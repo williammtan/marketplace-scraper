@@ -57,8 +57,8 @@ def ingest_tokopedia_link(category):
         try:
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             time.sleep(2)
-            products = WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.XPATH, './/div[@class="css-bk6tzz e1nlzfl3"]//a[@href]')))
-            time.sleep(2)
+            products = WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.XPATH, './/div[@class="css-bk6tzz e1nlzfl3"]//a[@href]')))
+            # time.sleep(2)
             total = len(products)
             print(total)
             total_all += total
@@ -219,3 +219,112 @@ def ingest_tokopedia():
         ingest_tokopedia_desc(ct3)
 
     
+def ingest_bl_link():
+    category = 'minuman'
+    url = f'https://www.bukalapak.com/c/food/{category}?page=5'
+
+    # call open browser function
+    chrome_options = Options()
+    chrome_options.add_argument("--window-size=1920,1080")
+    chrome_options.headless = True
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument('--ignore-certificate-errors')
+    chrome_options.add_argument('--incognito')
+    chrome_options.add_argument("log-level=3")
+    # set user agent
+    ua = UserAgent()
+    userAgent = ua.random
+    chrome_options.add_argument(f'user-agent={userAgent}')
+    driver = webdriver.Chrome("../chromedriver", options=chrome_options)
+    # open url
+    driver.get(url)
+
+    # set csv
+    # today = date.today()
+    csv_file = open(f'data/link_bl_{category}_2.csv', 'w', encoding='utf-8') 
+    writer = csv.writer(csv_file)
+
+    total_all = 0
+    df = {}
+    total_product = 0
+    for i in range(5, 30):
+        print(f"iterasi ke {i}")
+        driver.execute_script("window.scrollTo(0, 1500)")
+        driver.execute_script("window.scrollTo(0, 0)")
+        time.sleep(2)
+        
+        try:
+            linklists = None
+            linklists = driver.find_elements_by_xpath('.//div[@class="bl-product-card__description-name"]//a[@href]')
+            linklists_total = len(linklists)
+            print(linklists_total)
+            for k in range(0, linklists_total):
+                time.sleep(1)
+                try:                        
+                    linklist = None
+                    linklist = driver.find_elements_by_xpath('.//div[@class="bl-product-card__description-name"]//a[@href]')
+                    url_w = linklist[k].get_attribute('href')
+                    title1 = linklist[k].text
+                    # print(title1)
+                    print(url_w)
+
+                    # time.sleep(2)
+                    linklist[k].click()
+                    time.sleep(1)
+                    
+                    # scraping description
+                    try:
+                        desc = driver.find_element_by_xpath('.//div[@class="c-information__description-txt"]')
+                        desc1 = desc.text
+                    except:
+                        try:
+                            desc1 = ''
+                            desc = driver.find_elements_by_xpath('.//div[@class="c-information__description-txt"]//p')
+                            for ds in desc:
+                                desc1 += ds.text
+                        except (NoSuchElementException, StaleElementReferenceException) as e:
+                            desc1 = ''
+                            pass
+
+                    try:
+                        subcat = driver.find_element_by_xpath('.//table[@class="c-information__table"]//a[@href]')
+                        subcat1 = subcat.text
+                    except (NoSuchElementException, StaleElementReferenceException) as e:
+                        subcat1 = ''
+                        pass
+                    
+                    df['title'] = title1
+                    df['description'] = desc1
+                    df['sub_category'] = subcat1
+                    df['category'] = category
+                    writer.writerow(df.values())
+
+                    driver.back()
+
+                    if k>=14:
+                        driver.execute_script("window.scrollTo(0, 1500)")
+                        pass
+
+                except Exception as e:
+                    print("failed scrap in product", e)
+                    time.sleep(1)
+                    pass
+                # time.sleep(2)
+                # df['link'] = url_w
+                # writer.writerow(df.values())
+
+
+            total_product = total_product+linklists_total
+
+        except Exception as e:
+            print("failed scrap in page", e)
+            time.sleep(1)
+            pass
+
+        j = i+1
+        url2 = f"https://www.bukalapak.com/c/food/{category}?page={j}"
+        driver.get(url2)
+
+    print("total halaman {} dan total item {}".format(total_all+1, total_product))
+    driver.quit()
