@@ -92,44 +92,46 @@ def ingest_tokopedia_link(category):
     print(total_all)
     driver.quit()
 
-def ingest_tokopedia_desc():
-    category = "bumbu_6"
-    data = pd.read_csv(f"link_tokped_{category}.csv")
+def ingest_tokopedia_desc(category):
+    # category = "teh_2"
+    data = pd.read_csv(f"data/link_tokped_{category}.csv")
 
     # set csv
     today = date.today()
-    csv_file = open(f'tokped_{category}.csv', 'w', encoding='utf-8') 
+    csv_file = open(f'data/detail/tokped_{category}.csv', 'w', encoding='utf-8') 
     writer = csv.writer(csv_file)
 
     df = {}
+    # call open browser function
+    chrome_options = Options()
+    chrome_options.add_argument("--window-size=1920,1080")
+    chrome_options.headless = True
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument('--ignore-certificate-errors')
+    chrome_options.add_argument('--incognito')
+    prefs = {"profile.managed_default_content_settings.images":2,
+            "profile.default_content_setting_values.notifications":2,
+            "profile.managed_default_content_settings.stylesheets":2,
+            "profile.managed_default_content_settings.cookies":2,
+            "profile.managed_default_content_settings.javascript":1,
+            "profile.managed_default_content_settings.plugins":1,
+            "profile.managed_default_content_settings.popups":2,
+            "profile.managed_default_content_settings.geolocation":2,
+            "profile.managed_default_content_settings.media_stream":2,
+    }
+    chrome_options.add_experimental_option("prefs", prefs)
+    # chrome_options.add_argument("log-level=3")
+    # set user agent
+    ua = UserAgent()
+    userAgent = ua.random
+    chrome_options.add_argument(f'user-agent={userAgent}')
+    driver = webdriver.Chrome("../chromedriver", options=chrome_options)
+
     for i, dt in enumerate(data['url'].items()):
         print(i, ". ", str(dt[1]))
         url = str(dt[1])
         try:
-            # call open browser function
-            chrome_options = Options()
-            chrome_options.add_argument("--window-size=1920,1080")
-            chrome_options.headless = True
-            chrome_options.add_argument("--disable-dev-shm-usage")
-            chrome_options.add_argument("--no-sandbox")
-            chrome_options.add_argument('--ignore-certificate-errors')
-            chrome_options.add_argument('--incognito')
-            prefs = {"profile.managed_default_content_settings.images":2,
-                    "profile.default_content_setting_values.notifications":2,
-                    "profile.managed_default_content_settings.stylesheets":2,
-                    "profile.managed_default_content_settings.cookies":2,
-                    "profile.managed_default_content_settings.javascript":1,
-                    "profile.managed_default_content_settings.plugins":1,
-                    "profile.managed_default_content_settings.popups":2,
-                    "profile.managed_default_content_settings.geolocation":2,
-                    "profile.managed_default_content_settings.media_stream":2,
-            }
-            chrome_options.add_experimental_option("prefs", prefs)
-            # set user agent
-            ua = UserAgent()
-            userAgent = ua.random
-            chrome_options.add_argument(f'user-agent={userAgent}')
-            driver = webdriver.Chrome("../chromedriver", options=chrome_options)
             # open url
             driver.get(url)
             time.sleep(1)
@@ -142,7 +144,7 @@ def ingest_tokopedia_desc():
                 pass
                 
             try:
-                subcat1 = driver.find_element_by_xpath('.//li[@class="css-r0v3c0"]//a')
+                subcat1 = driver.find_element_by_xpath('.//li[@class="css-1vbldqk"]//a')
                 article_subcat = subcat1.text
             except:
                 article_subcat = "not found"
@@ -154,49 +156,34 @@ def ingest_tokopedia_desc():
             except:
                 article_description = "not found"
                 pass
+            
+            df['title'] = article_title
+            df['sub_category'] = article_subcat
+            df['description'] = article_description
+
+            writer.writerow(df.values())
 
         except Exception as e:
             print("failed scrap the url", e)
             time.sleep(1)
             pass
 
-        df['title'] = article_title
-        df['sub_category'] = article_subcat
-        df['description'] = article_description
-
-        writer.writerow(df.values())
-
     # exit the browser
     driver.quit()
     
 def ingest_tokopedia():
     link_raw = [
-        "makanan-beku",
-        "makanan-jadi",
-        "makanan-ringan",
-        "makanan-kaleng",
-        "makanan-kering",
-        "makanan-sarapan"
+        "kopi",
+        "teh"
     ]
-
-    df_clean = []
-    for dt in data['url'].items():
-        s = str(dt[1])
-        if "ta.tokopedia.com" in s:
-            sa = s[s.find('www.tokopedia.com'):]
-            sa = sa.replace('%2F','/')
-            sa = sa[:sa.find('%3F')]
-            sa = "https://" + sa
-        else:
-            sa = s
-        df_clean.append(sa)
 
     for lr in link_raw:
         print(lr)
+        # ingest link first
         # ingest throught this function
         ingest_tokopedia_link(lr)
         # preprocessing the links
-        data = pd.read_csv(f"data/link_tokped_{category}.csv")
+        data = pd.read_csv(f"data/link_tokped_{lr}.csv")
         df_clean = []
         for dt in data['url'].items():
             s = str(dt[1])
@@ -211,6 +198,24 @@ def ingest_tokopedia():
         
         df = pd.DataFrame()
         df['url'] = df_clean
-        # replace the files (split to two file if its the process takes long)
-        df.to_csv(f"data/link_tokped_{category}.csv", index=False)
+        # replace the files (split to several files, if the process takes long)
+        df2 = df.copy()
+        df3 = df.copy()
+        df = df[:500]
+        df2 = df2[500:1000]
+        df3 = df3[1000:]
+        # set the parameter
+        ct1 = lr+"_1"
+        ct2 = lr+"_2"
+        ct3 = lr+"_3"
+        df.to_csv(f"data/link_tokped_{ct1}.csv", index=False)
+        df2.to_csv(f"data/link_tokped_{ct2}.csv", index=False)
+        df3.to_csv(f"data/link_tokped_{ct3}.csv", index=False)
+        del df, df2, df3
+
+        # ingest description then
+        ingest_tokopedia_desc(ct1)
+        ingest_tokopedia_desc(ct2)
+        ingest_tokopedia_desc(ct3)
+
     
