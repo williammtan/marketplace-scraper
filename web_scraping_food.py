@@ -171,7 +171,7 @@ def ingest_tokopedia_desc(category):
     # exit the browser
     driver.quit()
     
-def ingest_tokopedia():
+def ingest_tokopedia_full():
     link_raw = [
         "kopi",
         "teh"
@@ -219,7 +219,7 @@ def ingest_tokopedia():
         ingest_tokopedia_desc(ct3)
 
     
-def ingest_bukalapak():
+def ingest_bukalapak_full():
     category = 'bumbu'
     url = f'https://www.bukalapak.com/c/food/{category}'
 
