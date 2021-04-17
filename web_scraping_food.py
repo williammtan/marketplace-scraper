@@ -27,10 +27,307 @@ from user_agent import random_header
 
 load_dotenv()
 
+def ingest_tokopedia_outlet():
+    # set link from list
+    df_raw = pd.read_csv('data/link_outlet_raw_1-4.csv')
+    link = []
+
+    for index, dt in df_raw.iterrows():
+        link.append(dt[0])
+
+    # set csv
+    csv_file = open(f'data/link_outlet_tokped_1.csv', 'w', encoding='utf-8') 
+    writer = csv.writer(csv_file)
+    csv_file2 = open(f'data/info_outlet_tokped_1.csv', 'w', encoding='utf-8') 
+    writer2 = csv.writer(csv_file2)
+
+    df = {}
+    df_ol = {}
+    outlet_list = []
+
+    # call open browser function
+    chrome_options = Options()
+    chrome_options.add_argument("--window-size=1920,1080")
+    # chrome_options.headless = True
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument('--ignore-certificate-errors')
+    chrome_options.add_argument('--incognito')
+    # set user agent
+    ua = UserAgent()
+    userAgent = ua.random
+    chrome_options.add_argument(f'user-agent={userAgent}')
+    driver = webdriver.Chrome("../chromedriver", options=chrome_options)
+
+    for l in link:
+        total_product = 0
+        print(l)
+        # open url
+        driver.get(l)
+        i = 1
+        while i>0:  
+            time.sleep(1)
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            print("page ", i)
+            try:
+                time.sleep(2)
+                outlet = driver.find_elements_by_xpath('.//div[@class="css-wlcnlb"]//div[@class="unf-card css-4fg9nr-unf-card e1ukdezh0"]//div[@class="pcv3__container css-1bd8ct"]//div[@class="css-1ehqh5q"]//a[@href]')
+                total_product = total_product + len(outlet)
+                for k in range(0, len(outlet)):
+                    linklist = driver.find_elements_by_xpath('.//div[@class="css-wlcnlb"]//div[@class="unf-card css-4fg9nr-unf-card e1ukdezh0"]//div[@class="pcv3__container css-1bd8ct"]//div[@class="css-1ehqh5q"]//a[@href]')
+                    url_w = linklist[k].get_attribute('href')
+                    # print(url_w)
+                    df['link'] = url_w
+                    writer.writerow(df.values())
+                
+            except Exception as e:
+                print("failed to get outlet", e)
+                time.sleep(1)
+                pass
+
+            time.sleep(1)
+            try:
+                hha = driver.find_element_by_xpath('.//a[@data-testid="btnShopProductPageNext"]')
+                i = i+1
+                l2 = f'{l}/page/{i}'
+                # print(l2)
+                driver.get(l2)
+            except Exception as e:
+                print("Page has ended")
+                # print(e)
+                i = 0
+                exit
+        
+        driver.execute_script("window.scrollTo(0, 0);")
+        time.sleep(2)
+        try:
+            name1 = driver.find_element_by_xpath('.//h1[@class="css-1i6886t"]')
+            name = name1.text
+        except:
+            name = "-"
+            pass
+        
+        try:
+            sold1 = driver.find_element_by_xpath('.//h2[@class="css-lzwncz-unf-heading e1qvo2ff2"]')
+            sold = sold1.text
+        except:
+            sold = "-"
+            pass
+
+        try:
+            score1 = driver.find_element_by_xpath('.//h2[@class="css-rfs3ih-unf-heading e1qvo2ff2"]')
+            score = score1.text
+        except:
+            score = "-"
+            pass
+
+        try:
+            review1 = driver.find_element_by_xpath('.//h6[@class="css-1s96mum-unf-heading e1qvo2ff6"]')
+            review = review1.text
+        except:
+            review = "-"
+            pass
+        
+        try:
+            area1 = driver.find_elements_by_xpath('.//p[@class="css-dxunmy-unf-heading e1qvo2ff8"]')
+            area = area1[-1].text
+        except:
+            area = "-"
+            pass
+        
+        try:
+            follower1 = driver.find_element_by_xpath('.//h6[@class="css-jsut4p-unf-heading e1qvo2ff6"]')
+            follower = follower1.text
+        except:
+            follower = "-"
+            pass
+        
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        time.sleep(2)
+        try:
+            desc1 = driver.find_element_by_xpath('.//div[@class="css-1gp0czb epavnfa0"]//div[@class="css-1t40sc2 epavnfa1"]//p//span')
+            desc = desc1.text
+        except:
+            desc = "-"
+            pass
+        
+        try:
+            since1 = driver.find_elements_by_xpath('.//div[@class="css-1gp0czb epavnfa0"]//div[@class="css-1t40sc2 epavnfa1"]//p')
+            since = since1[-1].text #last tag
+        except:
+            since = "-"
+            pass
+        
+
+        df_ol['total_produk'] = total_product
+        df_ol['nama_outlet'] = name
+        df_ol['produk_terjual'] = sold
+        df_ol['score_outlet'] = score
+        df_ol['ulasan'] = review
+        df_ol['area'] = area
+        df_ol['follower'] = follower
+        df_ol['deskripsi_toko'] = desc
+        df_ol['buka_sejak'] = since
+        df_ol['url'] = l
+
+        writer2.writerow(df_ol.values())
+
+    driver.quit()
+
+def ingest_tokopedia_desc_full():
+    num = 1
+    data = pd.read_csv(f"data/fulllink_tokped_{num}.csv")
+
+    # set csv
+    today = date.today()
+    csv_file = open(f'data/tokped/fullproduk_tokped_{num}.csv', 'w', encoding='utf-8') 
+    writer = csv.writer(csv_file)
+
+    df = {}
+    # call open browser function
+    chrome_options = Options()
+    # chrome_options.add_argument('--window-size=1920,1080')
+    # chrome_options.headless = True
+    # chrome_options.set_headless(headless=True)
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--ignore-certificate-errors')
+    chrome_options.add_argument('--incognito')
+    driver = webdriver.Chrome("../chromedriver", options=chrome_options)
+
+    for i, dt in enumerate(data['url'].items()):
+        url = str(dt)
+        print(i,"." , url)
+        try:
+            # open url
+            driver.get(url)
+            time.sleep(1)
+
+            try:
+                nama1 = driver.find_element_by_xpath('.//h1[@class="css-v7vvdw"]')
+                nama = nama1.text
+            except:
+                nama = "-"
+                pass
+
+            try:
+                terjual1 = driver.find_element_by_xpath('.//div[@data-testid="lblPDPDetailProductSoldCounter"]')
+                terjual = terjual1.text
+            except:
+                terjual = "-"
+                pass
+
+            try:
+                rating1 = driver.find_element_by_xpath('.//span[@data-testid="lblPDPDetailProductRatingNumber"]')
+                rating = rating1.text
+            except:
+                rating = "-"
+                pass
+            
+            try:
+                ulasan1 = driver.find_element_by_xpath('.//span[@data-testid="lblPDPDetailProductRatingCounter"]')
+                ulasan = ulasan1.text
+            except:
+                ulasan = "-"
+                pass
+
+            try:
+                harga1 = driver.find_element_by_xpath('.//div[@data-testid="lblPDPDetailProductPrice"]')
+                harga = harga1.text
+            except:
+                harga = "-"
+                pass
+
+            try:
+                hargaawal1 = driver.find_element_by_xpath('.//span[@data-testid="lblPDPDetailOriginalPrice"]')
+                hargaawal = hargaawal1.text
+            except:
+                hargaawal = "-"
+                pass
+            
+            try:
+                diskon1 = driver.find_element_by_xpath('.//span[@data-testid="lblPDPDetailDiscountPercentage"]')
+                diskon = diskon1.text
+            except:
+                diskon = "-"
+                pass
+
+            try:
+                stok1 = driver.find_element_by_xpath('.//div[@data-testid="quantityOrder"]//p//b')
+                stok = stok1.text
+            except:
+                stok = "-"
+                pass
+            
+            try:
+                wenew1 = driver.find_elements_by_xpath('.//li[@class="css-1vbldqk"]//span[@class="main"]')
+                kondisi = wenew1[0].text
+                berat = wenew1[1].text
+            except:
+                kondisi = "-"
+                berat = "-"
+                pass
+
+            try:
+                subetas1 = driver.find_elements_by_xpath('.//li[@class="css-1vbldqk"]//a')
+                subcat = subetas1[0].text
+                etalase = subetas1[1].text
+            except:
+                subcat = "-"
+                etalase = "-"
+                pass
+
+            try:
+                desc1 = driver.find_element_by_xpath('.//div[@data-testid="lblPDPDescriptionProduk"]')
+                desc = desc1.text
+            except:
+                desc = "-"
+                pass
+
+            try:
+                outlet1 = driver.find_element_by_xpath('.//a[@data-testid="llbPDPFooterShopName"]')
+                outlet = outlet1.text
+            except:
+                outlet = "-"
+                pass
+            
+            df['nama'] = nama
+            df['terjual'] = terjual
+            df['rating'] = rating
+            df['ulasan'] = ulasan
+            df['harga'] = harga
+            df['hargaawal'] = hargaawal
+            df['diskon'] = diskon
+            df['stok'] = stok
+            df['kondisi'] = kondisi
+            df['berat'] = berat
+            df['subcat'] = subcat
+            df['etalase'] = etalase
+            df['desc'] = desc
+            df['outlet'] = outlet
+            df['url'] = url
+
+            writer.writerow(df.values())
+
+        except Exception as e:
+            print("failed scrap the url", e)
+            time.sleep(1)
+            pass
+
+    # exit the browser
+    driver.quit()
+
 def ingest_tokopedia_link(category):
     # category = 'kue'
-    url = f'https://www.tokopedia.com/p/makanan-minuman/{category}'
+    url = f'https://www.tokopedia.com/p/makanan-minuman/{category}?page=1&goldmerchant=true&official=true&ob=5&rt=4,5&ob=5'
 
+    # set csv
+    # today = date.today()
+    csv_file = open(f'data/link_outlet_tokped_{category}.csv', 'w', encoding='utf-8') 
+    writer = csv.writer(csv_file)
+    df = {}
+    total_all = 0
+    
     # call open browser function
     chrome_options = Options()
     chrome_options.add_argument("--window-size=1920,1080")
@@ -47,13 +344,9 @@ def ingest_tokopedia_link(category):
     # open url
     driver.get(url)
 
-    total_all = 0
-    url_w = []
-    for i in range(0, 25):
+    for i in range(1, 5):
         print(f"iterasi ke {i}")
         # time.sleep(10)
-        j = i+2
-        url2 = f"https://www.tokopedia.com/p/makanan-minuman/{category}?page={j}"
         try:
             driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
             time.sleep(2)
@@ -69,25 +362,34 @@ def ingest_tokopedia_link(category):
                     linklist = None
                     linklist = WebDriverWait(driver, 5).until(EC.presence_of_all_elements_located((By.XPATH, './/div[@class="css-bk6tzz e1nlzfl3"]//a[@href]')))
                     # time.sleep(2)
-                    url_w.append(linklist[k].get_attribute('href'))
-                    # time.sleep(2)
+                    url_w = linklist[k].get_attribute('href')
+
+                    if "ta.tokopedia.com" in url_w:
+                        sa = url_w[url_w.find('www.tokopedia.com'):]
+                        sa = sa.replace('%2F','/')
+                        sa = sa[:sa.find('%3F')]
+                        sa = sa.split('/')
+                        sa = "https://www.tokopedia.com/" + sa[1]
+                    else:
+                        sa = url_w.split('/')
+                        sa = "https://www.tokopedia.com/" + sa[3]
+
+                    df['link'] = sa
+                    writer.writerow(df.values())
 
                 except Exception as e:
                     print("failed scrap", e)
                     time.sleep(1)
                     pass
 
-            time.sleep(2)
-            driver.get(url2)
         except Exception as e:
             print("failed to next page", e)
             time.sleep(1)
             pass
 
-    df = pd.DataFrame()
-    df['url'] = url_w
-    print(len(df.index))
-    df.to_csv(f'data/link_tokped_{category}.csv', index=False)
+        j = i+1
+        url2 = f'https://www.tokopedia.com/p/makanan-minuman/{category}?page={j}&goldmerchant=true&official=true&ob=5&rt=4,5&ob=5'
+        driver.get(url2)
 
     print(total_all)
     driver.quit()
@@ -98,7 +400,7 @@ def ingest_tokopedia_desc(category):
 
     # set csv
     today = date.today()
-    csv_file = open(f'data/tokped/tokped_{category}.csv', 'w', encoding='utf-8') 
+    csv_file = open(f'data/link_tokped_{category}.csv', 'w', encoding='utf-8') 
     writer = csv.writer(csv_file)
 
     df = {}
@@ -173,8 +475,11 @@ def ingest_tokopedia_desc(category):
     
 def ingest_tokopedia_full():
     link_raw = [
-        "kopi",
-        "teh"
+        "mie-pasta",
+        "sayur-buah",
+        "minuman",
+        "makanan-sarapan",
+        "makanan-beku"
     ]
 
     for lr in link_raw:
@@ -183,40 +488,42 @@ def ingest_tokopedia_full():
         # ingest throught this function
         ingest_tokopedia_link(lr)
         # preprocessing the links
-        data = pd.read_csv(f"data/link_tokped_{lr}.csv")
-        df_clean = []
-        for dt in data['url'].items():
-            s = str(dt[1])
-            if "ta.tokopedia.com" in s:
-                sa = s[s.find('www.tokopedia.com'):]
-                sa = sa.replace('%2F','/')
-                sa = sa[:sa.find('%3F')]
-                sa = "https://" + sa
-            else:
-                sa = s
-            df_clean.append(sa)
+        # data = pd.read_csv(f"data/link_tokped_{lr}.csv")
+        # df_clean = []
+        # for dt in data['url'].items():
+        #     s = str(dt[1])
+        #     if "ta.tokopedia.com" in s:
+        #         sa = s[s.find('www.tokopedia.com'):]
+        #         sa = sa.replace('%2F','/')
+        #         sa = sa[:sa.find('%3F')]
+        #         sa = sa[:sa.find('/')]
+        #         sa = "https://" + sa
+        #     else:
+        #         sa = s
+        #     df_clean.append(sa)
         
-        df = pd.DataFrame()
-        df['url'] = df_clean
+        # df = pd.DataFrame()
+        # df['url'] = df_clean
+        # df.to_csv(f"data/link_outlet_tokped_{lr}.csv", index=False)
         # replace the files (split to several files, if the process takes long)
-        df2 = df.copy()
-        df3 = df.copy()
-        df = df[:500]
-        df2 = df2[500:1000]
-        df3 = df3[1000:]
-        # set the parameter
-        ct1 = lr+"_1"
-        ct2 = lr+"_2"
-        ct3 = lr+"_3"
-        df.to_csv(f"data/link_tokped_{ct1}.csv", index=False)
-        df2.to_csv(f"data/link_tokped_{ct2}.csv", index=False)
-        df3.to_csv(f"data/link_tokped_{ct3}.csv", index=False)
-        del df, df2, df3
+        # df2 = df.copy()
+        # df3 = df.copy()
+        # df = df[:500]
+        # df2 = df2[500:1000]
+        # df3 = df3[1000:]
+        # # set the parameter
+        # ct1 = lr+"_1"
+        # ct2 = lr+"_2"
+        # ct3 = lr+"_3"
+        # df.to_csv(f"data/link_tokped_{ct1}.csv", index=False)
+        # df2.to_csv(f"data/link_tokped_{ct2}.csv", index=False)
+        # df3.to_csv(f"data/link_tokped_{ct3}.csv", index=False)
+        # del df, df2, df3
 
         # ingest description then
-        ingest_tokopedia_desc(ct1)
-        ingest_tokopedia_desc(ct2)
-        ingest_tokopedia_desc(ct3)
+        # ingest_tokopedia_desc(ct1)
+        # ingest_tokopedia_desc(ct2)
+        # ingest_tokopedia_desc(ct3)
 
     
 def ingest_bukalapak_full():
@@ -352,7 +659,7 @@ def ingest_shopee():
     userAgent = ua.random
     chrome_options.add_argument(f'user-agent={userAgent}')
     driver = webdriver.Chrome('../chromedriver', options=chrome_options)
-        # driver = webdriver.Chrome('../chromedriver_mac', options=chrome_options)
+    # driver = webdriver.Chrome('../chromedriver_mac', options=chrome_options)
     # open url
     driver.get(url)
 
