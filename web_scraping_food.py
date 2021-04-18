@@ -186,7 +186,7 @@ def ingest_tokopedia_desc_full():
     df = {}
     # call open browser function
     chrome_options = Options()
-    # chrome_options.add_argument('--window-size=1920,1080')
+    chrome_options.add_argument('--window-size=1920,1080')
     # chrome_options.headless = True
     # chrome_options.set_headless(headless=True)
     chrome_options.add_argument('--disable-dev-shm-usage')
@@ -196,12 +196,12 @@ def ingest_tokopedia_desc_full():
     driver = webdriver.Chrome("../chromedriver", options=chrome_options)
 
     for i, dt in enumerate(data['url'].items()):
-        url = str(dt)
+        url = str(dt[1])
         print(i,"." , url)
         try:
             # open url
             driver.get(url)
-            time.sleep(1)
+            time.sleep(2)
 
             try:
                 nama1 = driver.find_element_by_xpath('.//h1[@class="css-v7vvdw"]')
