@@ -11,11 +11,11 @@ class TokpedSpider(scrapy.Spider):
     def start_requests(self):
         df_urls = pd.read_csv("../data/fulllink_tokped_2.csv")
         urls = df_urls['url'].to_list()
-        urls = ['https://www.tokopedia.com/sejahtera888/pure-baking-soda-arm-hammer-500-gram?src=topads',
-            'https://www.tokopedia.com/ezybakingshop/mercolade-rainbow-compound-repack-per-batang-coklat-blok-warna-warn-pink-strawberry?src=topads',
-            'https://www.tokopedia.com/houseoforganix/vanilla-extract?whid=0',
-            'https://www.tokopedia.com/tokobahankuedona/diamond-dark-chocolate-compound-repack-245-255gr-cokelat-diamond?src=topads'
-        ]
+        # urls = ['https://www.tokopedia.com/sejahtera888/pure-baking-soda-arm-hammer-500-gram?src=topads',
+        #     'https://www.tokopedia.com/ezybakingshop/mercolade-rainbow-compound-repack-per-batang-coklat-blok-warna-warn-pink-strawberry?src=topads',
+        #     'https://www.tokopedia.com/houseoforganix/vanilla-extract?whid=0',
+        #     'https://www.tokopedia.com/tokobahankuedona/diamond-dark-chocolate-compound-repack-245-255gr-cokelat-diamond?src=topads'
+        # ]
         for l in urls:
             yield scrapy.Request(url=l, callback=self.parse)
 

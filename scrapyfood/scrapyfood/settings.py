@@ -14,7 +14,7 @@ NEWSPIDER_MODULE = 'scrapyfood.spiders'
 
 # Export as CSV Feed
 FEED_FORMAT = "csv"
-FEED_URI = "full_product_tokped.csv"
+FEED_URI = "../data/tokped/fullproduct_tokped_2.csv"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'scrapyfood (+http://www.yourdomain.com)'
