@@ -9,7 +9,7 @@ class TokpedSpider(scrapy.Spider):
     AUTOTHROTTLE_ENABLED = True
 
     def start_requests(self):
-        df_urls = pd.read_csv("../data/fulllink_tokped_2.csv")
+        df_urls = pd.read_csv("../data/fulllink_tokped_3.csv")
         urls = df_urls['url'].to_list()
         # urls = ['https://www.tokopedia.com/sejahtera888/pure-baking-soda-arm-hammer-500-gram?src=topads',
         #     'https://www.tokopedia.com/ezybakingshop/mercolade-rainbow-compound-repack-per-batang-coklat-blok-warna-warn-pink-strawberry?src=topads',
@@ -58,7 +58,7 @@ class TokpedSpider(scrapy.Spider):
         df['kategori'] = infokat[2]
         df['sub_kategori'] = subkatetalase[0]
         df['etalase'] = subkatetalase[1]
-        df['desc'] = desc
+        df['desc'] = str(desc)
         df['outlet'] = outlet
         # df['area_pengiriman'] = outlet
         df['url'] = url

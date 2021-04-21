@@ -6,13 +6,7 @@
 import scrapy
 
 
-class ScrapyfoodItem(scrapy.Item):
+class ScrapyimagesItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     pass
-
-class ImageItem(scrapy.Item):
-    image_names = scrapy.Field()
-    image_outlets = scrapy.Field()
-    image_urls = scrapy.Field()
-    images = scrapy.Field()

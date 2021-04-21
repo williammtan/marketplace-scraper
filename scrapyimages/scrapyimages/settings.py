@@ -1,4 +1,4 @@
-# Scrapy settings for scrapyfood project
+# Scrapy settings for scrapyimages project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,28 +7,20 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'scrapyfood'
+BOT_NAME = 'scrapyimages'
 
-SPIDER_MODULES = ['scrapyfood.spiders']
-NEWSPIDER_MODULE = 'scrapyfood.spiders'
+SPIDER_MODULES = ['scrapyimages.spiders']
+NEWSPIDER_MODULE = 'scrapyimages.spiders'
 
-# Export as CSV Feed
-# FEED_FORMAT = "csv"
-# FEED_URI = "../data/tokped/fullproduct_tokped.csv"
-
-# Export as JSON Feed
-FEED_FORMAT = "json"
-FEED_URI = "../data/tokped/images_product_tokped.json"
-
-# ITEM_PIPELINES = {'scrapy.pipelines.images.ImagesPipeline': 1}
-ITEM_PIPELINES = {'scrapyfood.pipelines.customImagePipeline': 1}
-IMAGES_STORE = '../data/tokped/images_tokped'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'scrapyfood (+http://www.yourdomain.com)'
+#USER_AGENT = 'scrapyimages (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-# ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = True
+
+ITEM_PIPELINES = {'scrapy.pipelines.images.ImagesPipeline': 1}
+IMAGES_STORE = 'images_tokped'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -55,15 +47,15 @@ IMAGES_STORE = '../data/tokped/images_tokped'
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-# SPIDER_MIDDLEWARES = {
-#    'scrapyfood.middlewares.ScrapyfoodSpiderMiddleware': 543,
-# }
+#SPIDER_MIDDLEWARES = {
+#    'scrapyimages.middlewares.ScrapyimagesSpiderMiddleware': 543,
+#}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-# DOWNLOADER_MIDDLEWARES = {
-#    'scrapyfood.middlewares.ScrapyfoodDownloaderMiddleware': 543,
-# }
+#DOWNLOADER_MIDDLEWARES = {
+#    'scrapyimages.middlewares.ScrapyimagesDownloaderMiddleware': 543,
+#}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
@@ -73,9 +65,9 @@ IMAGES_STORE = '../data/tokped/images_tokped'
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-# ITEM_PIPELINES = {
-#     'scrapy.pipelines.images.ImagesPipeline': 1
-# }
+#ITEM_PIPELINES = {
+#    'scrapyimages.pipelines.ScrapyimagesPipeline': 300,
+#}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
