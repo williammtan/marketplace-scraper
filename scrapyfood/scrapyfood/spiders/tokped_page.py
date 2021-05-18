@@ -3,6 +3,7 @@ from w3lib.html import remove_tags
 from ..utils import get_cache
 from ..items import ProductItem, PageProductItem
 from ..categories import main_categories, sub_categories
+import re
 
 
 class TokpedPageSpider(scrapy.Spider):

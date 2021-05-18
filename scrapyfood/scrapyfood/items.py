@@ -52,3 +52,38 @@ class PageProductItem(scrapy.Item):
 
     image_urls = scrapy.Field()
     images = scrapy.Field()
+
+
+class ShopeeShortProductItem(scrapy.Item):
+    id = scrapy.Field()
+    shop_id = scrapy.Field()
+    name = scrapy.Field()
+    url = scrapy.Field()
+    category = scrapy.Field()
+    price = scrapy.Field()
+
+    stock = scrapy.Field()
+    sold = scrapy.Field()
+    liked_count = scrapy.Field()
+    brand = scrapy.Field()
+
+    image_urls = scrapy.Field()
+    images = scrapy.Field()
+
+
+class ShopeeProductItem(scrapy.Item):
+    id = scrapy.Field()
+    shop_id = scrapy.Field()
+    name = scrapy.Field()
+    url = scrapy.Field()
+    description = scrapy.Field()
+    category = scrapy.Field()
+    price = scrapy.Field()
+
+    stock = scrapy.Field()
+    sold = scrapy.Field()
+    liked_count = scrapy.Field()
+    brand = scrapy.Field()
+
+    image_urls = scrapy.Field()
+    images = scrapy.Field()

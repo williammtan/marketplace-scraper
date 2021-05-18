@@ -17,41 +17,42 @@ NEWSPIDER_MODULE = 'scrapyfood.spiders'
 # FEED_URI = "../data/tokped/fullproduct_tokped.csv"
 
 # Export as JSON Feed
-FEED_FORMAT = "json"
-FEED_URI = "../data/tokped/images_product_tokped.json"
+# FEED_FORMAT = "json"
+# FEED_URI = "../data/tokped/images_product_tokped.json"
 
 # ITEM_PIPELINES = {'scrapy.pipelines.images.ImagesPipeline': 1}
 ITEM_PIPELINES = {'scrapyfood.pipelines.customImagePipeline': 1}
-IMAGES_STORE = '../data/tokped/images_tokped'
+IMAGES_STORE = '../data/shopee/images'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'scrapyfood (+http://www.yourdomain.com)'
+USER_AGENT = 'PostmanRuntime/7.28.0'
 
 # Obey robots.txt rules
 # ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-#CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS = 64
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-#DOWNLOAD_DELAY = 3
+# DOWNLOAD_DELAY = 0.5
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-#COOKIES_ENABLED = False
+COOKIES_ENABLED = False
 
+LOG_LEVEL = 'INFO'
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
-#DEFAULT_REQUEST_HEADERS = {
+# DEFAULT_REQUEST_HEADERS = {
 #   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
 #   'Accept-Language': 'en',
-#}
+# }
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
@@ -67,9 +68,9 @@ IMAGES_STORE = '../data/tokped/images_tokped'
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
-#EXTENSIONS = {
+# EXTENSIONS = {
 #    'scrapy.extensions.telnet.TelnetConsole': None,
-#}
+# }
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html

@@ -12,19 +12,20 @@
 #     def process_item(self, item, spider):
 #         return item
 
+import scrapy
 from scrapy import Request
+from scrapy.exceptions import DropItem
 from scrapy.pipelines.images import ImagesPipeline
-import re
+
 
 class customImagePipeline(ImagesPipeline):
     def get_media_requests(self, item, info):
-        return [Request(x, meta={'image_names': item["image_names"], 'image_outlets': item["image_outlets"]})
-            for x in item.get('image_urls', [])]
+        for image_url in item["image_urls"]:
+            yield scrapy.Request(image_url)
 
-    def file_path(self, request, response=None, info=None):
-        outlet = request.meta['image_outlets'] 
-        outlet = re.sub(r'([^\s\w]|_)+', '', outlet)
-        name = request.meta['image_names'] 
-        name = re.sub(r'([^\s\w]|_)+', '', name)
-        img_name = outlet + "_" + name
-        return '%s.jpg.webp' % img_name
+    def item_completed(self, results, item, info):
+        image_paths = [x["path"] for ok, x in results if ok]
+        if not image_paths:
+            raise DropItem("Item contains no images")
+        item["images"] = image_paths
+        return item
