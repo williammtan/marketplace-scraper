@@ -4,6 +4,7 @@ import json
 import re
 import csv
 
+
 class TokpedSpider(scrapy.Spider):
     name = 'tokped'
     AUTOTHROTTLE_ENABLED = True
@@ -23,22 +24,32 @@ class TokpedSpider(scrapy.Spider):
         df = {}
 
         nama = response.xpath('//h1[@class="css-v7vvdw"]/text()').get()
-        infokat = response.css('.css-yoyor-unf-heading.e1qvo2ff7::text').getall()
+        infokat = response.css(
+            '.css-yoyor-unf-heading.e1qvo2ff7::text').getall()
         terjual_raw = response.xpath('//script//text()').getall()
         # terjual = terjual_raw[5]
         terjual = str(terjual_raw)
         terjual = terjual[terjual.find('"itemSoldPaymentVerified"'):]
         terjual = terjual[:terjual.find(',')]
         terjual = terjual.split('"')
-        rating = response.xpath('//meta[@itemprop="ratingValue"]/@content').get()
-        ulasan = response.xpath('//meta[@itemprop="ratingCount"]/@content').get()
-        harga = response.xpath('//div[@data-testid="lblPDPDetailProductPrice"]/text()').get()
-        hargaawal = response.xpath('//span[@data-testid="lblPDPDetailOriginalPrice"]/text()').get()
-        diskon = response.xpath('//span[@data-testid="lblPDPDetailDiscountPercentage"]/text()').get()
-        stok = response.xpath('//div[@data-testid="quantityOrder"]//p//b/text()').get()
-        kondisiberat = response.xpath('//li[@class="css-1vbldqk"]//span[@class="main"]/text()').getall()
-        subkatetalase = response.xpath('//li[@class="css-1vbldqk"]//a//b/text()').getall()
-        desc = response.xpath('//div[@data-testid="lblPDPDescriptionProduk"]/text()').getall()
+        rating = response.xpath(
+            '//meta[@itemprop="ratingValue"]/@content').get()
+        ulasan = response.xpath(
+            '//meta[@itemprop="ratingCount"]/@content').get()
+        harga = response.xpath(
+            '//div[@data-testid="lblPDPDetailProductPrice"]/text()').get()
+        hargaawal = response.xpath(
+            '//span[@data-testid="lblPDPDetailOriginalPrice"]/text()').get()
+        diskon = response.xpath(
+            '//span[@data-testid="lblPDPDetailDiscountPercentage"]/text()').get()
+        stok = response.xpath(
+            '//div[@data-testid="quantityOrder"]//p//b/text()').get()
+        kondisiberat = response.xpath(
+            '//li[@class="css-1vbldqk"]//span[@class="main"]/text()').getall()
+        subkatetalase = response.xpath(
+            '//li[@class="css-1vbldqk"]//a//b/text()').getall()
+        desc = response.xpath(
+            '//div[@data-testid="lblPDPDescriptionProduk"]/text()').getall()
         outlet = response.xpath('//title/text()').get()
         outlet = outlet.split(" - ")
         outlet = outlet[-1]
