@@ -20,9 +20,9 @@ NEWSPIDER_MODULE = 'scrapyfood.spiders'
 # FEED_FORMAT = "json"
 # FEED_URI = "../data/tokped/images_product_tokped.json"
 
-# ITEM_PIPELINES = {'scrapy.pipelines.images.ImagesPipeline': 1}
-ITEM_PIPELINES = {'scrapyfood.pipelines.customImagePipeline': 1}
-IMAGES_STORE = '../data/shopee/images'
+ITEM_PIPELINES = {'scrapy.pipelines.images.ImagesPipeline': 1}
+# ITEM_PIPELINES = {'scrapyfood.pipelines.ImagePipeline': 1}
+IMAGES_STORE = '/Volumes/Main/william/food_scraping/shopee/makanan_ringan/images'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 USER_AGENT = 'PostmanRuntime/7.28.0'

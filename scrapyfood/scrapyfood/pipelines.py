@@ -18,7 +18,8 @@ from scrapy.exceptions import DropItem
 from scrapy.pipelines.images import ImagesPipeline
 
 
-class customImagePipeline(ImagesPipeline):
+class ImagePipeline(ImagesPipeline):
+
     def get_media_requests(self, item, info):
         for image_url in item["image_urls"]:
             yield scrapy.Request(image_url)

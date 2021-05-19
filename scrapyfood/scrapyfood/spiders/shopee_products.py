@@ -10,15 +10,14 @@ from ..constants import shopee_prod_api, shopee_prod_url, shopee_image_url
 
 
 class ShopeeProductScaper(scrapy.Spider):
-    base_api = 'https://shopee.co.id/api/v2/item/get?itemid={id}&shopid={shop_id}'
-    base_prod_url = 'https://shopee.co.id/{name}-i.{shop_id}.{id}'
+    name = 'shopee_products'
 
     def __init__(self, product_list, scrape_images=False):
-        self.df = pd.read_csv(product_list)
+        self.df = pd.read_json(product_list)
         self.scrape_images = scrape_images
 
     def start_requests(self):
-        for prod in self.df.iterrows():
+        for i, prod in self.df.iterrows():
             url = shopee_prod_api.format(id=prod.id, shop_id=prod.shop_id)
             yield scrapy.Request(url, callback=self.parse)
 
@@ -34,6 +33,8 @@ class ShopeeProductScaper(scrapy.Spider):
         name = prod['name']
         url = shopee_prod_url.format(name=name, shop_id=shop_id, id=id)
         description = prod['description']
+        categories = [{'id': cat['catid'], 'name': cat['display_name']}
+                      for cat in prod['categories']]
 
         price = prod['price'] / 100000000
         stock = prod['stock']
@@ -43,7 +44,7 @@ class ShopeeProductScaper(scrapy.Spider):
 
         image_ids = prod['images']
         image_urls = [shopee_image_url.format(
-            img_id) for img_id in image_ids] if self.scrape_images else None
+            id=img_id) for img_id in image_ids] if self.scrape_images else []
 
         prod_item = ShopeeProductItem({
             'id': id,
@@ -51,7 +52,7 @@ class ShopeeProductScaper(scrapy.Spider):
             'name': name,
             'url': url,
             'description': description,
-            'category': self.category,
+            'category': categories,
             'price': price,
             'image_urls': image_urls,
             'stock': stock,

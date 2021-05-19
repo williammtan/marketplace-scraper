@@ -77,7 +77,7 @@ class ShopeeProductItem(scrapy.Item):
     name = scrapy.Field()
     url = scrapy.Field()
     description = scrapy.Field()
-    category = scrapy.Field()
+    categories = scrapy.Field()
     price = scrapy.Field()
 
     stock = scrapy.Field()

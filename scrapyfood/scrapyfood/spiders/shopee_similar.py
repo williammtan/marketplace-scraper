@@ -11,19 +11,22 @@ SIM_LIMIT = 100
 
 
 class ShopeeSimilarScraper(scrapy.Spider):
+    name = 'shopee_similar'
 
-    def __init__(self, product_list, scrape_images=False, sections=['from_same_shop', 'you_may_also_like', 'similar_product']):
-        self.df = pd.read_csv(product_list)
+    def __init__(self, product_list, scrape_images=True, sections=['from_same_shop', 'you_may_also_like', 'similar_product']):
+        self.df = pd.read_json(product_list)
+        self.df = self.df.iloc[::-1]
         self.scrape_images = scrape_images
         self.sections = sections
 
     def start_requests(self):
-        for prod in self.df.iterrows():
+        print(self.df)
+        for i, prod in self.df.iterrows():
             url = shopee_similar_api.format(
-                id=prod.id, limit=SIM_LIMIT, shop_id=prod.shop_id)
-            yield scrapy.Request(url, callback=self.parse)
+                id=prod.id, limit=SIM_LIMIT, shop_id=prod.shop_id, category_id=prod.category)
+            yield scrapy.Request(url, callback=self.parse, cb_kwargs={'category': prod.category})
 
-    def parse(self, response):
+    def parse(self, response, category):
         body = response.json()['data']
         sections = [sect for sect in body['sections']
                     if sect['key'] in self.sections]
@@ -50,14 +53,13 @@ class ShopeeSimilarScraper(scrapy.Spider):
                 'shop_id': shop_id,
                 'name': name,
                 'url': url,
-                # 'category': self.category,
+                'category': category,
                 'price': price,
-                'image_urls': image_urls,
+                'image_urls': [],
                 'stock': stock,
                 'sold': sold,
                 'liked_count': liked_count,
                 'brand': brand
             })
 
-            prod_item = ShopeeShortProductItem()
             yield prod_item

@@ -12,7 +12,7 @@ ITEM_LIMIT = 100
 class ShopeePageScraper(scrapy.Spider):
     name = 'shopee_page'
 
-    def __init__(self, category='', brand=None, searchby='pop', order='desc', scrape_images=True):
+    def __init__(self, category='157', brand=None, searchby='pop', order='desc', scrape_images=True):
         self.category = category
         self.brand = brand
         self.order = order
@@ -24,7 +24,7 @@ class ShopeePageScraper(scrapy.Spider):
         for i in range(100):
             newest += ITEM_LIMIT  # max item count
             url = shopee_search_api.format(
-                newest=newest, order='desc', search_by=self.search_by)
+                newest=newest, order='desc', search_by=self.search_by, match_id=self.category)
             yield scrapy.Request(url, callback=self.parse)
 
     def parse(self, response):
