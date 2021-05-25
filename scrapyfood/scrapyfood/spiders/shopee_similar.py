@@ -7,29 +7,30 @@ import pandas as pd
 from ..constants import shopee_similar_api, shopee_prod_url, shopee_image_url
 from ..items import ShopeeShortProductItem
 
-SIM_LIMIT = 100
+# SIM_LIMIT = 100
 
 
 class ShopeeSimilarScraper(scrapy.Spider):
     name = 'shopee_similar'
 
-    def __init__(self, product_list, scrape_images=True, sections=['from_same_shop', 'you_may_also_like', 'similar_product']):
+    def __init__(self, product_list, query_count=50, scrape_images=True, sections=['from_same_shop', 'similar_product']):
         self.df = pd.read_json(product_list)
         self.df = self.df.iloc[::-1]
         self.scrape_images = scrape_images
         self.sections = sections
+        self.query_count = query_count
 
     def start_requests(self):
         print(self.df)
         for i, prod in self.df.iterrows():
             url = shopee_similar_api.format(
-                id=prod.id, limit=SIM_LIMIT, shop_id=prod.shop_id, category_id=prod.category)
+                id=prod.id, limit=self.query_count, shop_id=prod.shop_id, category_id=prod.category)
             yield scrapy.Request(url, callback=self.parse, cb_kwargs={'category': prod.category})
 
     def parse(self, response, category):
         body = response.json()['data']
         sections = [sect for sect in body['sections']
-                    if sect['key'] in self.sections]
+                    if sect['key'] in self.sections and sect['index'] is not None]
         items = [item for sect in sections for item in sect['data']['item']]
 
         for prod in items:
@@ -55,7 +56,7 @@ class ShopeeSimilarScraper(scrapy.Spider):
                 'url': url,
                 'category': category,
                 'price': price,
-                'image_urls': [],
+                'image_urls': image_urls,
                 'stock': stock,
                 'sold': sold,
                 'liked_count': liked_count,
