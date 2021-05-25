@@ -4,9 +4,11 @@
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+from w3lib.http import basic_auth_header
 
 # useful for handling different item types with a single interface
 from itemadapter import is_item, ItemAdapter
+from scrapyfood.constants import proxy_url
 
 
 class ScrapyfoodSpiderMiddleware:
@@ -101,3 +103,9 @@ class ScrapyfoodDownloaderMiddleware:
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+
+class ProxyMiddleware(object):
+    def process_request(self, request, spider):
+        print(proxy_url)
+        request.meta['proxy'] = proxy_url

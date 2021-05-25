@@ -20,7 +20,9 @@ class TokpedPageSpider(scrapy.Spider):
 
     def start_requests(self):
         for url in self.start_urls:
-            yield scrapy.Request(url, callback=self.parse)
+            yield scrapy.Request(url, callback=self.parse,
+                                 # meta={"proxy": "http://scraperapi:5b7afb62c67de1477c5359799c6d3607@proxy-server.scraperapi.com:8001"}
+                                 )
 
     def parse(self, response):
         cache_data = get_cache(response)

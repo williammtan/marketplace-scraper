@@ -20,12 +20,12 @@ NEWSPIDER_MODULE = 'scrapyfood.spiders'
 # FEED_FORMAT = "json"
 # FEED_URI = "../data/tokped/images_product_tokped.json"
 
-ITEM_PIPELINES = {'scrapy.pipelines.images.ImagesPipeline': 1}
-# ITEM_PIPELINES = {'scrapyfood.pipelines.ImagePipeline': 1}
-IMAGES_STORE = '/Volumes/Main/william/food_scraping/shopee/makanan_ringan/images'
+# ITEM_PIPELINES = {'scrapy.pipelines.images.ImagesPipeline': 1}
+ITEM_PIPELINES = {'scrapyfood.pipelines.ImagePipeline': 1}
+# IMAGES_STORE = '/Volumes/Main/william/food_scraping/shopee/makanan_sarapan/images'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = 'PostmanRuntime/7.28.0'
+# USER_AGENT = 'PostmanRuntime/7.28.0'
 
 # Obey robots.txt rules
 # ROBOTSTXT_OBEY = True
@@ -45,6 +45,7 @@ CONCURRENT_REQUESTS = 64
 COOKIES_ENABLED = False
 
 LOG_LEVEL = 'INFO'
+# DOWNLOAD_DELAY = 1
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
 
@@ -62,9 +63,11 @@ LOG_LEVEL = 'INFO'
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-# DOWNLOADER_MIDDLEWARES = {
-#    'scrapyfood.middlewares.ScrapyfoodDownloaderMiddleware': 543,
-# }
+DOWNLOADER_MIDDLEWARES = {
+    #    'scrapyfood.middlewares.ScrapyfoodDownloaderMiddleware': 543,
+    'scrapyfood.middlewares.ProxyMiddleware': 350,
+    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 400,
+}
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html

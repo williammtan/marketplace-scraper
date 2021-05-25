@@ -63,5 +63,5 @@ class ShopeePageScraper(scrapy.Spider):
                 'liked_count': liked_count,
                 'brand': brand
             })
-
+            # print(prod_item)
             yield prod_item

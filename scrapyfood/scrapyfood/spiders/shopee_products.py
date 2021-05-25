@@ -52,7 +52,7 @@ class ShopeeProductScaper(scrapy.Spider):
             'name': name,
             'url': url,
             'description': description,
-            'category': categories,
+            'categories': categories,
             'price': price,
             'image_urls': image_urls,
             'stock': stock,
