@@ -3,4 +3,5 @@
 /data
 **/__pycache__
 *.pyc
-/.vscode
+*/.vscode
+*.log

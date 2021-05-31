@@ -87,3 +87,10 @@ class ShopeeProductItem(scrapy.Item):
 
     image_urls = scrapy.Field()
     images = scrapy.Field()
+
+
+class ShopeeImageItem(scrapy.Item):
+    id = scrapy.Field()
+    shop_id = scrapy.Field()
+    image_ids = scrapy.Field()
+    image_paths = scrapy.Field()

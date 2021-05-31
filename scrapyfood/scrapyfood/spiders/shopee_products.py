@@ -7,21 +7,25 @@ import scrapy
 import pandas as pd
 from ..items import ShopeeProductItem
 from ..constants import shopee_prod_api, shopee_prod_url, shopee_image_url
+from ..utils import read_df
 
 
-class ShopeeProductScaper(scrapy.Spider):
+class ShopeeProductScraper(scrapy.Spider):
     name = 'shopee_products'
 
     def __init__(self, product_list, scrape_images=False):
-        self.df = pd.read_json(product_list)
+        self.df = read_df(product_list)
         self.scrape_images = scrape_images
 
     def start_requests(self):
+        print('start')
+        is_images = 'images' in self.df.columns
         for i, prod in self.df.iterrows():
             url = shopee_prod_api.format(id=prod.id, shop_id=prod.shop_id)
-            yield scrapy.Request(url, callback=self.parse)
+            images = prod.images if is_images else []
+            yield scrapy.Request(url, callback=self.parse, cb_kwargs={'images': images})
 
-    def parse(self, response):
+    def parse(self, response, images):
         body = response.json()
         if body['error'] is not None:  # last line
             return
@@ -58,6 +62,8 @@ class ShopeeProductScaper(scrapy.Spider):
             'stock': stock,
             'sold': sold,
             'liked_count': liked_count,
-            'brand': brand
+            'brand': brand,
+            'images': images
         })
+        print(prod_item)
         yield prod_item

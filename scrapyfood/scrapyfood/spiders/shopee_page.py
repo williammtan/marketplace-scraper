@@ -6,7 +6,7 @@ import scrapy
 from ..items import ShopeeShortProductItem
 from ..constants import shopee_search_api, shopee_prod_url, shopee_image_url
 
-ITEM_LIMIT = 100
+ITEM_LIMIT = 5
 
 
 class ShopeePageScraper(scrapy.Spider):

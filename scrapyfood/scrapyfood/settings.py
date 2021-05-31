@@ -22,10 +22,10 @@ NEWSPIDER_MODULE = 'scrapyfood.spiders'
 
 # ITEM_PIPELINES = {'scrapy.pipelines.images.ImagesPipeline': 1}
 ITEM_PIPELINES = {'scrapyfood.pipelines.ImagePipeline': 1}
-# IMAGES_STORE = '/Volumes/Main/william/food_scraping/shopee/makanan_sarapan/images'
+# IMAGES_STORE = '/Volumes/Main/william/food_scraping/shopee/makanan_ringan_new/12561/'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-# USER_AGENT = 'PostmanRuntime/7.28.0'
+USER_AGENT = 'PostmanRuntime/7.28.0'
 
 # Obey robots.txt rules
 # ROBOTSTXT_OBEY = True
@@ -65,8 +65,8 @@ LOG_LEVEL = 'INFO'
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     #    'scrapyfood.middlewares.ScrapyfoodDownloaderMiddleware': 543,
-    'scrapyfood.middlewares.ProxyMiddleware': 350,
-    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 400,
+    # 'scrapyfood.middlewares.ProxyMiddleware': 350,
+    # 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 400,
 }
 
 # Enable or disable extensions

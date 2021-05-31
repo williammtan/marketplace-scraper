@@ -6,6 +6,7 @@ import scrapy
 import pandas as pd
 from ..constants import shopee_similar_api, shopee_prod_url, shopee_image_url
 from ..items import ShopeeShortProductItem
+from ..utils import read_df
 
 # SIM_LIMIT = 100
 
@@ -14,11 +15,12 @@ class ShopeeSimilarScraper(scrapy.Spider):
     name = 'shopee_similar'
 
     def __init__(self, product_list, query_count=50, scrape_images=True, sections=['from_same_shop', 'similar_product']):
-        self.df = pd.read_json(product_list)
+        self.df = read_df(product_list)
         self.df = self.df.iloc[::-1]
         self.scrape_images = scrape_images
         self.sections = sections
         self.query_count = query_count
+        print(self.df)
 
     def start_requests(self):
         print(self.df)
