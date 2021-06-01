@@ -135,7 +135,6 @@ class TokpedGQLSpiderMiddleware:
             except StopIteration:
                 request(r)
                 break
-        for r in start_requests:
 
 
 class ProxyMiddleware(object):
