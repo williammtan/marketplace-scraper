@@ -116,16 +116,26 @@ class TokpedGQLSpiderMiddleware:
         # similarly to the process_spider_output() method, except
         # that it doesn’t have a response associated.
 
+        def request(r):
+            # combine the requests
+            body = [json.loads(r.body) for r in self.request_cue]
+            json_body = json.dumps(body)
+            yield r.replace(body=json_body, cb_kwargs={'kwargs': [r.cb_kwargs for r in self.request_cue]})
+            self.request_cue = []
+
         # Must return only requests (not items).
+        while True:
+            try:
+                r = next(start_requests)
+                self.request_cue.append(r)
+                if len(self.request_cue) == self.cue_size:
+                    # TODO: assert that the requests have the same body
+                    request(r)
+
+            except StopIteration:
+                request(r)
+                break
         for r in start_requests:
-            self.request_cue.append(r)
-            if len(self.request_cue) == self.cue_size:
-                # TODO: assert that the requests have the same body
-                # mix the requests
-                body = [json.loads(r.body) for r in self.request_cue]
-                json_body = json.dumps(body)
-                yield r.replace(body=json_body, cb_kwargs={'kwargs': [r.cb_kwargs for r in self.request_cue]})
-                self.request_cue = []
 
 
 class ProxyMiddleware(object):
