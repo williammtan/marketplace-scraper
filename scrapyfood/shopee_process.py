@@ -183,7 +183,7 @@ class ShopeeProcess(object):
         unique_df.to_json(unique_fname)
         self.process_df(unique_fname, short=True)
         self.scrape_products(unique_fname, fname_output=full_prods_fname)
-        self.process_df(full_prods_fname, short=False, main_cat=cat_name)
+        self.process_df(full_prods_fname, short=False, sub_cat=cat_name)
 
     def get_unique_categories(self):
         main_category_fname = os.path.join(
@@ -212,7 +212,7 @@ class ShopeeProcess(object):
             category_prod = main_category_df[main_category_df.sub_category == category]
             prod = category_prod.iloc[0]
             self.driver.get(prod.url)
-            time.sleep(1)
+            time.sleep(2)
             subcategory_element = self.driver.find_elements_by_class_name(
                 '_3YDLCj')[-1]
             subcategory_element.click()
@@ -253,7 +253,7 @@ class ShopeeProcess(object):
         settings = self.create_settings(fname_output, save_imgs, overide)
 
         scrape(ShopeeSimilarScraper, settings,
-               product_list=products_df, query_count=20)
+               product_list=products_df, query_count=20, sections=['similar_product', 'you_may_also_like'])
 
     def scrape_category(self, category_id, fname_output, save_imgs=True, filters=['sales', 'pop'], overide=True):
         """Scrape by category id"""

@@ -6,12 +6,6 @@
 import scrapy
 
 
-class ScrapyfoodItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
-
-
 class ImageItem(scrapy.Item):
     image_names = scrapy.Field()
     image_outlets = scrapy.Field()
@@ -19,11 +13,7 @@ class ImageItem(scrapy.Item):
     images = scrapy.Field()
 
 
-class PageItem(scrapy.Item):
-    products = scrapy.Field()
-
-
-class ProductItem(scrapy.Item):
+class TokpedProduct(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     id = scrapy.Field()
@@ -42,7 +32,7 @@ class ProductItem(scrapy.Item):
     images = scrapy.Field()
 
 
-class PageProductItem(scrapy.Item):
+class TokpedPageProduct(scrapy.Item):
     id = scrapy.Field()
     title = scrapy.Field()
     url = scrapy.Field()
@@ -52,6 +42,24 @@ class PageProductItem(scrapy.Item):
 
     image_urls = scrapy.Field()
     images = scrapy.Field()
+
+
+class TokpedSimilarProduct(scrapy.Item):
+    id = scrapy.Field()
+    name = scrapy.Field()
+    category_breadcrumb = scrapy.Field()
+    prod_url = scrapy.Field()
+    old_price = scrapy.Field()
+    discounted_price = scrapy.Field()
+    discount_percent = scrapy.Field()
+    stock = scrapy.Field()
+    shop = scrapy.Field()
+    image_urls = scrapy.Field()
+
+    rating = scrapy.Field()
+    review_count = scrapy.Field()
+
+    ref = scrapy.Field()
 
 
 class ShopeeShortProductItem(scrapy.Item):

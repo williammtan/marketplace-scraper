@@ -36,4 +36,5 @@ def read_df(file):
     else:
         raise Exception('Unknown file type')
 
+    df['id'] = df['id'].apply(str)
     return df

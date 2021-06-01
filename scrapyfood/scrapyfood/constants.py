@@ -1,4 +1,9 @@
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 ### SHOPEE ###
 
 # api bases
@@ -11,4 +16,4 @@ shopee_prod_url = 'https://shopee.co.id/{name}-i.{shop_id}.{id}'
 shopee_image_url = 'http://cf.shopee.co.id/file/{id}'
 
 # proxy
-proxy_url = "http://scraperapi:5b7afb62c67de1477c5359799c6d3607@proxy-server.scraperapi.com:8001"
+proxy_url = os.environ['SCRAPER_API_PROXY']

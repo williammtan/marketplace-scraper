@@ -3,6 +3,8 @@
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
+import json
+import scrapy
 from scrapy import signals
 from w3lib.http import basic_auth_header
 
@@ -103,6 +105,27 @@ class ScrapyfoodDownloaderMiddleware:
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+
+class TokpedGQLSpiderMiddleware:
+    request_cue = []
+    cue_size = 2
+
+    def process_start_requests(self, start_requests, spider):
+        # Called with the start requests of the spider, and works
+        # similarly to the process_spider_output() method, except
+        # that it doesn’t have a response associated.
+
+        # Must return only requests (not items).
+        for r in start_requests:
+            self.request_cue.append(r)
+            if len(self.request_cue) == self.cue_size:
+                # TODO: assert that the requests have the same body
+                # mix the requests
+                body = [json.loads(r.body) for r in self.request_cue]
+                json_body = json.dumps(body)
+                yield r.replace(body=json_body, cb_kwargs={'kwargs': [r.cb_kwargs for r in self.request_cue]})
+                self.request_cue = []
 
 
 class ProxyMiddleware(object):
