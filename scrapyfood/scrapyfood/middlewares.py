@@ -5,7 +5,7 @@
 
 import json
 from numpy.random import Generator
-import scrapy
+import logging
 from scrapy import signals
 from scrapy.utils.project import get_project_settings
 from w3lib.http import basic_auth_header
@@ -144,7 +144,7 @@ class TokpedGQLSpiderMiddleware:
                     self.request_cue.append(r)
                     if len(self.request_cue) == self.cue_size:
                         # TODO: assert that the requests have the same body
-                        print('Sending requests')
+                        logging.DEBUG('Sending requests')
                         yield from request(r)
 
                 except StopIteration:

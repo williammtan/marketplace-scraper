@@ -20,10 +20,8 @@ class ShopeeSimilarScraper(scrapy.Spider):
         self.scrape_images = scrape_images
         self.sections = sections
         self.query_count = query_count
-        print(self.df)
 
     def start_requests(self):
-        print(self.df)
         for i, prod in self.df.iterrows():
             url = shopee_similar_api.format(
                 id=prod.id, limit=self.query_count, shop_id=prod.shop_id, category_id=prod.category)

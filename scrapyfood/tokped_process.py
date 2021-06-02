@@ -46,7 +46,6 @@ class TokpedProcess(BaseProcess):
             fname_output=similar_fname), product_list=search_fname)
 
         # search_keywords = find_keywords()
-        # print(search_keywords)
 
 
 if __name__ == '__main__':
