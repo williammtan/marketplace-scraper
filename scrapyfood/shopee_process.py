@@ -24,7 +24,6 @@ from selenium.webdriver.chrome.options import Options
 from base_process import scrape, BaseProcess, WebdriverProcess
 
 import logging
-logging.basicConfig(encoding='utf-8', level=logging.DEBUG)
 
 
 class ShopeeProcess(BaseProcess, WebdriverProcess):
