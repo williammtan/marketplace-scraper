@@ -6,7 +6,7 @@ from ..gql import TokpedGQL, BaseSpiderGQL
 from ..items import TokpedSimilarProduct
 
 
-class TokpedSimilarScrape(scrapy.Spider, BaseSpiderGQL):
+class TokpedSimilarScraper(BaseSpiderGQL, scrapy.Spider):
     name = 'tokped_similar'
 
     def __init__(self, product_list):
@@ -163,4 +163,4 @@ class TokpedSimilarScrape(scrapy.Spider, BaseSpiderGQL):
         "categoryIDs": "",
         "LayoutPageType": "desktop",
         "queryParam": "user_addressId=0&user_cityId=176&user_districtId=2274&user_lat=&user_long=&user_postCode="
-    }, request_cue_length=2)
+    })

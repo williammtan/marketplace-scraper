@@ -4,8 +4,10 @@
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
 import json
+from numpy.random import Generator
 import scrapy
 from scrapy import signals
+from scrapy.utils.project import get_project_settings
 from w3lib.http import basic_auth_header
 
 # useful for handling different item types with a single interface
@@ -109,7 +111,9 @@ class ScrapyfoodDownloaderMiddleware:
 
 class TokpedGQLSpiderMiddleware:
     request_cue = []
-    cue_size = 2
+
+    def __init__(self):
+        self.cue_size = get_project_settings()['REQUEST_CUE']
 
     def process_start_requests(self, start_requests, spider):
         # Called with the start requests of the spider, and works
@@ -123,21 +127,31 @@ class TokpedGQLSpiderMiddleware:
             yield r.replace(body=json_body, cb_kwargs={'kwargs': [r.cb_kwargs for r in self.request_cue]})
             self.request_cue = []
 
-        # Must return only requests (not items).
-        while True:
-            try:
-                r = next(start_requests)
+        if type(start_requests) == tuple:
+            # Must return only requests (not items).
+            for i, r in enumerate(start_requests):
                 self.request_cue.append(r)
                 if len(self.request_cue) == self.cue_size:
                     # TODO: assert that the requests have the same body
-                    request(r)
+                    yield from request(r)
+                elif i == len(start_requests):
+                    # end of tuple
+                    yield from request(r)
+        else:
+            while True:
+                try:
+                    r = next(start_requests)
+                    self.request_cue.append(r)
+                    if len(self.request_cue) == self.cue_size:
+                        # TODO: assert that the requests have the same body
+                        print('Sending requests')
+                        yield from request(r)
 
-            except StopIteration:
-                request(r)
-                break
+                except StopIteration:
+                    request(r)
+                    break
 
 
 class ProxyMiddleware(object):
     def process_request(self, request, spider):
-        print(proxy_url)
         request.meta['proxy'] = proxy_url

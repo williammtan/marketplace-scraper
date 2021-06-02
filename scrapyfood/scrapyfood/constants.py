@@ -17,3 +17,8 @@ shopee_image_url = 'http://cf.shopee.co.id/file/{id}'
 
 # proxy
 proxy_url = os.environ['SCRAPER_API_PROXY']
+
+### TOKPED ###
+
+tokped_search_params = 'device=desktop&rows=200&sc={category}&source=universal&start={start}'
+max_search_rows = 200

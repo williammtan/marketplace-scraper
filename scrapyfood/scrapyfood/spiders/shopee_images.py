@@ -15,7 +15,6 @@ class ShopeeImageScraper(scrapy.Spider):
         for i, prod in self.products_df.iterrows():
             url = shopee_prod_api.format(id=prod.id, shop_id=prod.shop_id)
             headers = {'referer': prod.url}
-            print(headers)
             yield scrapy.Request(url=url, headers=headers, callback=self.parse, cb_kwargs={'prod_act': prod})
 
     def parse(self, response, prod_act):
@@ -32,4 +31,3 @@ class ShopeeImageScraper(scrapy.Spider):
             'image_ids': image_ids,
             'image_paths': image_paths
         })
-        print(prod_act.url)

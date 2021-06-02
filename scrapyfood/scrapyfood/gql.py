@@ -1,17 +1,19 @@
 import re
 from graphql.parser import GraphQLParser
+from scrapy.utils.project import get_project_settings
 import scrapy
 import json
 import numpy as np
 
 
 class BaseSpiderGQL(object):
-    # def __init__(self, callback):
-    #     self.callback = callback
-    #     print(self.callback)
+    custom_settings = {
+        'SPIDER_MIDDLEWARES': {
+            'scrapyfood.middlewares.TokpedGQLSpiderMiddleware': 543,
+        }
+    }
 
     def parse_split(self, response, kwargs):
-        print(dir(self))
         data = response.json()
         for i in range(len(data)):
             yield from self.parse(data[i]['data'], **kwargs[i])
@@ -24,7 +26,8 @@ class TokpedGQL():
     request_cue = []
     request_cue_length = 100
 
-    def __init__(self, operation_name, query, default_variables={}, request_cue_length=100):
+    def __init__(self, operation_name, query, default_variables={}):
+        request_cue_length = get_project_settings()['REQUEST_CUE']
         self.operation_name = operation_name
         self.query = query
         self.default_variables = default_variables
@@ -45,8 +48,6 @@ class TokpedGQL():
 
     def parse_split(self, response, cb_kwargs, callbacks):
         data = response.json()
-        print(callbacks)
-        print(data)
         for i in range(len(data)):
             callbacks(data[i], **cb_kwargs[i])
 
@@ -70,7 +71,6 @@ class TokpedGQL():
         })
 
         if len(self.request_cue) == self.request_cue_length:
-            print('go')
             json_body = json.dumps(
                 [req['body'] for req in self.request_cue], default=self.convert)
             yield scrapy.Request(url=self.url, method='POST', body=json_body, headers={

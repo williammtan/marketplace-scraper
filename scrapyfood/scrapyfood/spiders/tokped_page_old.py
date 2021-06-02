@@ -55,7 +55,7 @@ class TokpedPageSpider(scrapy.Spider):
                        for product in products]  # get product ids
         for id in product_ids:
             product = cache_data[id]
-            productItem = PageProductItem({
+            productItem = TokpedPageProduct({
                 'id': product['id'],
                 'title': product['name'],
                 'url': product['url'],
@@ -67,7 +67,6 @@ class TokpedPageSpider(scrapy.Spider):
             yield productItem
 
     def parse_product(self, response, depth):
-        print(depth)
         cache_data = get_cache(response)
 
         url = "".join(response.url.split("?")[0])
@@ -85,7 +84,7 @@ class TokpedPageSpider(scrapy.Spider):
         id = base_query["basicInfo"]["id"]
         item_data = cache_data[id]
 
-        product_item = ProductItem()
+        product_item = TokpedProduct()
 
         # TITLE AND DESCRIPTIONS
         title = response.css("h2.css-1fqpg99-unf-heading::text").get()
@@ -131,7 +130,6 @@ class TokpedPageSpider(scrapy.Spider):
         media_keys = list(filter(media_query.match, cache_data.keys()))
         image_urls = [cache_data[key]["URLThumbnail"] for key in media_keys]
 
-        print(product_item)
         yield product_item
 
         # SIMILAR IMAGES BY SEARCH QUERY

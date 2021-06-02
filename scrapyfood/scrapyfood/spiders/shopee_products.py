@@ -18,7 +18,6 @@ class ShopeeProductScraper(scrapy.Spider):
         self.scrape_images = scrape_images
 
     def start_requests(self):
-        print('start')
         is_images = 'images' in self.df.columns
         for i, prod in self.df.iterrows():
             url = shopee_prod_api.format(id=prod.id, shop_id=prod.shop_id)
@@ -65,5 +64,4 @@ class ShopeeProductScraper(scrapy.Spider):
             'brand': brand,
             'images': images
         })
-        print(prod_item)
         yield prod_item
