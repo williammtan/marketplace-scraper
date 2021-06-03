@@ -21,7 +21,7 @@ from scrapy.utils.project import get_project_settings
 from twisted.internet import reactor
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from base_process import scrape, BaseProcess, WebdriverProcess
+from process.base_process import scrape, BaseProcess, WebdriverProcess
 
 import logging
 

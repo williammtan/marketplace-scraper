@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 
 
-from base_process import BaseProcess, scrape
+from process.base_process import BaseProcess, scrape
 from scrapyfood.spiders.tokped_search import TokpedSearchScraper
 from scrapyfood.spiders.tokped_similar import TokpedSimilarScraper
 from nlp.keyword import find_keywords
