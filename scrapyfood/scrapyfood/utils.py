@@ -47,7 +47,7 @@ def read_df(file):
             logging.info("Reading a large file, using chunks: ")
             df_iter = pd.read_json(file, lines=True, chunksize=CHUNKSIZE)
             df = pd.concat(
-                [d for d in tqdm(df_iter, total=line_count/CHUNKSIZE)])
+                [d for d in tqdm(df_iter, total=round(line_count/CHUNKSIZE))])
         else:
             df = pd.read_json(file, lines=True)
     elif file_type == 'csv':

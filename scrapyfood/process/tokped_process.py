@@ -21,10 +21,6 @@ BASE_QUERY = [
         "id": "q",
         "name": "query",
     },
-    # {
-    #     "id": "sc",
-    #     "name": "category",
-    # },
     {
         "id": "ob",
         "name": "order_by",
@@ -52,24 +48,17 @@ BASE_QUERY = [
                 ],
         "type": "parameter"
     },
-    # {
-    #     "id": "rt",
-    #     "name": "rating",
-    #             "value": "4,5",
-    #             "type": "setting"
-    # }
 ]
 
 
 class TokpedProcess(BaseProcess):
     categories_file = open('../data/tokped/categories.json')
 
-    def __init__(self, main_category, output_dir, ratings=''):
+    def __init__(self, main_category, output_dir):
         self.main_category = main_category
         self.output_dir = output_dir
         self.sub_categories = [cat for cat in json.load(
             self.categories_file) if cat['id'] == self.main_category][0]['child']
-        self.rating_selection = ratings
 
     def start(self):
         """
@@ -92,6 +81,9 @@ class TokpedProcess(BaseProcess):
         ), query_file=self.create_search_query(queries=[{'name': f'keyword {i}', 'value': k} for i, k in enumerate(search_keywords)]))  # add new keywords to product file and process
         self.process_df(fname=fname_output)
 
+        scrape(TokpedSimilarScraper, self.create_settings(
+            fname_output=fname_output), product_list=fname_output)
+
         self.scrape_product_search(fname_output, related_output)
 
         with jsonlines.open(related_output) as reader:
@@ -100,9 +92,6 @@ class TokpedProcess(BaseProcess):
             fname_output=fname_output
         ), query_file=self.create_search_query(queries=[{'name': f'keyword {i}', 'value': k} for i, k in enumerate(related_keywords)], ob=False), max_queries=1000)  # add new related keywords to product file and process
         self.process_df(fname=fname_output)
-
-        # scrape(TokpedSimilarScraper, self.create_settings(
-        #     fname_output=fname_output), product_list=fname_output)
 
     def scrape_product_search(self, df_fname, related_output, sample_size=40000, batch_size=2000):
         """Searches a sample of products, and processes in batches, each time deleting duplicates in the file"""
@@ -125,34 +114,6 @@ class TokpedProcess(BaseProcess):
     def _process_df(self, df):
         return df[df.sub_category.isin([cat['identifier'] for cat in self.sub_categories])]
 
-    def scrape_sub_category(self, sub_category):
-        """
-        Scrape sub category, steps:
-            1. Search category
-            2. Similar products
-            3. Search common keywords
-        """
-        output_dir = os.path.join(self.output_dir, sub_category['name'])
-        search_fname = os.path.join(output_dir, 'search.jsonline')
-        similar_fname = os.path.join(output_dir, 'similar.jsonline')
-        products_fname = os.path.join(output_dir, 'similar.jsonline')
-
-        scrape(TokpedSearchScraper, self.create_settings(
-            fname_output=search_fname
-        ), query_file=self.create_search_query(category_id=sub_category))
-
-        scrape(TokpedSimilarScraper, self.create_settings(
-            fname_output=similar_fname), product_list=search_fname)
-
-        self.process_df(df=pd.concat(
-            [read_df(search_fname), read_df(similar_fname)]), fname=products_fname)  # combine, process and save to file
-
-        search_keywords = find_keywords(read_df(similar_fname))
-        scrape(TokpedSearchScraper, self.create_settings(
-            fname_output=products_fname
-        ), query_file=self.create_search_query(queries=search_keywords))  # add new keywords to product file and process
-        self.process_df(fname=products_fname)
-
     # category_mapping=[{"name": "Keju", "value": "2722"}, {"name": "Krim", "value": "2724"}]
     def create_search_query(self, queries=None, category_id=None, category_mapping=None, ob=True):
         query = BASE_QUERY.copy()
@@ -172,8 +133,6 @@ class TokpedProcess(BaseProcess):
                 parameter['type'] = 'setting'
             return parameter
 
-        # select_from_query('rt', is_paramter=False)[
-        #     'value'] = self.rating_selection
         if not ob:
             select_from_query('ob', is_paramter=False)['value'] = "23"
 
