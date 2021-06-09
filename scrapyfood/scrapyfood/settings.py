@@ -43,6 +43,7 @@ CONCURRENT_REQUESTS = 64
 
 # Disable cookies (enabled by default)
 COOKIES_ENABLED = False
+TEST = False
 
 LOG_LEVEL = 'INFO'
 REQUEST_CUE = 50

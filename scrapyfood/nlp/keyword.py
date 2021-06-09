@@ -24,16 +24,32 @@ def cleaning_title(doc):
         return ' '.join(text)
 
 
-def find_keywords(df, top_n=100):
+def find_keywords(df, top_n=20, n_common=20, threshold=100):
+
     logging.info('Finding keywords')
     nlp = spacy.blank('id')
     brief_cleaning = [re.sub("[^A-Za-z']+", ' ', str(title)).lower()
-                      for title in df.title.values]
+                      for title in df.name.values]
     text = [cleaning_title(doc) for doc in tqdm(
-        nlp.pipe(brief_cleaning, batch_size=5000, n_process=-1))]
+        nlp.pipe(brief_cleaning, batch_size=5000, n_process=-1), total=len(brief_cleaning))]
 
-    titles = [title.split() for title in text if title is not None]
+    titles = np.array([title.split()
+                      for title in text if title is not None], dtype=object)
     words = np.array([word for title in tqdm(titles)
                      for word in title], dtype=object)
     counter = Counter(words)
-    return counter.most_common(top_n)
+    keywords = counter.most_common(top_n)
+
+    search_keywords = []
+
+    for k, id in keywords:
+        # find prods which contain the keyword and find second most common
+        contains_k = titles[np.array([k in name for name in titles])]
+        words = [word for name in contains_k for word in name]
+        k_counter = Counter(words)
+        most_common = k_counter.most_common(n_common)
+        for key in most_common:
+            if k != key[0] and key[1] > threshold:
+                search_keywords.append(k + ' ' + key[0])
+
+    return search_keywords

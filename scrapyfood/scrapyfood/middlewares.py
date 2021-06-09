@@ -4,6 +4,7 @@
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
 import json
+from time import process_time
 from numpy.random import Generator
 import logging
 from scrapy import signals
@@ -124,7 +125,8 @@ class TokpedGQLSpiderMiddleware:
             # combine the requests
             body = [json.loads(r.body) for r in self.request_cue]
             json_body = json.dumps(body)
-            yield r.replace(body=json_body, cb_kwargs={'kwargs': [r.cb_kwargs for r in self.request_cue]})
+            logging.debug('Sending requests')
+            yield r.replace(body=json_body, cb_kwargs={'args': [r.cb_kwargs for r in self.request_cue]})
             self.request_cue = []
 
         if type(start_requests) == tuple:
@@ -144,11 +146,11 @@ class TokpedGQLSpiderMiddleware:
                     self.request_cue.append(r)
                     if len(self.request_cue) == self.cue_size:
                         # TODO: assert that the requests have the same body
-                        logging.DEBUG('Sending requests')
                         yield from request(r)
 
                 except StopIteration:
-                    request(r)
+                    logging.debug('Running end request')
+                    yield from request(r)
                     break
 
 

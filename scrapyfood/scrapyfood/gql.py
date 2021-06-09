@@ -13,10 +13,13 @@ class BaseSpiderGQL(object):
         }
     }
 
-    def parse_split(self, response, kwargs):
+    def parse_split(self, response, args=None, **kwargs):
         data = response.json()
-        for i in range(len(data)):
-            yield from self.parse(data[i]['data'], **kwargs[i])
+        if args == None:
+            yield from self.parse(data['data'], **kwargs)
+        else:
+            for i in range(len(data)):
+                yield from self.parse(data[i]['data'], **args[i])
 
 
 class TokpedGQL():
@@ -86,7 +89,7 @@ class TokpedGQL():
         for k, v in input_variables.items():
             vars[k] = v
 
-        self.verify(vars)
+        # self.verify(vars)
         body = {
             'operationName': self.operation_name,
             'variables': vars,

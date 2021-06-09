@@ -17,8 +17,8 @@ from twisted.internet import reactor
 
 def scrape(spider, settings={}, *args, **kwargs):
     output_fname, output_settings = list(settings['FEEDS'].items())[0]
-    if not output_settings['overwrite'] and os.path.isfile(output_fname):
-        return
+    # if not output_settings['overwrite'] and os.path.isfile(output_fname):
+    #     return
 
     logging.info(f'running {spider} spider')
     queue = Queue()
@@ -49,14 +49,20 @@ def f(queue, spider, settings, *args, **kwargs):
 
 
 class BaseProcess:
-    def process_df(self, fname, short=True, main_cat=None, sub_cat=None):
+    def _process_df(self, df):
+        return df
+
+    def process_df(self, fname, df=None, short=True, main_cat=None, sub_cat=None):
         # short meaning, not individually scraped products
         """Drop duplicates, simplify categories, and save file"""
         image_folder = os.path.join(os.path.dirname(fname), 'images')
 
-        df = read_df(fname)
-        df = df.dropna(subset=df.columns.difference(['brand']))
+        if not df:
+            df = read_df(fname)
+        # df = df.dropna(subset=df.columns.difference(['brand']))
         df = df.drop_duplicates(subset='id')
+        if 'index' in df.columns:
+            df['index'].pop()
         not_df = pd.DataFrame(columns=df.columns)
         if not short:
             # get sub category available items and get sub + main categories
@@ -89,8 +95,13 @@ class BaseProcess:
 
             df.drop(index=not_df.index)
 
-        df = df.reset_index()
-        df.to_json(fname)
+        df = self._process_df(df)
+        df = df.reset_index(drop=True)
+        _, file_extension = os.path.splitext(fname)
+        if file_extension == '.json':
+            df.to_json(fname)
+        elif file_extension == '.jsonlines':
+            df.to_json(fname, orient='records', lines=True)
 
     def create_settings(self, fname_output, save_imgs=False, overide=False):
         output_dir = os.path.dirname(fname_output)

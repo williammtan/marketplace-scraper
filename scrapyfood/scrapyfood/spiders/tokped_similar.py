@@ -1,16 +1,24 @@
 
 import pandas as pd
 import scrapy
-from ..utils import read_df
+from ..utils import read_df, read_terjual_tokped
 from ..gql import TokpedGQL, BaseSpiderGQL
-from ..items import TokpedSimilarProduct
+from ..items import TokpedShortProduct
+import re
+import json
 
 
 class TokpedSimilarScraper(BaseSpiderGQL, scrapy.Spider):
     name = 'tokped_similar'
 
-    def __init__(self, product_list):
+    def __init__(self, product_list, settings={
+        'sections': ['Lainnya di toko ini', 'Produk sponsor terkait', 'Pilihan lainnya untukmu'], "category": None
+    }):
         self.df = read_df(product_list)
+        if type(settings) == str:
+            settings = json.loads(open(settings, 'r').read())
+        self.keep_sections = settings['sections']
+        self.category = settings['category']
 
     def start_requests(self):
         for _, prod in self.df.iterrows():
@@ -18,7 +26,8 @@ class TokpedSimilarScraper(BaseSpiderGQL, scrapy.Spider):
 
     def parse(self, response, ref_id):
         data = response['productRecommendationWidget']
-        sections = data['data']
+        sections = [sect for sect in data['data']
+                    if sect['title'] in self.keep_sections]
         for sect in sections:
             ref = {'from': ref_id, 'section': sect['title']}
 
@@ -27,6 +36,9 @@ class TokpedSimilarScraper(BaseSpiderGQL, scrapy.Spider):
                 id = prod['id']
                 name = prod['productName']
                 category_breadcrumb = prod['categoryBreadcrumbs']
+                if self.category is not None and self.category not in category_breadcrumb.split('/'):
+                    # if specific category is defined and it's not in the category breadcrumbs, skip
+                    continue
                 prod_url = prod['productUrl']
                 old_price = prod['slashedPriceInt']
                 discounted_price = prod['priceInt']
@@ -37,8 +49,13 @@ class TokpedSimilarScraper(BaseSpiderGQL, scrapy.Spider):
 
                 rating = prod['productRating']
                 review_count = prod['productReviewCount']
+                sold = read_terjual_tokped(prod['productLabelGroups'])
 
-                yield TokpedSimilarProduct({
+                sub_category = category_breadcrumb.split('/')[-1]
+                sub_category_lower = '-'.join([split for split in re.split(
+                    r" |\-|&", sub_category.lower()) if split != ''])
+
+                yield TokpedShortProduct({
                     'id': id,
                     'name': name,
                     'category_breadcrumb': category_breadcrumb,
@@ -47,13 +64,15 @@ class TokpedSimilarScraper(BaseSpiderGQL, scrapy.Spider):
                     'discounted_price': discounted_price,
                     'discount_percent': discount_percent,
                     'stock': stock,
-                    'shop': shop,
+                    'shop': shop['id'],
                     'image_urls': image_urls,
+                    'sold': sold,
 
                     'rating': rating,
                     'review_count': review_count,
 
-                    'ref': ref
+                    'ref': ref,
+                    'sub_category': sub_category_lower
                 })
 
     gql = TokpedGQL(operation_name='RecomWidget', query="""query RecomWidget(

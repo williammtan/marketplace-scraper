@@ -1,0 +1,425 @@
+[
+	{ "from_keyword": "susu", "keyword": "susu" },
+	{ "from_keyword": "susu", "keyword": "susu beruang bear brand" },
+	{ "from_keyword": "susu", "keyword": "susu almond" },
+	{ "from_keyword": "susu", "keyword": "susu kambing" },
+	{ "from_keyword": "susu", "keyword": "susu diamond" },
+	{ "from_keyword": "milk", "keyword": "milk jug" },
+	{ "from_keyword": "milk", "keyword": "milk frother" },
+	{ "from_keyword": "milk", "keyword": "milku" },
+	{ "from_keyword": "milk", "keyword": "greenfields fresh milk" },
+	{ "from_keyword": "milk", "keyword": "almond milk" },
+	{ "from_keyword": "keju", "keyword": "keju" },
+	{ "from_keyword": "keju", "keyword": "keju edam" },
+	{ "from_keyword": "keju", "keyword": "keju mozarella" },
+	{ "from_keyword": "keju", "keyword": "keju edam ayam emas" },
+	{ "from_keyword": "keju", "keyword": "keju parmesan" },
+	{ "from_keyword": "cream", "keyword": "cream cheese" },
+	{ "from_keyword": "cream", "keyword": "implora lip cream" },
+	{ "from_keyword": "cream", "keyword": "eye cream" },
+	{ "from_keyword": "cream", "keyword": "whipping cream" },
+	{ "from_keyword": "cream", "keyword": "ice cream" },
+	{ "from_keyword": "coklat", "keyword": "coklat" },
+	{ "from_keyword": "coklat", "keyword": "coklat kiloan" },
+	{ "from_keyword": "coklat", "keyword": "coklat silverqueen" },
+	{ "from_keyword": "coklat", "keyword": "coklat batang" },
+	{ "from_keyword": "coklat", "keyword": "coklat bubuk" },
+	{ "from_keyword": "cheese", "keyword": "cheese" },
+	{ "from_keyword": "cheese", "keyword": "cheese cake" },
+	{ "from_keyword": "cheese", "keyword": "cheese stick" },
+	{ "from_keyword": "cheese", "keyword": "cheese cream" },
+	{ "from_keyword": "cheese", "keyword": "cream cheese" },
+	{ "from_keyword": "butter", "keyword": "butter" },
+	{ "from_keyword": "butter", "keyword": "butter anchor" },
+	{ "from_keyword": "butter", "keyword": "butterfly knife" },
+	{ "from_keyword": "butter", "keyword": "monde butter cookies" },
+	{ "from_keyword": "butter", "keyword": "anchor butter" },
+	{ "from_keyword": "uht", "keyword": "uht" },
+	{ "from_keyword": "uht", "keyword": "uht diamond" },
+	{ "from_keyword": "uht", "keyword": "susu uht" },
+	{ "from_keyword": "uht", "keyword": "susu uht 1 liter" },
+	{ "from_keyword": "uht", "keyword": "diamond uht" },
+	{ "from_keyword": "bubuk", "keyword": "bubuk minuman" },
+	{ "from_keyword": "bubuk", "keyword": "kopi bubuk" },
+	{ "from_keyword": "bubuk", "keyword": "coklat bubuk" },
+	{ "from_keyword": "bubuk", "keyword": "kunyit bubuk" },
+	{ "from_keyword": "sachet", "keyword": "tolak angin cair isi 12 sachet" },
+	{ "from_keyword": "sachet", "keyword": "dancow sachet" },
+	{ "from_keyword": "sachet", "keyword": "milo sachet" },
+	{ "from_keyword": "sachet", "keyword": "gula sachet" },
+	{ "from_keyword": "liter", "keyword": "minyak goreng 2 liter" },
+	{ "from_keyword": "liter", "keyword": "hand sanitizer 5 liter" },
+	{ "from_keyword": "liter", "keyword": "botol minum 2 liter" },
+	{ "from_keyword": "liter", "keyword": "minyak goreng 1 liter" },
+	{ "from_keyword": "liter", "keyword": "hand sanitizer 1 liter" },
+	{ "from_keyword": "almond", "keyword": "almond" },
+	{ "from_keyword": "almond", "keyword": "almond milk" },
+	{ "from_keyword": "almond", "keyword": "almond slice" },
+	{ "from_keyword": "almond", "keyword": "almond crispy" },
+	{ "from_keyword": "almond", "keyword": "kacang almond" },
+	{ "from_keyword": "cheddar", "keyword": "cheddar" },
+	{ "from_keyword": "cheddar", "keyword": "keju cheddar" },
+	{ "from_keyword": "cheddar", "keyword": "red cheddar" },
+	{ "from_keyword": "cheddar", "keyword": "red cheddar slice" },
+	{ "from_keyword": "cheddar", "keyword": "keju kraft cheddar 2kg" },
+	{ "from_keyword": "vanila", "keyword": "vanila extract" },
+	{ "from_keyword": "vanila", "keyword": "bebelac 3 vanila" },
+	{ "from_keyword": "vanila", "keyword": "susu diabetasol vanila 1kg" },
+	{ "from_keyword": "vanila", "keyword": "dancow 3 vanila 800" },
+	{ "from_keyword": "vanila", "keyword": "energen vanila" },
+	{ "from_keyword": "repack", "keyword": "fitgirl repack" },
+	{ "from_keyword": "repack", "keyword": "royal canin repack" },
+	{ "from_keyword": "repack", "keyword": "makanan kucing repack" },
+	{ "from_keyword": "repack", "keyword": "whiskas repack" },
+	{ "from_keyword": "repack", "keyword": "meo repack" },
+	{ "from_keyword": "full", "keyword": "helm full face" },
+	{ "from_keyword": "full", "keyword": "helm kyt full face" },
+	{ "from_keyword": "full", "keyword": "pc gaming full set" },
+	{ "from_keyword": "full", "keyword": "helm fullface" },
+	{ "from_keyword": "full", "keyword": "helm full face kyt" },
+	{ "from_keyword": "madu", "keyword": "madu" },
+	{ "from_keyword": "madu", "keyword": "madu asli" },
+	{ "from_keyword": "madu", "keyword": "madu uray" },
+	{ "from_keyword": "madu", "keyword": "madu al shifa" },
+	{ "from_keyword": "madu", "keyword": "madu hitam pahit" },
+	{ "from_keyword": "kambing", "keyword": "kambing" },
+	{ "from_keyword": "kambing", "keyword": "kambing qurban" },
+	{ "from_keyword": "kambing", "keyword": "kambing aqiqah" },
+	{ "from_keyword": "kambing", "keyword": "susu kambing" },
+	{ "from_keyword": "kambing", "keyword": "daging kambing" },
+	{ "from_keyword": "cream cheese", "keyword": "cream cheese" },
+	{ "from_keyword": "cream cheese", "keyword": "cream cheese anchor" },
+	{ "from_keyword": "cream cheese", "keyword": "cream cheese anchor 1kg" },
+	{ "from_keyword": "cream cheese", "keyword": "cream cheese powder" },
+	{ "from_keyword": "cream cheese", "keyword": "cream cheese elle & vire" },
+	{ "from_keyword": "milku", "keyword": "milku" },
+	{ "from_keyword": "milku", "keyword": "milku susu uht" },
+	{ "from_keyword": "milku", "keyword": "milkuat" },
+	{ "from_keyword": "milku", "keyword": "milku susu" },
+	{ "from_keyword": "milku", "keyword": "milkuat bantal" },
+	{ "from_keyword": "keju", "keyword": "keju" },
+	{ "from_keyword": "keju", "keyword": "keju edam" },
+	{ "from_keyword": "keju", "keyword": "keju mozarella" },
+	{ "from_keyword": "keju", "keyword": "keju edam ayam emas" },
+	{ "from_keyword": "keju", "keyword": "keju parmesan" },
+	{ "from_keyword": "keju parmesan", "keyword": "keju parmesan" },
+	{ "from_keyword": "keju parmesan", "keyword": "keju parmesan anchor" },
+	{ "from_keyword": "keju parmesan", "keyword": "keju parmesan bubuk" },
+	{ "from_keyword": "keju parmesan", "keyword": "keju parmesan anchor 800gr" },
+	{ "from_keyword": "keju parmesan", "keyword": "keju parmesan blok" },
+	{
+		"from_keyword": "greenfields fresh milk",
+		"keyword": "greenfields fresh milk"
+	},
+	{
+		"from_keyword": "greenfields fresh milk",
+		"keyword": "greenfields fresh milk 1 liter"
+	},
+	{
+		"from_keyword": "greenfields fresh milk",
+		"keyword": "greenfields fresh milk 125 ml"
+	},
+	{
+		"from_keyword": "greenfields fresh milk",
+		"keyword": "greenfields fresh milk karton"
+	},
+	{
+		"from_keyword": "greenfields fresh milk",
+		"keyword": "greenfields fresh milk jersey 1000ml"
+	},
+	{
+		"from_keyword": "greenfields fresh milk",
+		"keyword": "greenfields fresh milk 1.89"
+	},
+	{
+		"from_keyword": "greenfields fresh milk",
+		"keyword": "susu greenfields fresh milk"
+	},
+	{
+		"from_keyword": "greenfields fresh milk",
+		"keyword": "susu greenfields fresh milk 1l"
+	},
+	{ "from_keyword": "keju edam ayam emas", "keyword": "keju edam ayam emas" },
+	{
+		"from_keyword": "keju edam ayam emas",
+		"keyword": "keju edam ayam emas bola"
+	},
+	{
+		"from_keyword": "keju edam ayam emas",
+		"keyword": "keju edam ayam emas 250gr"
+	},
+	{
+		"from_keyword": "keju edam ayam emas",
+		"keyword": "keju edam ayam emas bola utuh"
+	},
+	{
+		"from_keyword": "keju edam ayam emas",
+		"keyword": "keju edam ayam emas 1 kg"
+	},
+	{
+		"from_keyword": "keju edam ayam emas",
+		"keyword": "keju edam ayam emas 100 gr"
+	},
+	{
+		"from_keyword": "keju edam ayam emas",
+		"keyword": "keju edam ayam emas 500 gram"
+	},
+	{
+		"from_keyword": "keju edam ayam emas",
+		"keyword": "keju edam ayam emas 1kg"
+	},
+	{ "from_keyword": "keju edam", "keyword": "keju edam" },
+	{ "from_keyword": "keju edam", "keyword": "keju edam ayam emas" },
+	{ "from_keyword": "keju edam", "keyword": "keju edam victoria" },
+	{ "from_keyword": "keju edam", "keyword": "keju edam bola" },
+	{ "from_keyword": "keju edam", "keyword": "keju edam 1 kg" },
+	{ "from_keyword": "keju mozarella", "keyword": "keju mozarella" },
+	{ "from_keyword": "keju mozarella", "keyword": "keju mozarella 1 kg" },
+	{ "from_keyword": "keju mozarella", "keyword": "keju mozarella perfetto" },
+	{ "from_keyword": "keju mozarella", "keyword": "keju mozarella anchor" },
+	{
+		"from_keyword": "keju mozarella",
+		"keyword": "keju mozarella perfetto 1kg"
+	},
+	{ "from_keyword": "milk frother", "keyword": "milk frother" },
+	{ "from_keyword": "milk frother", "keyword": "milk frother electric" },
+	{ "from_keyword": "milk frother", "keyword": "milk frother manual" },
+	{ "from_keyword": "milk frother", "keyword": "milk frother listrik" },
+	{ "from_keyword": "milk frother", "keyword": "milk frother usb" },
+	{ "from_keyword": "milk frother", "keyword": "milk frother stainless" },
+	{ "from_keyword": "milk frother", "keyword": "milk frother latina" },
+	{ "from_keyword": "milk frother", "keyword": "latina milk frother" },
+	{ "from_keyword": "susu diamond", "keyword": "susu diamond" },
+	{ "from_keyword": "susu diamond", "keyword": "susu diamond 1 liter" },
+	{ "from_keyword": "susu diamond", "keyword": "susu diamond 1 karton" },
+	{ "from_keyword": "susu diamond", "keyword": "susu diamond uht" },
+	{ "from_keyword": "susu diamond", "keyword": "susu diamond fresh milk" },
+	{ "from_keyword": "milk jug", "keyword": "milk jug" },
+	{ "from_keyword": "milk jug", "keyword": "milk jug 350ml" },
+	{ "from_keyword": "milk jug", "keyword": "milk jug 600ml" },
+	{ "from_keyword": "milk jug", "keyword": "milk jug latte art" },
+	{ "from_keyword": "milk jug", "keyword": "milk jug stainless" },
+	{
+		"from_keyword": "susu beruang bear brand",
+		"keyword": "susu beruang bear brand"
+	},
+	{
+		"from_keyword": "susu beruang bear brand",
+		"keyword": "susu beruang bear brand karton 30"
+	},
+	{
+		"from_keyword": "susu beruang bear brand",
+		"keyword": "susu beruang bear brand karton"
+	},
+	{
+		"from_keyword": "susu beruang bear brand",
+		"keyword": "susu beruang bear brand thailand"
+	},
+	{
+		"from_keyword": "susu beruang bear brand",
+		"keyword": "susu beruang bear brand 30pcs"
+	},
+	{
+		"from_keyword": "susu beruang bear brand",
+		"keyword": "susu beruang bear brand karton 30 189"
+	},
+	{
+		"from_keyword": "susu beruang bear brand",
+		"keyword": "susu beruang bear brand isi 10"
+	},
+	{
+		"from_keyword": "susu beruang bear brand",
+		"keyword": "susu beruang bear brand depok"
+	},
+	{ "from_keyword": "susu almond", "keyword": "susu almond" },
+	{ "from_keyword": "susu almond", "keyword": "susu almond asi booster" },
+	{ "from_keyword": "susu almond", "keyword": "susu almond bubuk" },
+	{ "from_keyword": "susu almond", "keyword": "susu almond pelancar asi" },
+	{ "from_keyword": "susu almond", "keyword": "susu almond afis" },
+	{ "from_keyword": "susu", "keyword": "susu" },
+	{ "from_keyword": "susu", "keyword": "susu beruang bear brand" },
+	{ "from_keyword": "susu", "keyword": "susu almond" },
+	{ "from_keyword": "susu", "keyword": "susu kambing" },
+	{ "from_keyword": "susu", "keyword": "susu diamond" },
+	{ "from_keyword": "coklat bubuk", "keyword": "coklat bubuk" },
+	{ "from_keyword": "coklat bubuk", "keyword": "coklat bubuk van houten" },
+	{ "from_keyword": "coklat bubuk", "keyword": "coklat bubuk bensdorp" },
+	{ "from_keyword": "coklat bubuk", "keyword": "coklat bubuk kiloan" },
+	{ "from_keyword": "coklat bubuk", "keyword": "coklat bubuk cocoa powder" },
+	{ "from_keyword": "coklat kiloan", "keyword": "coklat kiloan" },
+	{ "from_keyword": "coklat kiloan", "keyword": "coklat kiloan murah" },
+	{ "from_keyword": "coklat kiloan", "keyword": "coklat kiloan coklat" },
+	{
+		"from_keyword": "coklat kiloan",
+		"keyword": "coklat kiloan coklat silverqueen"
+	},
+	{ "from_keyword": "coklat kiloan", "keyword": "coklat kiloan delfi" },
+	{ "from_keyword": "coklat silverqueen", "keyword": "coklat silverqueen" },
+	{ "from_keyword": "coklat silverqueen", "keyword": "coklat silverqueen 1kg" },
+	{
+		"from_keyword": "coklat silverqueen",
+		"keyword": "coklat silverqueen kiloan"
+	},
+	{
+		"from_keyword": "coklat silverqueen",
+		"keyword": "coklat silverqueen bites"
+	},
+	{
+		"from_keyword": "coklat silverqueen",
+		"keyword": "coklat silverqueen valentine"
+	},
+	{ "from_keyword": "susu kambing", "keyword": "susu kambing" },
+	{ "from_keyword": "susu kambing", "keyword": "susu kambing etawa" },
+	{ "from_keyword": "susu kambing", "keyword": "susu kambing etawa bubuk" },
+	{ "from_keyword": "susu kambing", "keyword": "susu kambing murni" },
+	{ "from_keyword": "susu kambing", "keyword": "susu kambing etawa skygoat" },
+	{ "from_keyword": "coklat batang", "keyword": "coklat batang" },
+	{ "from_keyword": "coklat batang", "keyword": "coklat batangan" },
+	{ "from_keyword": "coklat batang", "keyword": "coklat batangan murah" },
+	{ "from_keyword": "coklat batang", "keyword": "coklat batangan 1 kg" },
+	{ "from_keyword": "coklat batang", "keyword": "coklat batang colatta" },
+	{ "from_keyword": "coklat", "keyword": "coklat" },
+	{ "from_keyword": "coklat", "keyword": "coklat kiloan" },
+	{ "from_keyword": "coklat", "keyword": "coklat silverqueen" },
+	{ "from_keyword": "coklat", "keyword": "coklat batang" },
+	{ "from_keyword": "coklat", "keyword": "coklat bubuk" },
+	{ "from_keyword": "ice cream", "keyword": "ice cream" },
+	{ "from_keyword": "ice cream", "keyword": "ice cream maker" },
+	{ "from_keyword": "ice cream", "keyword": "ice cream mask" },
+	{ "from_keyword": "ice cream", "keyword": "ice cream diamond" },
+	{ "from_keyword": "ice cream", "keyword": "ice cream 8 liter" },
+	{ "from_keyword": "whipping cream", "keyword": "whipping cream" },
+	{ "from_keyword": "whipping cream", "keyword": "whipping cream anchor" },
+	{ "from_keyword": "whipping cream", "keyword": "whipping cream cair" },
+	{ "from_keyword": "whipping cream", "keyword": "whipping cream bubuk" },
+	{ "from_keyword": "whipping cream", "keyword": "whipping cream greenfields" },
+	{ "from_keyword": "implora lip cream", "keyword": "implora lip cream" },
+	{ "from_keyword": "almond milk", "keyword": "almond milk" },
+	{ "from_keyword": "almond milk", "keyword": "almond milk unsweetened" },
+	{ "from_keyword": "almond milk", "keyword": "almond milk 1 liter" },
+	{ "from_keyword": "almond milk", "keyword": "almond milk powder" },
+	{ "from_keyword": "almond milk", "keyword": "blue diamond almond milk" },
+	{ "from_keyword": "goldenfil", "keyword": "goldenfil" },
+	{ "from_keyword": "goldenfil", "keyword": "goldenfil choco crunchy" },
+	{ "from_keyword": "goldenfil", "keyword": "goldenfill" },
+	{ "from_keyword": "goldenfil", "keyword": "goldenfil 1kg" },
+	{ "from_keyword": "goldenfil", "keyword": "goldenfil strawberry" },
+	{
+		"from_keyword": "golden black coffee",
+		"keyword": "golden black coffee cup"
+	},
+	{
+		"from_keyword": "golden black coffee",
+		"keyword": "jastip golden black coffee gb 3 cup"
+	},
+	{
+		"from_keyword": "golden black coffee",
+		"keyword": "roasted almond golden black coffee"
+	},
+	{ "from_keyword": "susu dancow sachet", "keyword": "susu dancow sachet" },
+	{
+		"from_keyword": "susu dancow sachet",
+		"keyword": "susu dancow sachet putih"
+	},
+	{
+		"from_keyword": "susu dancow sachet",
+		"keyword": "susu dancow sachet coklat"
+	},
+	{
+		"from_keyword": "susu dancow sachet",
+		"keyword": "susu dancow sachet renceng"
+	},
+	{
+		"from_keyword": "susu dancow sachet",
+		"keyword": "susu dancow sachet cokelat"
+	},
+	{
+		"from_keyword": "susu dancow sachet",
+		"keyword": "susu dancow sachet dus 16lbr"
+	},
+	{
+		"from_keyword": "susu dancow sachet",
+		"keyword": "susu dancow sachet renceng cokelat"
+	},
+	{ "from_keyword": "susu dancow sachet", "keyword": "susu dancow sachet 39" },
+	{ "from_keyword": "milo sachet", "keyword": "milo sachet" },
+	{ "from_keyword": "milo sachet", "keyword": "milo sachet 22gr renceng" },
+	{ "from_keyword": "milo sachet", "keyword": "milo sachet malaysia" },
+	{ "from_keyword": "milo sachet", "keyword": "milo sachet 3 in 1" },
+	{ "from_keyword": "milo sachet", "keyword": "milo sachet 35gr" },
+	{ "from_keyword": "milo sachet", "keyword": "milo sachet 3 in 1 malaysia" },
+	{ "from_keyword": "milo sachet", "keyword": "milo sachet 21" },
+	{ "from_keyword": "milo sachet", "keyword": "milo sachet renceng" },
+	{ "from_keyword": "dancow sachet", "keyword": "dancow sachet" },
+	{ "from_keyword": "dancow sachet", "keyword": "dancow sachet putih" },
+	{ "from_keyword": "dancow sachet", "keyword": "dancow sachet renceng" },
+	{ "from_keyword": "dancow sachet", "keyword": "dancow sachet coklat" },
+	{ "from_keyword": "dancow sachet", "keyword": "susu dancow sachet" },
+	{ "from_keyword": "dancow sachet", "keyword": "susu dancow sachet putih" },
+	{ "from_keyword": "dancow sachet", "keyword": "susu bubuk dancow sachet" },
+	{ "from_keyword": "dancow sachet", "keyword": "susu dancow sachet coklat" },
+	{ "from_keyword": "diamond uht", "keyword": "diamond uht" },
+	{ "from_keyword": "diamond uht", "keyword": "diamond uht milk 1 liter" },
+	{ "from_keyword": "diamond uht", "keyword": "diamond uht 1 liter" },
+	{ "from_keyword": "diamond uht", "keyword": "diamond uht karton" },
+	{ "from_keyword": "diamond uht", "keyword": "diamond uht 1liter dus" },
+	{ "from_keyword": "diamond uht", "keyword": "susu diamond uht" },
+	{ "from_keyword": "diamond uht", "keyword": "susu diamond uht 1 liter" },
+	{ "from_keyword": "diamond uht", "keyword": "susu diamond uht 1 karton" },
+	{ "from_keyword": "bubuk minuman", "keyword": "bubuk minuman" },
+	{ "from_keyword": "bubuk minuman", "keyword": "bubuk minuman powder" },
+	{ "from_keyword": "bubuk minuman", "keyword": "bubuk minuman javaland" },
+	{ "from_keyword": "bubuk minuman", "keyword": "bubuk minuman premium" },
+	{ "from_keyword": "bubuk minuman", "keyword": "bubuk minuman aneka rasa" },
+	{ "from_keyword": "susu uht 1 liter", "keyword": "susu uht 1 liter" },
+	{ "from_keyword": "susu uht 1 liter", "keyword": "susu uht 1 liter karton" },
+	{ "from_keyword": "susu uht 1 liter", "keyword": "susu uht 1 liter coklat" },
+	{ "from_keyword": "susu uht 1 liter", "keyword": "susu uht 1 liter ultra" },
+	{ "from_keyword": "susu uht 1 liter", "keyword": "susu uht 1 liter low fat" },
+	{ "from_keyword": "susu uht 1 liter", "keyword": "susu uht 1 liter diamond" },
+	{
+		"from_keyword": "susu uht 1 liter",
+		"keyword": "susu uht 1 liter indomilk"
+	},
+	{
+		"from_keyword": "susu uht 1 liter",
+		"keyword": "susu uht 1 liter greenfields"
+	},
+	{ "from_keyword": "kopi bubuk", "keyword": "kopi bubuk" },
+	{ "from_keyword": "kopi bubuk", "keyword": "kopi bubuk robusta" },
+	{ "from_keyword": "kopi bubuk", "keyword": "kopi bubuk 1 kg" },
+	{ "from_keyword": "kopi bubuk", "keyword": "kopi bubuk asli" },
+	{ "from_keyword": "kopi bubuk", "keyword": "kopi bubuk arabika" },
+	{ "from_keyword": "uht diamond", "keyword": "uht diamond" },
+	{ "from_keyword": "uht diamond", "keyword": "uht diamond 1 liter" },
+	{ "from_keyword": "uht diamond", "keyword": "uht diamond 1" },
+	{ "from_keyword": "uht diamond", "keyword": "uht diamond 1 liter karton" },
+	{ "from_keyword": "uht diamond", "keyword": "susu uht diamond" },
+	{
+		"from_keyword": "uht diamond",
+		"keyword": "susu uht diamond full cream 1 liter"
+	},
+	{
+		"from_keyword": "uht diamond",
+		"keyword": "susu uht diamond 1 liter karton"
+	},
+	{ "from_keyword": "uht diamond", "keyword": "susu uht diamond 125ml" },
+	{ "from_keyword": "anchor butter", "keyword": "anchor butter" },
+	{ "from_keyword": "anchor butter", "keyword": "anchor butter 2kg" },
+	{ "from_keyword": "anchor butter", "keyword": "anchor butter unsalted" },
+	{ "from_keyword": "anchor butter", "keyword": "anchor butter 1 kg" },
+	{ "from_keyword": "anchor butter", "keyword": "anchor butter salted" },
+	{ "from_keyword": "anchor butter", "keyword": "anchor butter 454" },
+	{ "from_keyword": "anchor butter", "keyword": "anchor butter mix" },
+	{ "from_keyword": "anchor butter", "keyword": "anchor butter 227" },
+	{ "from_keyword": "susu uht", "keyword": "susu uht" },
+	{ "from_keyword": "susu uht", "keyword": "susu uht 1 liter" },
+	{ "from_keyword": "susu uht", "keyword": "susu uht diamond" },
+	{ "from_keyword": "susu uht", "keyword": "susu uht ultra milk" },
+	{ "from_keyword": "susu uht", "keyword": "susu uht 1 liter karton" },
+	{ "from_keyword": "uht", "keyword": "uht" },
+	{ "from_keyword": "uht", "keyword": "uht diamond" },
+	{ "from_keyword": "uht", "keyword": "susu uht" },
+	{ "from_keyword": "uht", "keyword": "susu uht 1 liter" },
+	{ "from_keyword": "uht", "keyword": "diamond uht" }
+]

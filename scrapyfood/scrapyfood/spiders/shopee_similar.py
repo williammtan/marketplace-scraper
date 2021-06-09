@@ -17,6 +17,7 @@ class ShopeeSimilarScraper(scrapy.Spider):
     def __init__(self, product_list, query_count=50, scrape_images=True, sections=['from_same_shop', 'similar_product']):
         self.df = read_df(product_list)
         self.df = self.df.iloc[::-1]
+        self.df = self.df.sample(100)
         self.scrape_images = scrape_images
         self.sections = sections
         self.query_count = query_count

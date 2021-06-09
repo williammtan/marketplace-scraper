@@ -20,5 +20,5 @@ proxy_url = os.environ['SCRAPER_API_PROXY']
 
 ### TOKPED ###
 
-tokped_search_params = 'device=desktop&rows=200&sc={category}&source=universal&start={start}'
+tokped_search_params = 'device=desktop&rows=200&source=search&related=true&'
 max_search_rows = 200
