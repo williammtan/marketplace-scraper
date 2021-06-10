@@ -4,6 +4,7 @@ from scrapy.utils.project import get_project_settings
 import scrapy
 import json
 import numpy as np
+import shlex
 
 
 class BaseSpiderGQL(object):
@@ -82,7 +83,7 @@ class TokpedGQL():
 
         # return scrapy.Request(url=self.url, method='POST', body=body, headers={'Content-Type': 'application/json', 'referer': 'https://www.tokopedia.com/asahealthyshop/1-kg-organic-chia-seed-mexico?src=topads'}, callback=callback, cb_kwargs=cb_kwargs)
 
-    def request_old(self, callback, cb_kwargs=None, **kwargs):
+    def request_old(self, callback, headers=None, cb_kwargs=None, **kwargs):
         input_variables = kwargs
         # overide default vars
         vars = self.default_variables
@@ -97,4 +98,16 @@ class TokpedGQL():
         }
         json_body = json.dumps(body)
 
-        return scrapy.Request(url=self.url, method='POST', body=json_body, headers={'Content-Type': 'application/json', 'referer': 'aaaa'}, callback=callback, cb_kwargs=cb_kwargs)
+        headers_base = {'content-type': 'application/json',
+                        'referer': 'aaaa', 'x-device': 'desktop'}
+        headers_base.update(headers)
+        return scrapy.Request(url=self.url, method='POST', body=json_body, headers=headers_base, callback=callback, cb_kwargs=cb_kwargs)
+
+
+def compress_graphql(q):
+    """Compress a GraphQL query by removing unnecessary whitespace.
+
+    >>> compress_graphql(query_with_strings)
+    u'query someQuery { Field( search: "string with   spaces" ) { foo } }'
+    """
+    return u' '.join(shlex.split(q, posix=False))

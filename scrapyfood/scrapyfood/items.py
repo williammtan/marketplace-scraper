@@ -23,11 +23,17 @@ class TokpedProduct(scrapy.Item):
     price = scrapy.Field()
     description = scrapy.Field()
     weight = scrapy.Field()
-    menu = scrapy.Field()
-    shop_name = scrapy.Field()
-    shop_id = scrapy.Field()
+    menu_id = scrapy.Field()
+    menu_name = scrapy.Field()
+    min_order = scrapy.Field()
+    max_order = scrapy.Field()
+    condition = scrapy.Field()
     stock = scrapy.Field()
     url = scrapy.Field()
+
+    shop_name = scrapy.Field()
+    shop_alias = scrapy.Field()
+    shop_id = scrapy.Field()
 
     main_category = scrapy.Field()
     sub_category = scrapy.Field()
@@ -36,18 +42,7 @@ class TokpedProduct(scrapy.Item):
     review_count = scrapy.Field()
     talk_count = scrapy.Field()
     rating = scrapy.Field()
-
-    image_urls = scrapy.Field()
-    images = scrapy.Field()
-
-
-class TokpedPageProduct(scrapy.Item):
-    id = scrapy.Field()
-    title = scrapy.Field()
-    url = scrapy.Field()
-    main_category = scrapy.Field()
-    sub_category = scrapy.Field()
-    price = scrapy.Field()
+    sold = scrapy.Field()
 
     image_urls = scrapy.Field()
     images = scrapy.Field()
@@ -63,6 +58,7 @@ class TokpedShortProduct(scrapy.Item):
     discount_percent = scrapy.Field()
     stock = scrapy.Field()
     shop = scrapy.Field()
+    shop_domain = scrapy.Field()
     image_urls = scrapy.Field()
 
     rating = scrapy.Field()
@@ -70,6 +66,7 @@ class TokpedShortProduct(scrapy.Item):
     sold = scrapy.Field()
 
     ref = scrapy.Field()
+    main_category = scrapy.Field()
     sub_category = scrapy.Field()
 
 

@@ -25,7 +25,7 @@ ITEM_PIPELINES = {'scrapyfood.pipelines.ImagePipeline': 1}
 # IMAGES_STORE = '/Volumes/Main/william/food_scraping/shopee/makanan_ringan_new/12561/'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36'
+USER_AGENT = ''
 
 # Obey robots.txt rules
 # ROBOTSTXT_OBEY = True
@@ -38,6 +38,7 @@ CONCURRENT_REQUESTS = 64
 # See also autothrottle settings and docs
 # DOWNLOAD_DELAY = 0.5
 # The download delay setting will honor only one of:
+# DOWNLOAD_TIMEOUT = 20
 # CONCURRENT_REQUESTS_PER_DOMAIN = 16
 # CONCURRENT_REQUESTS_PER_IP = 16
 
@@ -46,21 +47,23 @@ COOKIES_ENABLED = False
 TEST = False
 
 LOG_LEVEL = 'INFO'
-REQUEST_CUE = 50
+REQUEST_CUE = 60
 # DOWNLOAD_DELAY = 1
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
 # DEFAULT_REQUEST_HEADERS = {
-#   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-#   'Accept-Language': 'en',
+#     'Accept': '*/*',
+#     'Referer': 'aaa',
+#     'Content-Type': 'application/json'
 # }
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 SPIDER_MIDDLEWARES = {
-    'scrapyfood.middlewares.TokpedGQLSpiderMiddleware': 543,
+    # 'scrapyfood.middlewares.TokpedGQLSpiderMiddleware': 543,
+    # 'scrapyfood.middlewares.VPNMiddleware': 543,
 }
 
 # Enable or disable downloader middlewares

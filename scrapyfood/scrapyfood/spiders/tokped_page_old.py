@@ -1,7 +1,7 @@
 import scrapy
 from w3lib.html import remove_tags
 from ..utils import get_cache
-from ..items import TokpedProduct, TokpedPageProduct
+from ..items import TokpedProduct
 from ..categories import main_categories, sub_categories
 import re
 

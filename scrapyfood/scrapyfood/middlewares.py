@@ -4,6 +4,7 @@
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
 import json
+import subprocess
 from time import process_time
 from numpy.random import Generator
 import logging
@@ -13,7 +14,9 @@ from w3lib.http import basic_auth_header
 
 # useful for handling different item types with a single interface
 from itemadapter import is_item, ItemAdapter
-from scrapyfood.constants import proxy_url
+from scrapyfood.constants import proxy_base, proxy_api
+from nordvpn_switcher import initialize_VPN, rotate_VPN, terminate_VPN
+import time
 
 
 class ScrapyfoodSpiderMiddleware:
@@ -115,6 +118,11 @@ class TokpedGQLSpiderMiddleware:
 
     def __init__(self):
         self.cue_size = get_project_settings()['REQUEST_CUE']
+        self.request_count = 0
+        logging.info('initialized vpn')
+        self.vpn_process = subprocess.Popen(
+            ['openpyn', '-s', vpn_servers[0]], stdin=subprocess.PIPE)
+        time.sleep(20)
 
     def process_start_requests(self, start_requests, spider):
         # Called with the start requests of the spider, and works
@@ -146,6 +154,14 @@ class TokpedGQLSpiderMiddleware:
                     self.request_cue.append(r)
                     if len(self.request_cue) == self.cue_size:
                         # TODO: assert that the requests have the same body
+                        self.request_count += 1
+                        if self.request_count % 400 == 0 and self.request_count != 0:
+                            self.vpn_process.kill()
+                            index = int(self.request_count / 400)
+                            logging.info(
+                                f"Rotating vpn to {vpn_servers[index]}")
+                            self.vpn_process = subprocess.Popen(
+                                ['openpyn', '-s', vpn_servers[index]], stdin=subprocess.PIPE)
                         yield from request(r)
 
                 except StopIteration:
@@ -154,6 +170,84 @@ class TokpedGQLSpiderMiddleware:
                     break
 
 
+class VPNMiddleware:
+    def __init__(self):
+        self.request_count = 0
+        print('initialized vpn')
+        initialize_VPN(save=1, area_input=['complete rotation singapore'])
+
+    def process_start_requests(self, start_request, spider):
+        for r in start_request:
+            self.request_count += 1
+            if self.request_count % 400 == 0:
+                print('roatating vpn')
+                rotate_VPN()
+            yield r
+
+
 class ProxyMiddleware(object):
     def process_request(self, request, spider):
-        request.meta['proxy'] = proxy_url
+        if not request.url.endswith('&keep_headers=true') and not request.url.startswith('https://images.tokopedia.net'):
+            request = request.replace(url=proxy_base.format(url=request.url))
+            return request
+        # print(request.url)
+        # request.meta['proxy'] = proxy_api
+        # print(proxy_api)
+        # return request
+        # print(request)
+
+
+vpn_servers = ['sg455',
+               'sg456',
+               'sg457',
+               'sg458',
+               'sg459',
+               'sg460',
+               'sg461',
+               'sg462',
+               'sg463',
+               'sg464',
+               'sg465',
+               'sg466',
+               'sg467',
+               'sg468',
+               'sg469',
+               'sg470',
+               'sg471',
+               'sg472',
+               'sg473',
+               'sg474',
+               'sg475',
+               'sg476',
+               'sg477',
+               'sg478',
+               'sg479',
+               'sg480',
+               'sg481',
+               'sg482',
+               'sg483',
+               'sg484',
+               'sg485',
+               'sg486',
+               'sg487',
+               'sg488',
+               'sg489',
+               'sg490',
+               'sg491',
+               'sg492',
+               'sg493',
+               'sg494',
+               'sg495',
+               'sg496',
+               'sg497',
+               'sg498',
+               'sg499',
+               'sg500',
+               'sg501',
+               'sg502',
+               'sg503',
+               'sg504',
+               'sg505',
+               'sg506',
+               'sg507',
+               'sg508']
