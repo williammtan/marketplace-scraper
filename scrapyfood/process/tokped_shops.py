@@ -30,17 +30,17 @@ class TokpedProcess(BaseProcess):
         speed_fname = os.path.join(self.output_dir, 'speed.jsonlines')
         shops_fname = os.path.join(self.output_dir, 'shops.jsonlines')
 
-        # scrape(TokpedShopCoreScraper, self.create_settings(
-        #     fname_output=core_fname, overide=True
-        # ), shop_domains=self.shops_df.alias.to_list())
+        scrape(TokpedShopCoreScraper, self.create_settings(
+            fname_output=core_fname, overide=True
+        ), shop_domains=self.shops_df.alias.to_list())
 
         scrape(TokpedShopStatisticScraper, self.create_settings(
             fname_output=stats_fname, overide=True
         ), shop_ids=self.shops_df.id.to_list())
 
-        # scrape(TokpedShopSpeedScraper, self.create_settings(
-        #     fname_output=speed_fname, overide=True
-        # ), shop_ids=self.shops_df.id.to_list())
+        scrape(TokpedShopSpeedScraper, self.create_settings(
+            fname_output=speed_fname, overide=True
+        ), shop_ids=self.shops_df.id.to_list())
 
         self.merge(core_fname)
         self.merge(stats_fname)
