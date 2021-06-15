@@ -1,0 +1,6 @@
+pandas==1.2.4
+numpy==1.20.3
+jsonlines==2.0.0
+graphql-py==0.8.1
+python-dotenv==0.17.1
+tqdm==4.60.0

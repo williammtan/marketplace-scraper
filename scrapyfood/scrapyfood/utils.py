@@ -85,3 +85,10 @@ def read_rp_tokped(text):
 # eg. {'sc': 2722, 'ob': 23} => device=desktop&rows=200&source=universal&sc=2722&ob=23
 def create_tokped_params(params: dict):
     return tokped_search_params + '&'.join([f'{key}={val["value"]}' for key, val in params.items()])
+
+
+def calculate_weight(weight, weight_unit):
+    # weight_unit: GRAM | KILOGRAM
+    if weight_unit == 'KILOGRAM':
+        weight *= 1000
+    return weight

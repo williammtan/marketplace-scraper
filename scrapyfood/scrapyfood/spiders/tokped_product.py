@@ -1,7 +1,7 @@
 from os import read
 from subprocess import call
 import scrapy
-from ..utils import read_df
+from ..utils import read_df, calculate_weight
 from ..items import TokpedProduct
 from ..gql import BaseSpiderGQL, TokpedGQL
 
@@ -76,8 +76,8 @@ class TokpedProductScraper(BaseSpiderGQL, scrapy.Spider):
             "shop_alias": shop_alias,
             "shop_id": basic_info['shopID'],
 
-            "main_category": categories[-1]['name'],
-            "sub_category": categories[-2]['name'],
+            "main_category": categories[-2]['name'],
+            "sub_category": categories[-1]['name'],
 
             "view_count": stats['countView'],
             "review_count": stats['countReview'],
@@ -87,6 +87,48 @@ class TokpedProductScraper(BaseSpiderGQL, scrapy.Spider):
 
             "image_urls": image_urls
         })
+
+    gql = TokpedGQL("PDPGetLayoutQuery", query="""
+fragment ProductMedia on pdpDataProductMedia { media { type urlThumbnail: URLThumbnail } } fragment ProductHighlight on pdpDataProductContent { name price { value currency } stock { value } } fragment ProductCustomInfo on pdpDataCustomInfo { icon title isApplink applink separator description } fragment ProductInfo on pdpDataProductInfo { row content { title subtitle } } fragment ProductDetail on pdpDataProductDetail { content { title subtitle } } fragment ProductDataInfo on pdpDataInfo { icon title isApplink applink content { icon text } } query PDPGetLayoutQuery($shopDomain: String, $productKey: String, $layoutID: String, $apiVersion: Float, $userLocation: pdpUserLocation!) { pdpGetLayout(shopDomain: $shopDomain, productKey: $productKey, layoutID: $layoutID, apiVersion: $apiVersion, userLocation: $userLocation) { name pdpSession basicInfo { alias id: productID shopID shopName minOrder maxOrder weight weightUnit condition status url needPrescription catalogID isLeasing isBlacklisted menu { id name url } category { id name title breadcrumbURL detail { id name breadcrumbURL } } txStats { countSold } stats { countView countReview countTalk rating } } components { name type position data { ...ProductMedia ...ProductHighlight ...ProductInfo ...ProductDetail ...ProductDataInfo ...ProductCustomInfo } } } }
+""", default_variables={
+        # "shopDomain": "kiosmatraman",
+        # "productKey": "susu-dyco-colostrum-isi-30-saset",
+        "layoutID": "",
+        "apiVersion": 1,
+        "userLocation": {
+            "addressID": "0",
+            "districtID": "2274",
+            "postalCode": "",
+            "latlon": ""
+        }
+    }
+    )
+
+
+class TokpedWeightScraper(scrapy.Spider, BaseSpiderGQL):
+    name = 'tokped_products_weight'
+
+    def __init__(self, product_list):
+        self.product_list = read_df(product_list)[
+            ['id', 'alias', 'shop_alias']]
+
+    def start_requests(self):
+        for i, prod in self.product_list.iterrows():
+            yield self.gql.request_old(callback=self.parse_split, headers={'x-tkpd-akamai': 'pdpGetData'}, shopDomain=prod.shop_alias, productKey=prod.alias)
+
+    def parse(self, response):
+        data = response['pdpGetLayout']
+        if data is None:
+            return
+        basic_info = data['basicInfo']
+        weight = basic_info['weight']
+        weight_unit = basic_info['weightUnit']
+        weight = calculate_weight(weight, weight_unit)
+
+        yield {
+            'id': basic_info['id'],
+            'weight': weight
+        }
 
     gql = TokpedGQL("PDPGetLayoutQuery", query="""
 fragment ProductMedia on pdpDataProductMedia { media { type urlThumbnail: URLThumbnail } } fragment ProductHighlight on pdpDataProductContent { name price { value currency } stock { value } } fragment ProductCustomInfo on pdpDataCustomInfo { icon title isApplink applink separator description } fragment ProductInfo on pdpDataProductInfo { row content { title subtitle } } fragment ProductDetail on pdpDataProductDetail { content { title subtitle } } fragment ProductDataInfo on pdpDataInfo { icon title isApplink applink content { icon text } } query PDPGetLayoutQuery($shopDomain: String, $productKey: String, $layoutID: String, $apiVersion: Float, $userLocation: pdpUserLocation!) { pdpGetLayout(shopDomain: $shopDomain, productKey: $productKey, layoutID: $layoutID, apiVersion: $apiVersion, userLocation: $userLocation) { name pdpSession basicInfo { alias id: productID shopID shopName minOrder maxOrder weight weightUnit condition status url needPrescription catalogID isLeasing isBlacklisted menu { id name url } category { id name title breadcrumbURL detail { id name breadcrumbURL } } txStats { countSold } stats { countView countReview countTalk rating } } components { name type position data { ...ProductMedia ...ProductHighlight ...ProductInfo ...ProductDetail ...ProductDataInfo ...ProductCustomInfo } } } }

@@ -72,7 +72,7 @@ class TokpedProcess(BaseProcess):
 
         scrape(TokpedSearchScraper, self.create_settings(
             fname_output=fname_output
-        ), query_file=self.create_search_query(category_mapping=[{"name": sub_cat['name'], "value": sub_cat['id']} for sub_cat in self.sub_categories]))
+        ), query_file=self.create_search_query(category_mapping=[{"name": sub_cat['name'], "value": sub_cat['id']} for sub_cat in self.sub_categories], ob=False))
 
         search_keywords = find_keywords(read_df(fname_output))
         logging.info(f'Found keywords: {search_keywords}')
@@ -81,17 +81,38 @@ class TokpedProcess(BaseProcess):
         ), query_file=self.create_search_query(queries=[{'name': f'keyword {i}', 'value': k} for i, k in enumerate(search_keywords)]))  # add new keywords to product file and process
         self.process_df(fname=fname_output)
 
-        scrape(TokpedSimilarScraper, self.create_settings(
-            fname_output=fname_output), product_list=fname_output)
+        self.batch_scrape(df_fname=fname_output, scrape_func=lambda df: scrape(TokpedSimilarScraper, self.create_settings(
+            fname_output=fname_output), product_list=df), batch_size=10000)
 
-        self.scrape_product_search(fname_output, related_output)
+        # self.scrape_product_search(fname_output, related_output)
+        self.batch_scrape(df_fname=fname_output, scrape_func=lambda df: scrape(TokpedSearchScraper, self.create_settings(
+            fname_output=fname_output
+        ), query_file=self.create_search_query(queries=[{'name': f'product {i}', 'value': k} for i, k in enumerate(df.name)], ob=False),
+            related_output=related_output, max_queries=1000
+        ), sample_size=50000)
 
         with jsonlines.open(related_output) as reader:
-            related_keywords = np.unique(list(reader)[-1])
+            related_keywords = np.unique(list(reader))
         scrape(TokpedSearchScraper, self.create_settings(
             fname_output=fname_output
         ), query_file=self.create_search_query(queries=[{'name': f'keyword {i}', 'value': k} for i, k in enumerate(related_keywords)], ob=False), max_queries=1000)  # add new related keywords to product file and process
         self.process_df(fname=fname_output)
+
+    def batch_scrape(self, df_fname, scrape_func, sample_size=None, batch_size=2000):
+        sample_df = read_df(df_fname)
+        sample_size = sample_size or len(sample_df)
+        sample_df = sample_df.sample(sample_size)
+        iterations = math.floor(sample_size / batch_size)
+        tqdm_bar = tqdm(total=sample_size)
+        for i in tqdm(range(iterations)):
+            # eg. i=0, df[0:3000], i=2, df[6000:9000]
+            process_df = sample_df[i*batch_size: (i+1)*batch_size]
+
+            scrape_func(process_df)
+
+            tqdm_bar.update((i+1)*batch_size)
+            self.process_df(fname=df_fname)
+        tqdm_bar.close()
 
     def scrape_product_search(self, df_fname, related_output, sample_size=40000, batch_size=2000):
         """Searches a sample of products, and processes in batches, each time deleting duplicates in the file"""
@@ -139,7 +160,7 @@ class TokpedProcess(BaseProcess):
         if not category_mapping:
             # constant category
             category_id = category_id or self.main_category  # defaults to self.main_category
-            # select_from_query('sc', is_paramter=False)['value'] = category_id
+            select_from_query('sc', is_paramter=False)['value'] = category_id
         else:
             select_from_query('sc', is_paramter=True)[
                 'values'] = category_mapping

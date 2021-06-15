@@ -14,7 +14,11 @@ class TokpedSimilarScraper(BaseSpiderGQL, scrapy.Spider):
     def __init__(self, product_list, settings={
         'sections': ['Lainnya di toko ini', 'Produk sponsor terkait', 'Pilihan lainnya untukmu'], "category": None
     }):
-        self.df = read_df(product_list)
+        if type(product_list) == 'str':
+            self.df = read_df(product_list)
+        else:
+            self.df = product_list
+
         if type(settings) == str:
             settings = json.loads(open(settings, 'r').read())
         self.keep_sections = settings['sections']

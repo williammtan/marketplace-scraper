@@ -25,7 +25,7 @@ ITEM_PIPELINES = {'scrapyfood.pipelines.ImagePipeline': 1}
 # IMAGES_STORE = '/Volumes/Main/william/food_scraping/shopee/makanan_ringan_new/12561/'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = ''
+USER_AGENT = 'Mozilla/5.0 (Windows 98) AppleWebKit/5360 (KHTML, like Gecko) Chrome/40.0.861.0 Mobile Safari/5360'
 
 # Obey robots.txt rules
 # ROBOTSTXT_OBEY = True

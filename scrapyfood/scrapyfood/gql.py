@@ -83,7 +83,7 @@ class TokpedGQL():
 
         # return scrapy.Request(url=self.url, method='POST', body=body, headers={'Content-Type': 'application/json', 'referer': 'https://www.tokopedia.com/asahealthyshop/1-kg-organic-chia-seed-mexico?src=topads'}, callback=callback, cb_kwargs=cb_kwargs)
 
-    def request_old(self, callback, headers=None, cb_kwargs=None, **kwargs):
+    def request_old(self, callback, headers={}, cb_kwargs=None, **kwargs):
         input_variables = kwargs
         # overide default vars
         vars = self.default_variables

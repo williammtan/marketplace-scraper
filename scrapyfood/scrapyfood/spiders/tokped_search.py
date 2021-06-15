@@ -24,8 +24,7 @@ class TokpedSearchScraper(BaseSpiderGQL, scrapy.Spider):
     name = 'tokped_search'
 
     def __init__(self, query_file, related_output=None, max_queries=6000):
-        global MAX_QUERIES
-        MAX_QUERIES = max_queries
+        self.max_queries = max_queries or MAX_QUERIES
         if type(query_file) == str:
             f = open(query_file)
             self.query_list = json.load(f)
@@ -56,9 +55,8 @@ class TokpedSearchScraper(BaseSpiderGQL, scrapy.Spider):
             yield from self.scrape_config(param_string)
 
     def scrape_config(self, config):
-        logging.debug(f'Scraping config: {config}')
-        print(config)
-        for i in range(0, MAX_QUERIES, QUERY_SIZE):
+        logging.info(f'Scraping config: {config}')
+        for i in range(0, self.max_queries, QUERY_SIZE):
             query = config + f'&start={i}'
             yield self.gql.request_old(callback=self.parse_split, params=query, cb_kwargs={'ref_params': query})
 

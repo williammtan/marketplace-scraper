@@ -120,9 +120,9 @@ class TokpedGQLSpiderMiddleware:
         self.cue_size = get_project_settings()['REQUEST_CUE']
         self.request_count = 0
         logging.info('initialized vpn')
-        self.vpn_process = subprocess.Popen(
-            ['openpyn', '-s', vpn_servers[0]], stdin=subprocess.PIPE)
-        time.sleep(20)
+        # self.vpn_process = subprocess.Popen(
+        #     ['openpyn', '-s', vpn_servers[0]], stdin=subprocess.PIPE)
+        # time.sleep(20)
 
     def process_start_requests(self, start_requests, spider):
         # Called with the start requests of the spider, and works
@@ -156,12 +156,12 @@ class TokpedGQLSpiderMiddleware:
                         # TODO: assert that the requests have the same body
                         self.request_count += 1
                         if self.request_count % 400 == 0 and self.request_count != 0:
-                            self.vpn_process.kill()
+                            # self.vpn_process.kill()
                             index = int(self.request_count / 400)
                             logging.info(
                                 f"Rotating vpn to {vpn_servers[index]}")
-                            self.vpn_process = subprocess.Popen(
-                                ['openpyn', '-s', vpn_servers[index]], stdin=subprocess.PIPE)
+                            # self.vpn_process = subprocess.Popen(
+                            #     ['openpyn', '-s', vpn_servers[index]], stdin=subprocess.PIPE)
                         yield from request(r)
 
                 except StopIteration:

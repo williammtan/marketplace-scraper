@@ -75,6 +75,30 @@ class TokpedAutocompleteItem(scrapy.Item):
     keyword = scrapy.Field()
 
 
+class TokpedShopCoreItem(scrapy.Item):
+    id = scrapy.Field()
+    name = scrapy.Field()
+    alias = scrapy.Field()
+    description = scrapy.Field()
+    tagline = scrapy.Field()
+    active_products = scrapy.Field()
+    location = scrapy.Field()
+    is_closed = scrapy.Field()
+
+    products_sold = scrapy.Field()
+    transaction_count = scrapy.Field()
+    favourite_count = scrapy.Field()
+
+    started_at = scrapy.Field()
+
+
+class TokpedShopStatisticItem(scrapy.Item):
+    id = scrapy.Field()
+    satisfaction = scrapy.Field()
+    rating = scrapy.Field()
+    reputation = scrapy.Field()
+
+
 class ShopeeShortProductItem(scrapy.Item):
     id = scrapy.Field()
     shop_id = scrapy.Field()
