@@ -1,9 +1,8 @@
-from os import read
-from subprocess import call
 import scrapy
 from ..utils import read_df, calculate_weight
 from ..items import TokpedProduct
 from ..gql import BaseSpiderGQL, TokpedGQL
+import logging
 
 
 class TokpedProductScraper(BaseSpiderGQL, scrapy.Spider):
@@ -12,16 +11,16 @@ class TokpedProductScraper(BaseSpiderGQL, scrapy.Spider):
     def __init__(self, product_list):
         self.product_list = read_df(product_list)
         if 'prod_url' in self.product_list.columns:
-            if 'shop_domain' not in self.product_list.columns:
+            if 'shop_alias' not in self.product_list.columns:
                 self.product_list['shop_domain'] = self.product_list.apply(
                     lambda x: x.prod_url.split('/')[-2], axis=1)
-            if 'name_domain' not in self.product_list.columns:
+            if 'alias' not in self.product_list.columns:
                 self.product_list['name_domain'] = self.product_list.apply(
                     lambda x: x.prod_url.split('/')[-1].split('?')[0], axis=1)
 
     def start_requests(self):
         for i, prod in self.product_list.iterrows():
-            yield self.gql.request_old(callback=self.parse_split, headers={'x-tkpd-akamai': 'pdpGetData'}, shopDomain=prod.shop_domain, productKey=prod.name_domain, cb_kwargs={'shop_alias': prod.shop_domain})
+            yield self.gql.request_old(callback=self.parse_split, headers={'x-tkpd-akamai': 'pdpGetData'}, shopDomain=prod.shop_alias, productKey=prod.alias, cb_kwargs={'shop_alias': prod.shop_alias})
 
     def parse(self, response, shop_alias):
         data = response['pdpGetLayout']
@@ -54,8 +53,12 @@ class TokpedProductScraper(BaseSpiderGQL, scrapy.Spider):
         menu = basic_info['menu']
         categories = basic_info['category']['detail']
 
+        if categories[0]['id'] != "35":
+            logging.debug('Dropped item, not food.')
+            return
+
         stats = basic_info['stats']
-        sold = basic_info['txStats']['countSold']
+        tx_stats = basic_info['txStats']
 
         yield TokpedProduct({
             "id": basic_info['id'],
@@ -83,13 +86,14 @@ class TokpedProductScraper(BaseSpiderGQL, scrapy.Spider):
             "review_count": stats['countReview'],
             "talk_count": stats['countTalk'],
             "rating": stats['rating'],
-            "sold": sold,
+            "sold": tx_stats['countSold'],
+            "transactions": tx_stats['transactionSuccess'],
 
             "image_urls": image_urls
         })
 
     gql = TokpedGQL("PDPGetLayoutQuery", query="""
-fragment ProductMedia on pdpDataProductMedia { media { type urlThumbnail: URLThumbnail } } fragment ProductHighlight on pdpDataProductContent { name price { value currency } stock { value } } fragment ProductCustomInfo on pdpDataCustomInfo { icon title isApplink applink separator description } fragment ProductInfo on pdpDataProductInfo { row content { title subtitle } } fragment ProductDetail on pdpDataProductDetail { content { title subtitle } } fragment ProductDataInfo on pdpDataInfo { icon title isApplink applink content { icon text } } query PDPGetLayoutQuery($shopDomain: String, $productKey: String, $layoutID: String, $apiVersion: Float, $userLocation: pdpUserLocation!) { pdpGetLayout(shopDomain: $shopDomain, productKey: $productKey, layoutID: $layoutID, apiVersion: $apiVersion, userLocation: $userLocation) { name pdpSession basicInfo { alias id: productID shopID shopName minOrder maxOrder weight weightUnit condition status url needPrescription catalogID isLeasing isBlacklisted menu { id name url } category { id name title breadcrumbURL detail { id name breadcrumbURL } } txStats { countSold } stats { countView countReview countTalk rating } } components { name type position data { ...ProductMedia ...ProductHighlight ...ProductInfo ...ProductDetail ...ProductDataInfo ...ProductCustomInfo } } } }
+fragment ProductMedia on pdpDataProductMedia { media { type urlThumbnail: URLThumbnail } } fragment ProductHighlight on pdpDataProductContent { name price { value currency } stock { value } } fragment ProductCustomInfo on pdpDataCustomInfo { icon title isApplink applink separator description } fragment ProductInfo on pdpDataProductInfo { row content { title subtitle } } fragment ProductDetail on pdpDataProductDetail { content { title subtitle } } fragment ProductDataInfo on pdpDataInfo { icon title isApplink applink content { icon text } } query PDPGetLayoutQuery($shopDomain: String, $productKey: String, $layoutID: String, $apiVersion: Float, $userLocation: pdpUserLocation!) { pdpGetLayout(shopDomain: $shopDomain, productKey: $productKey, layoutID: $layoutID, apiVersion: $apiVersion, userLocation: $userLocation) { name pdpSession basicInfo { alias id: productID shopID shopName minOrder maxOrder weight weightUnit condition status url needPrescription catalogID isLeasing isBlacklisted menu { id name url } category { id name title breadcrumbURL detail { id name breadcrumbURL } } txStats { countSold transactionSuccess } stats { countView countReview countTalk rating } } components { name type position data { ...ProductMedia ...ProductHighlight ...ProductInfo ...ProductDetail ...ProductDataInfo ...ProductCustomInfo } } } }
 """, default_variables={
         # "shopDomain": "kiosmatraman",
         # "productKey": "susu-dyco-colostrum-isi-30-saset",
@@ -105,7 +109,7 @@ fragment ProductMedia on pdpDataProductMedia { media { type urlThumbnail: URLThu
     )
 
 
-class TokpedWeightScraper(scrapy.Spider, BaseSpiderGQL):
+class TokpedWeightScraper(BaseSpiderGQL, scrapy.Spider):
     name = 'tokped_products_weight'
 
     def __init__(self, product_list):
@@ -132,6 +136,65 @@ class TokpedWeightScraper(scrapy.Spider, BaseSpiderGQL):
 
     gql = TokpedGQL("PDPGetLayoutQuery", query="""
 fragment ProductMedia on pdpDataProductMedia { media { type urlThumbnail: URLThumbnail } } fragment ProductHighlight on pdpDataProductContent { name price { value currency } stock { value } } fragment ProductCustomInfo on pdpDataCustomInfo { icon title isApplink applink separator description } fragment ProductInfo on pdpDataProductInfo { row content { title subtitle } } fragment ProductDetail on pdpDataProductDetail { content { title subtitle } } fragment ProductDataInfo on pdpDataInfo { icon title isApplink applink content { icon text } } query PDPGetLayoutQuery($shopDomain: String, $productKey: String, $layoutID: String, $apiVersion: Float, $userLocation: pdpUserLocation!) { pdpGetLayout(shopDomain: $shopDomain, productKey: $productKey, layoutID: $layoutID, apiVersion: $apiVersion, userLocation: $userLocation) { name pdpSession basicInfo { alias id: productID shopID shopName minOrder maxOrder weight weightUnit condition status url needPrescription catalogID isLeasing isBlacklisted menu { id name url } category { id name title breadcrumbURL detail { id name breadcrumbURL } } txStats { countSold } stats { countView countReview countTalk rating } } components { name type position data { ...ProductMedia ...ProductHighlight ...ProductInfo ...ProductDetail ...ProductDataInfo ...ProductCustomInfo } } } }
+""", default_variables={
+        # "shopDomain": "kiosmatraman",
+        # "productKey": "susu-dyco-colostrum-isi-30-saset",
+        "layoutID": "",
+        "apiVersion": 1,
+        "userLocation": {
+            "addressID": "0",
+            "districtID": "2274",
+            "postalCode": "",
+            "latlon": ""
+        }
+    }
+    )
+
+
+class TokpedTransactionScraper(BaseSpiderGQL, scrapy.Spider):
+    name = 'tokped_products_transaction'
+
+    def __init__(self, product_list):
+        self.product_list = read_df(product_list)[
+            ['id', 'alias', 'shop_alias']]
+
+    def start_requests(self):
+        for i, prod in self.product_list.iterrows():
+            yield self.gql.request_old(callback=self.parse_split, headers={'x-tkpd-akamai': 'pdpGetData'}, shopDomain=prod.shop_alias, productKey=prod.alias)
+
+    def parse(self, response):
+        data = response['pdpGetLayout']
+        if data is None:
+            return
+        basic_info = data['basicInfo']
+        stats = basic_info['txStats']
+
+        yield {
+            'id': basic_info['id'],
+            'sold': stats['countSold'],
+            'payment_verified': stats['paymentVerified'],
+            'item_sold_payment_verified': stats['itemSoldPaymentVerified'],
+            'transaction_success': stats['transactionSuccess'],
+            'transaction_reject': stats['transactionReject']
+        }
+
+    gql = TokpedGQL("PDPGetLayoutQuery", query="""
+
+query PDPGetLayoutQuery($shopDomain: String, $productKey: String, $layoutID: String, $apiVersion: Float, $userLocation: pdpUserLocation!) {
+  pdpGetLayout(shopDomain: $shopDomain, productKey: $productKey, layoutID: $layoutID, apiVersion: $apiVersion, userLocation: $userLocation) {
+    basicInfo {
+      id: productID
+      txStats {
+        transactionSuccess
+        transactionReject
+        countSold
+        paymentVerified
+        itemSoldPaymentVerified
+        __typename
+      }
+    }
+}
+}
 """, default_variables={
         # "shopDomain": "kiosmatraman",
         # "productKey": "susu-dyco-colostrum-isi-30-saset",

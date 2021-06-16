@@ -47,7 +47,7 @@ COOKIES_ENABLED = False
 TEST = False
 
 LOG_LEVEL = 'INFO'
-REQUEST_CUE = 60
+REQUEST_CUE = 100
 # DOWNLOAD_DELAY = 1
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False

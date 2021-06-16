@@ -34,6 +34,9 @@ class TokpedProcess(BaseProcess):
             fname_output=core_fname, overide=True
         ), shop_domains=self.shops_df.alias.to_list())
 
+        self.shops_df = pd.merge(
+            self.shops_df, read_df(core_fname), on='alias')
+
         scrape(TokpedShopStatisticScraper, self.create_settings(
             fname_output=stats_fname, overide=True
         ), shop_ids=self.shops_df.id.to_list())
@@ -42,7 +45,6 @@ class TokpedProcess(BaseProcess):
             fname_output=speed_fname, overide=True
         ), shop_ids=self.shops_df.id.to_list())
 
-        self.merge(core_fname)
         self.merge(stats_fname)
         self.merge(speed_fname)
 
@@ -74,12 +76,12 @@ if __name__ == '__main__':
 
     if args.shops_file:
         shops_df = read_df(args.shops_file)
-        shops_df = shops_df[['id', 'alias']]
+        shops_df = shops_df[['alias']]
     elif args.products_file:
         products = read_df(args.products_file)
-        shops_df = products[['shop_id', 'shop_alias']
-                            ].drop_duplicates(subset='shop_id')
-        shops_df.columns = ['id', 'alias']
+        shops_df = products[['shop_alias']
+                            ].drop_duplicates(subset='shop_alias')
+        shops_df.columns = ['alias']
     else:
         raise argparse.ArgumentError(
             "Arguments must include either --shops-file or --products-file argument")

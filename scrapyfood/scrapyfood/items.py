@@ -43,6 +43,7 @@ class TokpedProduct(scrapy.Item):
     talk_count = scrapy.Field()
     rating = scrapy.Field()
     sold = scrapy.Field()
+    transactions = scrapy.Field()
 
     image_urls = scrapy.Field()
     images = scrapy.Field()
