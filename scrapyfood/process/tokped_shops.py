@@ -48,6 +48,9 @@ class TokpedProcess(BaseProcess):
         self.merge(stats_fname)
         self.merge(speed_fname)
 
+        self.shops_df['url'] = self.shops_df.apply(
+            lambda x: "https://tokopedia.com/" + x.alias, axis=1)
+
         self.shops_df.to_json(shops_fname, lines=True, orient='records')
 
     def merge(self, fname):
