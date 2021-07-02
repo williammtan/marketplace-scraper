@@ -91,6 +91,7 @@ if __name__ == '__main__':
 
     if args.test:
         shops_df = shops_df.sample(1000)
+    print(shops_df)
 
     process = TokpedProcess(shops_df, args.output_dir)
     process.start()

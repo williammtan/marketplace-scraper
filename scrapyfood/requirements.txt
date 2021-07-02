@@ -4,3 +4,4 @@ jsonlines==2.0.0
 graphql-py==0.8.1
 python-dotenv==0.17.1
 tqdm==4.60.0
+scrapy==2.4.1

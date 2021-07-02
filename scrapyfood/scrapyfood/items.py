@@ -20,7 +20,11 @@ class TokpedProduct(scrapy.Item):
     id = scrapy.Field()
     alias = scrapy.Field()
     name = scrapy.Field()
+    
     price = scrapy.Field()
+    strike_price = scrapy.Field()
+    discount = scrapy.Field()
+
     description = scrapy.Field()
     weight = scrapy.Field()
     menu_id = scrapy.Field()
@@ -31,8 +35,11 @@ class TokpedProduct(scrapy.Item):
     stock = scrapy.Field()
     url = scrapy.Field()
 
-    shop_name = scrapy.Field()
-    shop_alias = scrapy.Field()
+    wholesale_quantity = scrapy.Field()
+    wholesale_price = scrapy.Field()
+
+    # shop_name = scrapy.Field()
+    # shop_alias = scrapy.Field()
     shop_id = scrapy.Field()
 
     main_category = scrapy.Field()

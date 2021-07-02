@@ -1,0 +1,142 @@
+[
+  {
+    "name": "id",
+    "type": "INTEGER",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "alias",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "name",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "description",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "weight",
+    "type": "INTEGER",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "shop_id",
+    "type": "INTEGER",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "price",
+    "type": "INTEGER",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "strike_price",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "discount",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "url",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "menu_id",
+    "type": "INTEGER",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "menu_name",
+    "type": "STRING",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "wholesale_quantity",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "wholesale_price",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "min_order",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "max_order",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "condition",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "stock",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "main_category",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "sub_category",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "sold",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "transactions",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "view_count",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "review_count",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "rating",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "talk_count",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "created_at",
+    "type": "TIMESTAMP",
+    "mode": "REQUIRED"
+  },
+  {
+    "name": "updated_at",
+    "type": "TIMESTAMP",
+    "mode": "REQUIRED"
+  }
+]

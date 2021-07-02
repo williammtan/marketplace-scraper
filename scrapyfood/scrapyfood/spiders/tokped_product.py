@@ -39,6 +39,15 @@ class TokpedProductScraper(BaseSpiderGQL, scrapy.Spider):
         name = content['name']
         price = content['price']['value']
         stock = content['stock']['value']
+        campaign = content['campaign']
+        wholesale = content['wholesale']
+        if len(wholesale) == 0:
+            wholesale_quantity = None
+            wholesale_price = None
+        else:
+            wholesale = wholesale[0]
+            wholesale_quantity = wholesale['minQty']
+            wholesale_price = wholesale['price']['value']
 
         detail = find_component('product_detail')['data'][0]['content']
         condition = [comp['subtitle']
@@ -64,7 +73,11 @@ class TokpedProductScraper(BaseSpiderGQL, scrapy.Spider):
             "id": basic_info['id'],
             "alias": basic_info['alias'],
             "name": name,
+
             "price": price,
+            "strike_price": campaign['originalPrice'] if campaign['originalPrice'] != 0 else price,
+            "discount": campaign['percentageAmount'],
+
             "description": description,
             "weight": basic_info['weight'],
             "menu_id": menu['id'],
@@ -75,8 +88,11 @@ class TokpedProductScraper(BaseSpiderGQL, scrapy.Spider):
             "stock": stock,
             "url": basic_info['url'],
 
-            "shop_name": basic_info['shopName'],
-            "shop_alias": shop_alias,
+            "wholesale_quantity": wholesale_quantity,
+            "wholesale_price": wholesale_price,
+
+            # "shop_name": basic_info['shopName'],
+            # "shop_alias": shop_alias,
             "shop_id": basic_info['shopID'],
 
             "main_category": categories[-2]['name'],
@@ -93,7 +109,330 @@ class TokpedProductScraper(BaseSpiderGQL, scrapy.Spider):
         })
 
     gql = TokpedGQL("PDPGetLayoutQuery", query="""
-fragment ProductMedia on pdpDataProductMedia { media { type urlThumbnail: URLThumbnail } } fragment ProductHighlight on pdpDataProductContent { name price { value currency } stock { value } } fragment ProductCustomInfo on pdpDataCustomInfo { icon title isApplink applink separator description } fragment ProductInfo on pdpDataProductInfo { row content { title subtitle } } fragment ProductDetail on pdpDataProductDetail { content { title subtitle } } fragment ProductDataInfo on pdpDataInfo { icon title isApplink applink content { icon text } } query PDPGetLayoutQuery($shopDomain: String, $productKey: String, $layoutID: String, $apiVersion: Float, $userLocation: pdpUserLocation!) { pdpGetLayout(shopDomain: $shopDomain, productKey: $productKey, layoutID: $layoutID, apiVersion: $apiVersion, userLocation: $userLocation) { name pdpSession basicInfo { alias id: productID shopID shopName minOrder maxOrder weight weightUnit condition status url needPrescription catalogID isLeasing isBlacklisted menu { id name url } category { id name title breadcrumbURL detail { id name breadcrumbURL } } txStats { countSold transactionSuccess } stats { countView countReview countTalk rating } } components { name type position data { ...ProductMedia ...ProductHighlight ...ProductInfo ...ProductDetail ...ProductDataInfo ...ProductCustomInfo } } } }
+fragment ProductVariant on pdpDataProductVariant {
+  errorCode
+  parentID
+  defaultChild
+  sizeChart
+  variants {
+    productVariantID
+    variantID
+    name
+    identifier
+    option {
+      picture {
+        urlOriginal: url
+        urlThumbnail: url100
+        __typename
+      }
+      productVariantOptionID
+      variantUnitValueID
+      value
+      hex
+      __typename
+    }
+    __typename
+  }
+  children {
+    productID
+    price
+    priceFmt
+    optionID
+    productName
+    productURL
+    picture {
+      urlOriginal: url
+      urlThumbnail: url100
+      __typename
+    }
+    stock {
+      stock
+      isBuyable
+      stockWording
+      stockWordingHTML
+      minimumOrder
+      maximumOrder
+      __typename
+    }
+    isCOD
+    isWishlist
+    campaignInfo {
+      campaignID
+      campaignType
+      campaignTypeName
+      campaignIdentifier
+      background
+      discountPercentage
+      originalPrice
+      discountPrice
+      stock
+      stockSoldPercentage
+      threshold
+      startDate
+      endDate
+      endDateUnix
+      appLinks
+      isAppsOnly
+      isActive
+      hideGimmick
+      isCheckImei
+      __typename
+    }
+    thematicCampaign {
+      additionalInfo
+      background
+      campaignName
+      icon
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+
+fragment ProductMedia on pdpDataProductMedia {
+  media {
+    type
+    urlThumbnail: URLThumbnail
+    videoUrl: videoURLAndroid
+    prefix
+    suffix
+    description
+    __typename
+  }
+  videos {
+    source
+    url
+    __typename
+  }
+  __typename
+}
+
+fragment ProductHighlight on pdpDataProductContent {
+  name
+  price {
+    value
+    currency
+    __typename
+  }
+  campaign {
+    campaignID
+    campaignType
+    campaignTypeName
+    campaignIdentifier
+    background
+    percentageAmount
+    originalPrice
+    discountedPrice
+    originalStock
+    stock
+    stockSoldPercentage
+    threshold
+    startDate
+    endDate
+    endDateUnix
+    appLinks
+    isAppsOnly
+    isActive
+    hideGimmick
+    __typename
+  }
+  thematicCampaign {
+    additionalInfo
+    background
+    campaignName
+    icon
+    __typename
+  }
+  stock {
+    useStock
+    value
+    stockWording
+    __typename
+  }
+  variant {
+    isVariant
+    parentID
+    __typename
+  }
+  wholesale {
+    minQty
+    price {
+      value
+      currency
+      __typename
+    }
+    __typename
+  }
+  isCashback {
+    percentage
+    __typename
+  }
+  isTradeIn
+  isOS
+  isPowerMerchant
+  isWishlist
+  isCOD
+  isFreeOngkir {
+    isActive
+    __typename
+  }
+  preorder {
+    duration
+    timeUnit
+    isActive
+    preorderInDays
+    __typename
+  }
+  __typename
+}
+
+fragment ProductCustomInfo on pdpDataCustomInfo {
+  icon
+  title
+  isApplink
+  applink
+  separator
+  description
+  __typename
+}
+
+fragment ProductInfo on pdpDataProductInfo {
+  row
+  content {
+    title
+    subtitle
+    applink
+    __typename
+  }
+  __typename
+}
+
+fragment ProductDetail on pdpDataProductDetail {
+  content {
+    title
+    subtitle
+    applink
+    showAtFront
+    isAnnotation
+    __typename
+  }
+  __typename
+}
+
+fragment ProductDataInfo on pdpDataInfo {
+  icon
+  title
+  isApplink
+  applink
+  content {
+    icon
+    text
+    __typename
+  }
+  __typename
+}
+
+fragment ProductSocial on pdpDataSocialProof {
+  row
+  content {
+    icon
+    title
+    subtitle
+    applink
+    type
+    rating
+    __typename
+  }
+  __typename
+}
+
+query PDPGetLayoutQuery($shopDomain: String, $productKey: String, $layoutID: String, $apiVersion: Float, $userLocation: pdpUserLocation!) {
+  pdpGetLayout(shopDomain: $shopDomain, productKey: $productKey, layoutID: $layoutID, apiVersion: $apiVersion, userLocation: $userLocation) {
+    name
+    pdpSession
+    basicInfo {
+      alias
+      id: productID
+      shopID
+      shopName
+      minOrder
+      maxOrder
+      weight
+      weightUnit
+      condition
+      status
+      url
+      needPrescription
+      catalogID
+      isLeasing
+      isBlacklisted
+      menu {
+        id
+        name
+        url
+        __typename
+      }
+      category {
+        id
+        name
+        title
+        breadcrumbURL
+        isAdult
+        detail {
+          id
+          name
+          breadcrumbURL
+          isAdult
+          __typename
+        }
+        __typename
+      }
+      blacklistMessage {
+        title
+        description
+        button
+        url
+        __typename
+      }
+      txStats {
+        transactionSuccess
+        transactionReject
+        countSold
+        paymentVerified
+        itemSoldPaymentVerified
+        __typename
+      }
+      stats {
+        countView
+        countReview
+        countTalk
+        rating
+        __typename
+      }
+      __typename
+    }
+    components {
+      name
+      type
+      position
+      data {
+        ...ProductMedia
+        ...ProductHighlight
+        ...ProductInfo
+        ...ProductDetail
+        ...ProductSocial
+        ...ProductDataInfo
+        ...ProductCustomInfo
+        ...ProductVariant
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
 """, default_variables={
         # "shopDomain": "kiosmatraman",
         # "productKey": "susu-dyco-colostrum-isi-30-saset",
