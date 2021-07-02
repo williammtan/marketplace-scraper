@@ -74,46 +74,10 @@ def process_external(args):
 
 def process_external_temp(args):
 
-    df_short = read_df(os.path.join(
-        args.dir, 'products.jsonlines'))  # from search
-    df_full = read_df(os.path.join(
-        args.dir, 'product_transactions.jsonlines'))  # individual
-    print('done loading')
+    df = read_df(args.products)  # from search
 
-    # drop fields already in full
-    df_short = df_short[['id', 'old_price', 'discount_percent']]
-    # df = pd.merge(df_short, df_full, on='id')
-    df = df_full.merge(df_short, on='id', how='left')
-    print('done mergin')
-    del df_full
-    df['old_price'] = df.apply(lambda x: x.price if np.isnan(
-        x.old_price) else x.old_price, axis=1)
-    print('done old price')
-    df['discount_percent'] = df.apply(lambda x: 0.0 if np.isnan(
-        x.discount_percent) else x.discount_percent, axis=1)
-    print('done discount')
-    df = df.drop(columns=['shop_name', 'shop_alias'])  # already have shop_id
-    df = df.rename(columns={'old_price': 'strike_price',
-                   'discount_percent': 'discount'})
-    print('done drop and rename')
     df['strike_price'] = df.strike_price.astype('int64')
 
-    # make media
-    if args.media:
-        df_images = []
-        for i, prod in df_full.iterrows():
-            for url, img in zip(prod['image_urls'], prod['images']):
-                df_images.append({
-                    "id": id_generator(),
-                    "product_id": prod['id'],
-                    "media_path": img,
-                    "media_url": url
-                })
-        df_images = pd.DataFrame(df_images)
-        df = df.drop(columns='images')
-
-    col_order = ['id', 'name', 'alias', 'description', 'weight', 'shop_id', 'price', 'strike_price', 'discount', 'url', 'menu_id', 'menu_name', 'min_order',
-                 'max_order', 'condition', 'stock', 'main_category', 'sub_category', 'sold', 'transactions', 'view_count', 'review_count', 'rating', 'talk_count', 'created_at', 'updated_at']
     df = df.drop(columns=['image_urls'])
 
     # add times
@@ -121,31 +85,21 @@ def process_external_temp(args):
     df['created_at'] = time_string
     df['updated_at'] = time_string
 
-    df = df[col_order]
-    print('done reorder columns')
+    # convert nans to pd.Int32Dtype
+    df['wholesale_price'] = df.wholesale_price.astype(pd.Int32Dtype())
+    df['wholesale_quantity'] = df.wholesale_quantity.astype(pd.Int32Dtype())
 
     # save to file
-    save_dir = os.path.join(args.dir, 'biquery')
-    if not os.path.isdir(save_dir):
-        os.makedirs(save_dir)
-    df.to_json(os.path.join(save_dir, 'products.jsonlines'),
+    df.to_json(args.output,
                lines=True, orient='records')
-
-    if args.media:
-        df_images['created_at'] = time_string
-        df_images['updated_at'] = time_string
-        df_images.to_json(os.path.join(save_dir, 'media.jsonlines'),
-                          lines=True, orient='records')
-    # df.to_csv(os.path.join(save_dir, 'products.csv'))
-    # df_images.to_csv(os.path.join(save_dir, 'media.csv'))
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-d', '--dir')
-    parser.add_argument('-m', '--media', default=False, action='store_true')
+    parser.add_argument('-p', '--products')
+    parser.add_argument('-o', '--output')
+    # parser.add_argument('-m', '--media', default=False, action='store_true')
     args = parser.parse_args()
-    assert os.path.isdir(args.dir)
 
     process_external_temp(args)
 
