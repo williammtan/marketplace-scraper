@@ -25,6 +25,7 @@ python3 -m process.preprocess_products -p $scraper_output -o $preprocessing_outp
 blob="gs://data_external_backup/upload/updates/datetime/products.jsonlines"
 gsutil cp $preprocessing_output $blob
 bq load \
+  --replace \
   --source_format="NEWLINE_DELIMITED_JSON" \
   "external_data_temp.EXTERNAL_PRODUCTS_ANALYTICS_$datetime" \
   $blob \
