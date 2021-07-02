@@ -1,5 +1,5 @@
 
-# cd /home/externalscraper-vm/food_scraping/
+cd /home/externalscraper/food_scraping/
 git pull
 # mode=$1
 
