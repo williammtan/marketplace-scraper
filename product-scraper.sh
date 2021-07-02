@@ -27,7 +27,6 @@ blob="gs://data_external_backup/upload/updates/datetime/products.jsonlines"
 gsutil cp $preprocessing_output $blob
 bq load \
   --source_format="NEWLINE_DELIMITED_JSON" \
-  --noreplace \
   "external_data_temp.EXTERNAL_PRODUCTS_ANALYTICS_$datetime" \
   $blob \
   ../product_schema.json
