@@ -22,8 +22,8 @@ pip3 install -r requirements.txt
 scrapy crawl tokped_products -a product_list="$run_dir/scraper_input.csv" -O "$run_dir/products.jsonlines"
 python3 -m process.preprocess_products -p $scraper_output -o $preprocessing_output
 
-blob="gs://data_external_backup/upload/updates/datetime/products.jsonlines"
-raw_blob="gs://data_external_backup/upload/updates/datetime/products_raw.jsonlines"
+blob="gs://data_external_backup/upload/updates/$datetime/products.jsonlines"
+raw_blob="gs://data_external_backup/upload/updates/$datetime/products_raw.jsonlines"
 gsutil cp $preprocessing_output $blob
 gsutil cp "$run_dir/products.jsonlines" $raw_blob
 bq load \
