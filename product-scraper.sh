@@ -2,7 +2,7 @@
 cd scrapyfood
 
 datetime=$(date +"%Y%m%d")
-run_dir="../data/runs/$datetime-products"
+run_dir="/mnt/disks/disk-1/runs/$datetime-products"
 mkdir -p "$run_dir"
 
 scraper_input="$run_dir/scraper_input.csv"
