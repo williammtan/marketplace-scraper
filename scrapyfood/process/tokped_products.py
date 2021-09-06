@@ -88,14 +88,14 @@ class TokpedProcess(BaseProcess):
         self.batch_scrape(df_fname=fname_output, scrape_func=lambda df: scrape(TokpedSearchScraper, self.create_settings(
             fname_output=fname_output
         ), query_file=self.create_search_query(queries=[{'name': f'product {i}', 'value': k} for i, k in enumerate(df.name)], ob=False),
-            related_output=related_output, max_queries=1000
+            related_output=related_output, max_queries=2000
         ), sample_size=50000)
 
         with jsonlines.open(related_output) as reader:
             related_keywords = np.unique(list(reader))
         scrape(TokpedSearchScraper, self.create_settings(
             fname_output=fname_output
-        ), query_file=self.create_search_query(queries=[{'name': f'keyword {i}', 'value': k} for i, k in enumerate(related_keywords)], ob=False), max_queries=1000)  # add new related keywords to product file and process
+        ), query_file=self.create_search_query(queries=[{'name': f'keyword {i}', 'value': k} for i, k in enumerate(related_keywords)], ob=False), max_queries=3000)  # add new related keywords to product file and process
         self.process_df(fname=fname_output)
 
     def batch_scrape(self, df_fname, scrape_func, sample_size=None, batch_size=2000):

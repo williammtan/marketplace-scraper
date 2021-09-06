@@ -12,10 +12,10 @@ class TokpedProductScraper(BaseSpiderGQL, scrapy.Spider):
         self.product_list = read_df(product_list)
         if 'prod_url' in self.product_list.columns:
             if 'shop_alias' not in self.product_list.columns:
-                self.product_list['shop_domain'] = self.product_list.apply(
+                self.product_list['shop_alias'] = self.product_list.apply(
                     lambda x: x.prod_url.split('/')[-2], axis=1)
             if 'alias' not in self.product_list.columns:
-                self.product_list['name_domain'] = self.product_list.apply(
+                self.product_list['alias'] = self.product_list.apply(
                     lambda x: x.prod_url.split('/')[-1].split('?')[0], axis=1)
 
     def start_requests(self):

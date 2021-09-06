@@ -14,7 +14,7 @@ class TokpedSimilarScraper(BaseSpiderGQL, scrapy.Spider):
     def __init__(self, product_list, settings={
         'sections': ['Lainnya di toko ini', 'Produk sponsor terkait', 'Pilihan lainnya untukmu'], "category": None
     }):
-        if type(product_list) == 'str':
+        if type(product_list) == str:
             self.df = read_df(product_list)
         else:
             self.df = product_list
@@ -26,7 +26,7 @@ class TokpedSimilarScraper(BaseSpiderGQL, scrapy.Spider):
 
     def start_requests(self):
         for _, prod in self.df.iterrows():
-            yield self.gql.request_old(callback=self.parse_split, cb_kwargs={'ref_id': prod.id}, productIDs=prod.id)
+            yield self.gql.request_old(callback=self.parse_split, cb_kwargs={'ref_id': prod.id}, productIDs=str(prod.id))
 
     def parse(self, response, ref_id):
         data = response['productRecommendationWidget']

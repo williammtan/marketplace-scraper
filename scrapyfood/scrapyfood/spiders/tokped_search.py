@@ -58,7 +58,7 @@ class TokpedSearchScraper(BaseSpiderGQL, scrapy.Spider):
         logging.info(f'Scraping config: {config}')
         for i in range(0, self.max_queries, QUERY_SIZE):
             query = config + f'&start={i}'
-            yield self.gql.request_old(callback=self.parse_split, params=query, cb_kwargs={'ref_params': query})
+            yield self.gql.request_old(callback=self.parse_split, params=query, cb_kwargs={'ref_params': query}, headers={})
 
     def parse(self, response, ref_params):
         data = response['ace_search_product_v4']['data']

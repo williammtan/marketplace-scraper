@@ -81,9 +81,8 @@ def process_external_temp(args):
     df = df.drop(columns=['image_urls'])
 
     # add times
-    time_string = get_date_time()
-    df['created_at'] = time_string
-    df['updated_at'] = time_string
+    df['created_at'] = args.time
+    df['updated_at'] = args.time
 
     # convert nans to pd.Int32Dtype
     df['wholesale_price'] = df.wholesale_price.astype(pd.Int32Dtype())
@@ -97,6 +96,7 @@ def process_external_temp(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--products')
+    parser.add_argument('-t', '--time', default=get_date_time())
     parser.add_argument('-o', '--output')
     # parser.add_argument('-m', '--media', default=False, action='store_true')
     args = parser.parse_args()
