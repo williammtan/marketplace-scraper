@@ -15,14 +15,14 @@ bq query --format=csv --max_rows=300000000 --use_legacy_sql=false 'SELECT
   INNER JOIN
   `food-id-app.external_data_temp.EXTERNAL_PRODUCTS` products
   ON shop.id = products.shop_id
-    )' > $scraper_input
+    ) WHERE products.sold > 0' > $scraper_input
 
 pip3 install -r requirements.txt
 
 scrapy crawl tokped_products -a product_list="$run_dir/scraper_input.csv" -O "$run_dir/products.jsonlines"
 python3 -m process.preprocess_products -p $scraper_output -o $preprocessing_output
 
-blob="gs://data_external_backup/upload/updates/$datetime/products.jsonlines"
+blob="gs://data_external_backup/upload/updates-full/$datetime/products.jsonlines"
 raw_blob="gs://data_external_backup/upload/updates/$datetime/products_raw.jsonlines"
 gsutil cp $preprocessing_output $blob
 gsutil cp "$run_dir/products.jsonlines" $raw_blob

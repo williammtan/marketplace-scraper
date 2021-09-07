@@ -6,3 +6,4 @@
 */.vscode
 *.log
 **/.ipynb_checkpoints
+product-scraper copy.sh
