@@ -3,7 +3,7 @@ import json
 import scrapy
 from datetime import datetime
 from ..gql import TokpedGQL, BaseSpiderGQL
-from ..items import TokpedShopCoreItem, TokpedShopStatisticItem
+from ..items import TokpedShopCoreItem, TokpedShopStatisticItem, TokpedShopSpeedItem
 
 
 class TokpedShopCoreScraper(BaseSpiderGQL, scrapy.Spider):
@@ -274,10 +274,10 @@ class TokpedShopSpeedScraper(BaseSpiderGQL, scrapy.Spider):
             yield self.gql.request_old(callback=self.parse_split, shopId=id, cb_kwargs={'id': id})
 
     def parse(self, response, id):
-        yield {
+        yield TokpedShopSpeedItem({
             "id": id,
             "response_speed": response['shopSpeed']['messageResponseTime']
-        }
+        })
 
     gql = TokpedGQL(operation_name='shopSpeedQuery', query="""
     query shopSpeedQuery($shopId: Int!) {

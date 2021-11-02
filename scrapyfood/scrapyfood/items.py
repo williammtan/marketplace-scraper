@@ -106,6 +106,31 @@ class TokpedShopStatisticItem(scrapy.Item):
     rating = scrapy.Field()
     reputation = scrapy.Field()
 
+class TokpedShopSpeedItem(scrapy.Item):
+    id = scrapy.Field()
+    response_speed = scrapy.Field()
+
+class TokpedShopItem(scrapy.Item):
+    """Output of tokped_shops process"""
+    id = scrapy.Field()
+
+    name = scrapy.Field()
+    alias = scrapy.Field()
+    description = scrapy.Field()
+    tagline = scrapy.Field()
+    active_products = scrapy.Field()
+    location = scrapy.Field()
+    is_closed = scrapy.Field()
+    products_sold = scrapy.Field()
+    transaction_count = scrapy.Field()
+    favourite_count = scrapy.Field()
+    started_at = scrapy.Field()
+
+    satisfaction = scrapy.Field()
+    rating = scrapy.Field()
+    reputation = scrapy.Field()
+
+    response_speed = scrapy.Field()
 
 class ShopeeShortProductItem(scrapy.Item):
     id = scrapy.Field()
