@@ -1,3 +1,0 @@
-BigQuery error in query operation: Error processing job 'food-id-
-app:bqjob_r3952a3b5f676366e_0000017b86064ad9_1': Not found: Table food-id-
-app:external_data_temp.EXTERNAL_PRODUCTS_ was not found in location US
