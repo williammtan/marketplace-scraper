@@ -1,8 +1,9 @@
+# set -e # exit on error
 
 cd scrapyfood
 
 datetime=$(date +"%Y%m%d")
-run_dir="/mnt/disks/disk-1/runs/$datetime-products"
+run_dir="../data/runs/"
 mkdir -p "$run_dir"
 
 scraper_input="$run_dir/scraper_input.csv"

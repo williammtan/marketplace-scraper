@@ -4,6 +4,8 @@ import random
 import argparse
 import os
 import datetime
+from tqdm import tqdm
+import jsonlines
 
 from scrapyfood.utils import read_df
 
@@ -71,6 +73,26 @@ def process_external(args):
     df.to_csv(prod_filename)
     df_images.to_csv(media_filename)
 
+col_conversions = {
+    'id': int,
+    'price': int,
+    'strike_price': int,
+    'discount': float,
+    'weight': int,
+    'menu_id': int,
+    'min_order': int,
+    'max_order': int,
+    'stock': int,
+    'wholesale_quantity': int,
+    'wholesale_price': int,
+    'shop_id': int,
+    'view_count': int,
+    'review_count': int,
+    'talk_count': int,
+    'rating': float,
+    'sold': int,
+    'transactions': int
+}
 
 def process_external_temp(args):
 
@@ -92,6 +114,23 @@ def process_external_temp(args):
     df.to_json(args.output,
                lines=True, orient='records')
 
+def process_external_temp_gen(args):
+    """Preprocess using generator loop instead of loading full into memory"""
+    with jsonlines.open(args.products) as reader:
+        with jsonlines.open(args.output, 'w') as writer:
+            for row in tqdm(reader):
+                row['created_at'] = args.time
+                row['updated_at'] = args.time
+
+                for k,t in col_conversions.items():
+                    if row[k] is not None:
+                        row[k] = t(row[k])
+
+                del row['strike_price']
+                del row['image_urls']
+                writer.write(row)
+                
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -101,7 +140,7 @@ if __name__ == '__main__':
     # parser.add_argument('-m', '--media', default=False, action='store_true')
     args = parser.parse_args()
 
-    process_external_temp(args)
+    process_external_temp_gen(args)
 
 
 """
