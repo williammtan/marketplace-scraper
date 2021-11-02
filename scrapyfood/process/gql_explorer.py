@@ -3,7 +3,7 @@
 from graphql.parser import GraphQLParser
 from graphql.ast import Field, Query, NonNullType, Variable
 from seleniumwire import webdriver
-from scrapyfood.constants import proxy_url
+from scrapyfood.constants import proxy_base as proxy_url
 import threading
 import argparse
 import requests
