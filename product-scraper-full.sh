@@ -35,3 +35,5 @@ bq load \
   $blob \
   ../product_schema.json
 
+
+gcloud logging write scraper-log "Completed product-scraper-full update with $(wc -l < $preprocessing_output) products"

@@ -7,3 +7,5 @@ chmod +x product-scraper.sh
 
 chmod +x product-scraper-full.sh
 ./product-scraper-full.sh
+
+gcloud logging write scraper-log "Completed all startup-script tasks"
