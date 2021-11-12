@@ -17,7 +17,7 @@ bq query --format=csv --max_rows=300000000 --use_legacy_sql=false 'SELECT
   INNER JOIN
   `food-id-app.external_data_temp.EXTERNAL_PRODUCTS` products
   ON shop.id = products.shop_id
-    ) WHERE products.sold > 0' > $scraper_input
+    )' > $scraper_input
 
 pip3 install -r requirements.txt
 
