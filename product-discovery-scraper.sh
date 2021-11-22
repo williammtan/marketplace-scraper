@@ -27,11 +27,7 @@ do
     cat=$(echo "$cat" | tr -d '"')
     category_dir="$run_dir/$cat"
     mkdir -p $category_dir
-    # python -m process.tokped_products -m $cat -o $category_dir
-    echo '
-    {"id": 1, "prod_url": "https://www.tokopedia.com/hpmkemang/hoki-beras-5kg?whid=0"}
-    {"id": 2, "prod_url": "https://www.tokopedia.com/delifarma/beras-bogor-rojolele-5-kg-25-kg-5-kg?whid=0"}
-    ' > "$category_dir/products.jsonlines"
+    python -m process.tokped_products -m $cat -o $category_dir
 done
 
 python -m process.merge_products $(find $run_dir -name "products.jsonlines") $current_products_file -c id prod_url -o $new_products_file
