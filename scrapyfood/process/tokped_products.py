@@ -179,7 +179,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-m', '--main-cat', required=True,
                         help='Main category id to scrape')
-    parser.add_argument('-c', '--categories', required=True,
+    parser.add_argument('-c', '--categories', required=False,
                         help='Path to categories JSON file', default='../categories.json')
     parser.add_argument('-o', '--dir', required=True,
                         help='Output directory')
