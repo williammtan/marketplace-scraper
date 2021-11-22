@@ -1,0 +1,941 @@
+[
+	{
+		"id": "2696",
+		"name": "Bahan Kue",
+		"url": "https://www.tokopedia.com/p/makanan-minuman/bahan-kue",
+		"iconImageUrl": "https://ecs7.tokopedia.net/img/attachment/2020/3/19/82120085/82120085_12c4396a-40e8-4276-b9d6-ba520a5c8ede.png",
+		"child": [
+			{
+				"name": "Bahan Puding & Agar - Agar",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/bahan-kue/bahan-puding-agar-agar",
+				"id": "2776",
+				"identifier": "bahan-puding-agar-agar"
+			},
+			{
+				"name": "Baking Powder",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/bahan-kue/baking-powder",
+				"id": "2772",
+				"identifier": "baking-powder"
+			},
+			{
+				"name": "Baking Soda",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/bahan-kue/baking-soda",
+				"id": "2771",
+				"identifier": "baking-soda"
+			},
+			{
+				"name": "Coklat Bubuk",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/bahan-kue/coklat-bubuk",
+				"id": "2774",
+				"identifier": "coklat-bubuk"
+			},
+			{
+				"name": "Coklat Masak",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/bahan-kue/coklat-masak",
+				"id": "2773",
+				"identifier": "coklat-masak"
+			},
+			{
+				"name": "Perisa Makanan",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/bahan-kue/perisa-makanan",
+				"id": "2769",
+				"identifier": "perisa-makanan"
+			},
+			{
+				"name": "Pewarna Makanan",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/bahan-kue/pewarna-makanan",
+				"id": "2768",
+				"identifier": "pewarna-makanan"
+			},
+			{
+				"name": "Ragi",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/bahan-kue/ragi",
+				"id": "2770",
+				"identifier": "ragi"
+			},
+			{
+				"name": "Topping & Penghias Kue",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/bahan-kue/topping-penghias-kue",
+				"id": "2775",
+				"identifier": "topping-penghias-kue"
+			}
+		],
+		"identifier": "bahan-kue"
+	},
+	{
+		"id": "2691",
+		"name": "Beras",
+		"url": "https://www.tokopedia.com/p/makanan-minuman/beras",
+		"iconImageUrl": "https://ecs7.tokopedia.net/img/attachment/2020/3/20/77305583/77305583_558ff071-ee59-40b8-a255-aee7118addd8.png",
+		"child": [
+			{
+				"name": "Beras Hitam",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/beras/beras-hitam",
+				"id": "2735",
+				"identifier": "beras-hitam"
+			},
+			{
+				"name": "Beras Ketan",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/beras/beras-ketan",
+				"id": "2736",
+				"identifier": "beras-ketan"
+			},
+			{
+				"name": "Beras Merah",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/beras/beras-merah",
+				"id": "2734",
+				"identifier": "beras-merah"
+			},
+			{
+				"name": "Beras Putih",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/beras/beras-putih",
+				"id": "2733",
+				"identifier": "beras-putih"
+			}
+		],
+		"identifier": "beras"
+	},
+	{
+		"id": "1159",
+		"name": "Bumbu & Bahan Masakan",
+		"url": "https://www.tokopedia.com/p/makanan-minuman/bumbu-bahan-masakan",
+		"iconImageUrl": "https://ecs7.tokopedia.net/img/attachment/2020/3/19/82120085/82120085_ce9169c0-409c-4d68-952f-1c883ddd4cea.png",
+		"child": [
+			{
+				"name": "Aneka Sambal",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/bumbu-bahan-masakan/aneka-sambal",
+				"id": "1165",
+				"identifier": "aneka-sambal"
+			},
+			{
+				"name": "Bawang",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/bumbu-bahan-masakan/bawang",
+				"id": "2751",
+				"identifier": "bawang"
+			},
+			{
+				"name": "Bumbu Masak Instan",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/bumbu-bahan-masakan/bumbu-masak-instan",
+				"id": "2749",
+				"identifier": "bumbu-masak-instan"
+			},
+			{
+				"name": "Cuka",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/bumbu-bahan-masakan/cuka",
+				"id": "2744",
+				"identifier": "cuka"
+			},
+			{
+				"name": "Garam & Merica",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/bumbu-bahan-masakan/garam-merica",
+				"id": "1161",
+				"identifier": "garam-merica"
+			},
+			{
+				"name": "Gula",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/bumbu-bahan-masakan/gula",
+				"id": "2743",
+				"identifier": "gula"
+			},
+			{
+				"name": "Kaldu & Penyedap Rasa",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/bumbu-bahan-masakan/kaldu-penyedap-rasa",
+				"id": "1164",
+				"identifier": "kaldu-penyedap-rasa"
+			},
+			{
+				"name": "Kecap",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/bumbu-bahan-masakan/kecap",
+				"id": "2746",
+				"identifier": "kecap"
+			},
+			{
+				"name": "Mayonnaise",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/bumbu-bahan-masakan/mayonnaise",
+				"id": "2745",
+				"identifier": "mayonnaise"
+			},
+			{
+				"name": "Minyak",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/bumbu-bahan-masakan/minyak",
+				"id": "1160",
+				"identifier": "minyak"
+			},
+			{
+				"name": "Rempah",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/bumbu-bahan-masakan/rempah",
+				"id": "2747",
+				"identifier": "rempah"
+			},
+			{
+				"name": "Santan",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/bumbu-bahan-masakan/santan",
+				"id": "2748",
+				"identifier": "santan"
+			},
+			{
+				"name": "Saus & Dressing",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/bumbu-bahan-masakan/saus-dressing",
+				"id": "1162",
+				"identifier": "saus-dressing"
+			},
+			{
+				"name": "Terasi",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/bumbu-bahan-masakan/terasi",
+				"id": "2750",
+				"identifier": "terasi"
+			}
+		],
+		"identifier": "bumbu-bahan-masakan"
+	},
+	{
+		"id": "2697",
+		"name": "Kopi",
+		"url": "https://www.tokopedia.com/p/makanan-minuman/kopi",
+		"iconImageUrl": "https://ecs7.tokopedia.net/img/attachment/2020/3/19/82120085/82120085_9f9db8c6-7a3f-4a4f-92dd-047d3d26fcbc.png",
+		"child": [
+			{
+				"name": "Biji Kopi",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/kopi/biji-kopi",
+				"id": "2786",
+				"identifier": "biji-kopi"
+			},
+			{
+				"name": "Kopi Bubuk",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/kopi/kopi-bubuk",
+				"id": "2787",
+				"identifier": "kopi-bubuk"
+			},
+			{
+				"name": "Kopi Kemasan",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/kopi/kopi-kemasan",
+				"id": "2788",
+				"identifier": "kopi-kemasan"
+			},
+			{
+				"name": "Krimer",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/kopi/krimer",
+				"id": "2789",
+				"identifier": "krimer"
+			}
+		],
+		"identifier": "kopi"
+	},
+	{
+		"id": "2701",
+		"name": "Kue",
+		"url": "https://www.tokopedia.com/p/makanan-minuman/kue",
+		"iconImageUrl": "https://ecs7.tokopedia.net/img/attachment/2020/3/19/82120085/82120085_3b0bf228-178f-4cdc-bbd3-8d0b3d33ab03.png",
+		"child": [
+			{
+				"name": "Kue Basah",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/kue/kue-basah",
+				"id": "2809",
+				"identifier": "kue-basah"
+			},
+			{
+				"name": "Kue Kering",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/kue/kue-kering",
+				"id": "2808",
+				"identifier": "kue-kering"
+			},
+			{
+				"name": "Kue Ulang Tahun",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/kue/kue-ulang-tahun",
+				"id": "2810",
+				"identifier": "kue-ulang-tahun"
+			}
+		],
+		"identifier": "kue"
+	},
+	{
+		"id": "2302",
+		"name": "Makanan Beku",
+		"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-beku",
+		"iconImageUrl": "https://ecs7.tokopedia.net/img/attachment/2020/3/19/82120085/82120085_e331e5d4-11e3-468b-ac80-0c4749ad3412.png",
+		"child": [
+			{
+				"name": "Baso & Daging Olahan Lainnya",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-beku/baso-daging-olahan-lainnya",
+				"id": "2730",
+				"identifier": "baso-daging-olahan-lainnya"
+			},
+			{
+				"name": "Buah Beku",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-beku/buah-beku",
+				"id": "2307",
+				"identifier": "buah-beku"
+			},
+			{
+				"name": "Camilan Beku",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-beku/camilan-beku",
+				"id": "2727",
+				"identifier": "camilan-beku"
+			},
+			{
+				"name": "Daging Sosis",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-beku/daging-sosis",
+				"id": "2729",
+				"identifier": "daging-sosis"
+			},
+			{
+				"name": "Dessert",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-beku/dessert",
+				"id": "2305",
+				"identifier": "dessert"
+			},
+			{
+				"name": "Kentang Beku",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-beku/kentang-beku",
+				"id": "2725",
+				"identifier": "kentang-beku"
+			},
+			{
+				"name": "Nugget",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-beku/nugget",
+				"id": "2728",
+				"identifier": "nugget"
+			},
+			{
+				"name": "Pastry & Olahan Tepung",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-beku/pastry-olahan-tepung",
+				"id": "2731",
+				"identifier": "pastry-olahan-tepung"
+			},
+			{
+				"name": "Sayuran Beku",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-beku/sayuran-beku",
+				"id": "2726",
+				"identifier": "sayuran-beku"
+			},
+			{
+				"name": "Sosis",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-beku/sosis",
+				"id": "2304",
+				"identifier": "sosis"
+			}
+		],
+		"identifier": "makanan-beku"
+	},
+	{
+		"id": "2702",
+		"name": "Makanan Jadi",
+		"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-jadi",
+		"iconImageUrl": "https://ecs7.tokopedia.net/img/attachment/2020/3/19/82120085/82120085_2ce59424-add6-4e77-831e-dcd34f1b2f8d.png",
+		"child": [
+			{
+				"name": "Buah Olahan",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-jadi/buah-olahan",
+				"id": "2816",
+				"identifier": "buah-olahan"
+			},
+			{
+				"name": "Lauk Pauk",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-jadi/lauk-pauk",
+				"id": "2811",
+				"identifier": "lauk-pauk"
+			},
+			{
+				"name": "Makanan Asin",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-jadi/makanan-asin",
+				"id": "2814",
+				"identifier": "makanan-asin"
+			},
+			{
+				"name": "Makanan Manis",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-jadi/makanan-manis",
+				"id": "2813",
+				"identifier": "makanan-manis"
+			},
+			{
+				"name": "Nasi Tumpeng",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-jadi/nasi-tumpeng",
+				"id": "2812",
+				"identifier": "nasi-tumpeng"
+			},
+			{
+				"name": "Sayur Olahan",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-jadi/sayur-olahan",
+				"id": "2815",
+				"identifier": "sayur-olahan"
+			}
+		],
+		"identifier": "makanan-jadi"
+	},
+	{
+		"id": "2694",
+		"name": "Makanan Kaleng",
+		"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-kaleng",
+		"iconImageUrl": "https://ecs7.tokopedia.net/img/attachment/2020/3/19/82120085/82120085_89e99e7d-8fcb-41ff-a8e7-94f540bbaf10.png",
+		"child": [
+			{
+				"name": "Buah Kaleng",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-kaleng/buah-kaleng",
+				"id": "2758",
+				"identifier": "buah-kaleng"
+			},
+			{
+				"name": "Daging Kaleng",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-kaleng/daging-kaleng",
+				"id": "2756",
+				"identifier": "daging-kaleng"
+			},
+			{
+				"name": "Ikan Kaleng",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-kaleng/ikan-kaleng",
+				"id": "2757",
+				"identifier": "ikan-kaleng"
+			},
+			{
+				"name": "Makanan Instan Kaleng",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-kaleng/makanan-instan-kaleng",
+				"id": "2759",
+				"identifier": "makanan-instan-kaleng"
+			}
+		],
+		"identifier": "makanan-kaleng"
+	},
+	{
+		"id": "1150",
+		"name": "Makanan Kering",
+		"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-kering",
+		"iconImageUrl": "https://ecs7.tokopedia.net/img/attachment/2020/3/20/77305583/77305583_c0366c65-cc1f-4588-8907-155a099c6010.png",
+		"child": [
+			{
+				"name": "Abon",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-kering/abon",
+				"id": "2754",
+				"identifier": "abon"
+			},
+			{
+				"name": "Bawang Goreng",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-kering/bawang-goreng",
+				"id": "2755",
+				"identifier": "bawang-goreng"
+			},
+			{
+				"name": "Biji-bijian",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-kering/biji-bijian",
+				"id": "2753",
+				"identifier": "biji-bijian"
+			},
+			{
+				"name": "Daging Kering & Asin",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-kering/daging-kering-asin",
+				"id": "1151",
+				"identifier": "daging-kering-asin"
+			},
+			{
+				"name": "Kerupuk",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-kering/kerupuk",
+				"id": "2752",
+				"identifier": "kerupuk"
+			}
+		],
+		"identifier": "makanan-kering"
+	},
+	{
+		"id": "2700",
+		"name": "Makanan Ringan",
+		"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-ringan",
+		"iconImageUrl": "https://ecs7.tokopedia.net/img/attachment/2020/3/19/82120085/82120085_d861608c-32b9-4c27-af4e-2348100a4f78.png",
+		"child": [
+			{
+				"name": "Biskuit & Wafer",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-ringan/biskuit-wafer",
+				"id": "2803",
+				"identifier": "biskuit-wafer"
+			},
+			{
+				"name": "Camilan Instant",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-ringan/camilan-instant",
+				"id": "2806",
+				"identifier": "camilan-instant"
+			},
+			{
+				"name": "Cokelat",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-ringan/cokelat",
+				"id": "2802",
+				"identifier": "cokelat"
+			},
+			{
+				"name": "Kacang",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-ringan/kacang",
+				"id": "2804",
+				"identifier": "kacang"
+			},
+			{
+				"name": "Keripik",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-ringan/keripik",
+				"id": "2805",
+				"identifier": "keripik"
+			},
+			{
+				"name": "Permen",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-ringan/permen",
+				"id": "2801",
+				"identifier": "permen"
+			},
+			{
+				"name": "Puding & Jelly",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-ringan/puding-jelly",
+				"id": "2807",
+				"identifier": "puding-jelly"
+			}
+		],
+		"identifier": "makanan-ringan"
+	},
+	{
+		"id": "2699",
+		"name": "Makanan Sarapan",
+		"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-sarapan",
+		"iconImageUrl": "https://ecs7.tokopedia.net/img/attachment/2020/3/19/82120085/82120085_f675c0a9-1034-415d-a4ea-df62dcb21a84.png",
+		"child": [
+			{
+				"name": "Granola",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-sarapan/granola",
+				"id": "2797",
+				"identifier": "granola"
+			},
+			{
+				"name": "Meses",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-sarapan/meses",
+				"id": "2795",
+				"identifier": "meses"
+			},
+			{
+				"name": "Muesli",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-sarapan/muesli",
+				"id": "2798",
+				"identifier": "muesli"
+			},
+			{
+				"name": "Oat",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-sarapan/oat",
+				"id": "2799",
+				"identifier": "oat"
+			},
+			{
+				"name": "Quinoa",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-sarapan/quinoa",
+				"id": "2800",
+				"identifier": "quinoa"
+			},
+			{
+				"name": "Roti",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-sarapan/roti",
+				"id": "2793",
+				"identifier": "roti"
+			},
+			{
+				"name": "Selai",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-sarapan/selai",
+				"id": "2794",
+				"identifier": "selai"
+			},
+			{
+				"name": "Sereal",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/makanan-sarapan/sereal",
+				"id": "2796",
+				"identifier": "sereal"
+			}
+		],
+		"identifier": "makanan-sarapan"
+	},
+	{
+		"id": "2693",
+		"name": "Mie & Pasta",
+		"url": "https://www.tokopedia.com/p/makanan-minuman/mie-pasta",
+		"iconImageUrl": "https://ecs7.tokopedia.net/img/attachment/2020/3/19/82120085/82120085_2c6f7a0d-78b6-45ee-8425-d5ddc2850f8d.png",
+		"child": [
+			{
+				"name": "Aneka Pasta",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/mie-pasta/aneka-pasta",
+				"id": "2742",
+				"identifier": "aneka-pasta"
+			},
+			{
+				"name": "Bihun & Soun",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/mie-pasta/bihun-soun",
+				"id": "2740",
+				"identifier": "bihun-soun"
+			},
+			{
+				"name": "Kwetiau",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/mie-pasta/kwetiau",
+				"id": "2741",
+				"identifier": "kwetiau"
+			},
+			{
+				"name": "Mie Impor",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/mie-pasta/mie-impor",
+				"id": "2739",
+				"identifier": "mie-impor"
+			},
+			{
+				"name": "Mie Instan",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/mie-pasta/mie-instan",
+				"id": "2738",
+				"identifier": "mie-instan"
+			},
+			{
+				"name": "Mie Telur",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/mie-pasta/mie-telur",
+				"id": "2737",
+				"identifier": "mie-telur"
+			}
+		],
+		"identifier": "mie-pasta"
+	},
+	{
+		"id": "1173",
+		"name": "Minuman",
+		"url": "https://www.tokopedia.com/p/makanan-minuman/minuman",
+		"iconImageUrl": "https://ecs7.tokopedia.net/img/attachment/2020/3/19/82120085/82120085_36fffab4-5aa0-4afc-b2d4-14f09deec056.png",
+		"child": [
+			{
+				"name": "Air Mineral",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/minuman/air-mineral",
+				"id": "2777",
+				"identifier": "air-mineral"
+			},
+			{
+				"name": "Apple Cider Vinegar",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/minuman/apple-cider-vinegar",
+				"id": "2783",
+				"identifier": "apple-cider-vinegar"
+			},
+			{
+				"name": "Bubuk Minuman Lainnya",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/minuman/bubuk-minuman-lainnya",
+				"id": "2784",
+				"identifier": "bubuk-minuman-lainnya"
+			},
+			{
+				"name": "Energy Drink",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/minuman/energy-drink",
+				"id": "1179",
+				"identifier": "energy-drink"
+			},
+			{
+				"name": "Jus",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/minuman/jus",
+				"id": "2778",
+				"identifier": "jus"
+			},
+			{
+				"name": "Madu",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/minuman/madu",
+				"id": "2782",
+				"identifier": "madu"
+			},
+			{
+				"name": "Minuman Cokelat",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/minuman/minuman-cokelat",
+				"id": "2780",
+				"identifier": "minuman-cokelat"
+			},
+			{
+				"name": "Minuman Kemasan Lainnya",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/minuman/minuman-kemasan-lainnya",
+				"id": "2785",
+				"identifier": "minuman-kemasan-lainnya"
+			},
+			{
+				"name": "Minuman Tradisional",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/minuman/minuman-tradisional",
+				"id": "2781",
+				"identifier": "minuman-tradisional"
+			},
+			{
+				"name": "Sirup",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/minuman/sirup",
+				"id": "1178",
+				"identifier": "sirup"
+			},
+			{
+				"name": "Soft Drink",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/minuman/soft-drink",
+				"id": "2779",
+				"identifier": "soft-drink"
+			}
+		],
+		"identifier": "minuman"
+	},
+	{
+		"id": "2703",
+		"name": "Paket & Parcel Makanan",
+		"url": "https://www.tokopedia.com/p/makanan-minuman/paket-parcel-makanan",
+		"iconImageUrl": "https://ecs7.tokopedia.net/img/attachment/2020/3/19/82120085/82120085_f55aeaa9-bcc3-4173-900a-cf33f7b6a3da.png",
+		"child": [
+			{
+				"name": "Paket Sembako",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/paket-parcel-makanan/paket-sembako",
+				"id": "2817",
+				"identifier": "paket-sembako"
+			},
+			{
+				"name": "Parcel Buah",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/paket-parcel-makanan/parcel-buah",
+				"id": "2818",
+				"identifier": "parcel-buah"
+			},
+			{
+				"name": "Parcel Coklat",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/paket-parcel-makanan/parcel-coklat",
+				"id": "2819",
+				"identifier": "parcel-coklat"
+			},
+			{
+				"name": "Parcel Kue Kering",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/paket-parcel-makanan/parcel-kue-kering",
+				"id": "2820",
+				"identifier": "parcel-kue-kering"
+			},
+			{
+				"name": "Parcel Makanan",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/paket-parcel-makanan/parcel-makanan",
+				"id": "2821",
+				"identifier": "parcel-makanan"
+			}
+		],
+		"identifier": "paket-parcel-makanan"
+	},
+	{
+		"id": "2690",
+		"name": "Produk Susu",
+		"url": "https://www.tokopedia.com/p/makanan-minuman/produk-susu",
+		"iconImageUrl": "https://ecs7.tokopedia.net/img/attachment/2020/3/20/77305583/77305583_3081b0fc-7649-4be0-ab02-7d76c3aef5cd.png",
+		"child": [
+			{
+				"name": "Keju",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/produk-susu/keju",
+				"id": "2722",
+				"identifier": "keju"
+			},
+			{
+				"name": "Krim",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/produk-susu/krim",
+				"id": "2724",
+				"identifier": "krim"
+			},
+			{
+				"name": "Mentega & Butter",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/produk-susu/mentega-butter",
+				"id": "2723",
+				"identifier": "mentega-butter"
+			},
+			{
+				"name": "Susu Bubuk",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/produk-susu/susu-bubuk",
+				"id": "2717",
+				"identifier": "susu-bubuk"
+			},
+			{
+				"name": "Susu Kedelai & Kacang-kacangan",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/produk-susu/susu-kedelai-kacang-kacangan",
+				"id": "2720",
+				"identifier": "susu-kedelai-kacang-kacangan"
+			},
+			{
+				"name": "Susu Kental Manis",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/produk-susu/susu-kental-manis",
+				"id": "2719",
+				"identifier": "susu-kental-manis"
+			},
+			{
+				"name": "Susu Lansia",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/produk-susu/susu-lansia",
+				"id": "2718",
+				"identifier": "susu-lansia"
+			},
+			{
+				"name": "Susu segar & Pasteurisasi",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/produk-susu/susu-segar-pasteurisasi",
+				"id": "2715",
+				"identifier": "susu-segar-pasteurisasi"
+			},
+			{
+				"name": "Susu UHT",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/produk-susu/susu-uht",
+				"id": "2716",
+				"identifier": "susu-uht"
+			},
+			{
+				"name": "Yogurt",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/produk-susu/yogurt",
+				"id": "2721",
+				"identifier": "yogurt"
+			}
+		],
+		"identifier": "produk-susu"
+	},
+	{
+		"id": "2689",
+		"name": "Protein & Telur",
+		"url": "https://www.tokopedia.com/p/makanan-minuman/protein-telur",
+		"iconImageUrl": "https://ecs7.tokopedia.net/img/attachment/2020/3/19/82120085/82120085_6c02f232-fa1f-408f-8c07-6c393cc66e97.png",
+		"child": [
+			{
+				"name": "Daging Ayam",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/protein-telur/daging-ayam",
+				"id": "2708",
+				"identifier": "daging-ayam"
+			},
+			{
+				"name": "Daging Kambing",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/protein-telur/daging-kambing",
+				"id": "2709",
+				"identifier": "daging-kambing"
+			},
+			{
+				"name": "Daging Lainnya",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/protein-telur/daging-lainnya",
+				"id": "2714",
+				"identifier": "daging-lainnya"
+			},
+			{
+				"name": "Daging Sapi",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/protein-telur/daging-sapi",
+				"id": "2707",
+				"identifier": "daging-sapi"
+			},
+			{
+				"name": "Ikan",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/protein-telur/ikan",
+				"id": "2710",
+				"identifier": "ikan"
+			},
+			{
+				"name": "Seafood",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/protein-telur/seafood",
+				"id": "2711",
+				"identifier": "seafood"
+			},
+			{
+				"name": "Tahu & Tempe",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/protein-telur/tahu-tempe",
+				"id": "2712",
+				"identifier": "tahu-tempe"
+			},
+			{
+				"name": "Telur",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/protein-telur/telur",
+				"id": "2713",
+				"identifier": "telur"
+			}
+		],
+		"identifier": "protein-telur"
+	},
+	{
+		"id": "2688",
+		"name": "Sayur & Buah",
+		"url": "https://www.tokopedia.com/p/makanan-minuman/sayur-buah",
+		"iconImageUrl": "https://ecs7.tokopedia.net/img/attachment/2020/3/19/82120085/82120085_94074c50-bb58-45c4-84ec-180d4a45cd48.png",
+		"child": [
+			{
+				"name": "Buah-buahan",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/sayur-buah/buah-buahan",
+				"id": "2705",
+				"identifier": "buah-buahan"
+			},
+			{
+				"name": "Jamur",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/sayur-buah/jamur",
+				"id": "2706",
+				"identifier": "jamur"
+			},
+			{
+				"name": "Sayuran",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/sayur-buah/sayuran",
+				"id": "2704",
+				"identifier": "sayuran"
+			}
+		],
+		"identifier": "sayur-buah"
+	},
+	{
+		"id": "2698",
+		"name": "Teh",
+		"url": "https://www.tokopedia.com/p/makanan-minuman/teh",
+		"iconImageUrl": "https://ecs7.tokopedia.net/img/attachment/2020/3/19/82120085/82120085_d6349e09-b196-44c0-9b1b-88eee23cba24.png",
+		"child": [
+			{
+				"name": "Daun Teh",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/teh/daun-teh",
+				"id": "2790",
+				"identifier": "daun-teh"
+			},
+			{
+				"name": "Teh Bubuk",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/teh/teh-bubuk",
+				"id": "2792",
+				"identifier": "teh-bubuk"
+			},
+			{
+				"name": "Teh Kemasan",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/teh/teh-kemasan",
+				"id": "2791",
+				"identifier": "teh-kemasan"
+			}
+		],
+		"identifier": "teh"
+	},
+	{
+		"id": "2695",
+		"name": "Tepung",
+		"url": "https://www.tokopedia.com/p/makanan-minuman/tepung",
+		"iconImageUrl": "https://ecs7.tokopedia.net/img/attachment/2020/3/20/77305583/77305583_0f0fcb6f-c886-49a2-a16a-95928fa90cdb.png",
+		"child": [
+			{
+				"name": "Tepung Beras & Ketan",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/tepung/tepung-beras-ketan",
+				"id": "2761",
+				"identifier": "tepung-beras-ketan"
+			},
+			{
+				"name": "Tepung Bumbu & Tepung Siap Pakai",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/tepung/tepung-bumbu-tepung-siap-pakai",
+				"id": "2766",
+				"identifier": "tepung-bumbu-tepung-siap-pakai"
+			},
+			{
+				"name": "Tepung Jagung",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/tepung/tepung-jagung",
+				"id": "2764",
+				"identifier": "tepung-jagung"
+			},
+			{
+				"name": "Tepung Kentang",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/tepung/tepung-kentang",
+				"id": "2763",
+				"identifier": "tepung-kentang"
+			},
+			{
+				"name": "Tepung Roti - Panir",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/tepung/tepung-roti-panir",
+				"id": "2765",
+				"identifier": "tepung-roti-panir"
+			},
+			{
+				"name": "Tepung Sagu",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/tepung/tepung-sagu",
+				"id": "2767",
+				"identifier": "tepung-sagu"
+			},
+			{
+				"name": "Tepung Tapioka",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/tepung/tepung-tapioka",
+				"id": "2762",
+				"identifier": "tepung-tapioka"
+			},
+			{
+				"name": "Tepung Terigu & Gandum",
+				"url": "https://www.tokopedia.com/p/makanan-minuman/tepung/tepung-terigu-gandum",
+				"id": "2760",
+				"identifier": "tepung-terigu-gandum"
+			}
+		],
+		"identifier": "tepung"
+	}
+]
