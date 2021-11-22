@@ -48,3 +48,5 @@ bq load \
   "external_data_temp.EXTERNAL_PRODUCTS_UPDATE" \
   $blob \
   ../product_schema.json
+
+gcloud logging write scraper-log "Completed product-discovery-scraper update with $(wc -l < $new_products_preprocessed_file) products"
