@@ -27,12 +27,12 @@ do
     cat=$(echo "$cat" | tr -d '"')
     category_dir="$run_dir/$cat"
     mkdir -p $category_dir
-    python -m process.tokped_products -m $cat -o $category_dir
+    python3 -m process.tokped_products -m $cat -o $category_dir
 done
 
-python -m process.merge_products $(find $run_dir -name "products.jsonlines") $current_products_file -c id prod_url -o $new_products_file
+python3 -m process.merge_products $(find $run_dir -name "products.jsonlines") $current_products_file -c id prod_url -o $new_products_file
 scrapy crawl tokped_products -a product_list=$new_products_file -s LOG_LEVEL='INFO' -o $new_products_full_file
-python -m process.preprocess_products -p $new_products_full_file -o $new_products_preprocessed_file
+python3 -m process.preprocess_products -p $new_products_full_file -o $new_products_preprocessed_file
 
 blob="gs://data_external_backup/upload/updates-discovery/$datetime/products.jsonlines"
 raw_blob="gs://data_external_backup/upload/updates-discovery/$datetime/products_raw.jsonlines"
