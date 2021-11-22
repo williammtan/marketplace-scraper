@@ -52,11 +52,10 @@ BASE_QUERY = [
 
 
 class TokpedProcess(BaseProcess):
-    categories_file = open('../data/tokped/categories.json')
-
-    def __init__(self, main_category, output_dir):
+    def __init__(self, main_category, categories_file, output_dir):
         self.main_category = main_category
         self.output_dir = output_dir
+        self.categories_file = open(categories_file)
         self.sub_categories = [cat for cat in json.load(
             self.categories_file) if cat['id'] == self.main_category][0]['child']
 
@@ -180,6 +179,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-m', '--main-cat', required=True,
                         help='Main category id to scrape')
+    parser.add_argument('-c', '--categories', required=True,
+                        help='Path to categories JSON file', default='../categories.json')
     parser.add_argument('-o', '--dir', required=True,
                         help='Output directory')
     parser.add_argument('-rt', '--rating', default='4,5')
@@ -189,5 +190,5 @@ if __name__ == '__main__':
     if not os.path.isdir(args.dir):
         os.makedirs(args.dir)
 
-    process = TokpedProcess(args.main_cat, args.dir)
+    process = TokpedProcess(args.main_cat, args.categories, args.dir)
     process.start()
