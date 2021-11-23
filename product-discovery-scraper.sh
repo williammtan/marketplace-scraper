@@ -1,4 +1,4 @@
-
+#!/bin/bash
 set -e # exit on error
 
 cd scrapyfood
@@ -17,7 +17,7 @@ mkdir -p "$run_dir"
 bq query --format=csv --max_rows=300000000 --use_legacy_sql=false '
 SELECT
   id, url as prod_url
-  FROM `food-id-app.external_data_temp.EXTERNAL_PRODUCTS` LIMIT 5
+  FROM `food-id-app.external_data_temp.EXTERNAL_PRODUCTS`
 ' > $current_products_file
 
 IFS=' ' read -ra CATS <<< $(cat ../categories.json | jq '. | map(.id) | join (" ")' | tr -d '"')
