@@ -1,4 +1,4 @@
-# set -e # exit on error
+set -e # exit on error
 
 cd scrapyfood
 
