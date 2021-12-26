@@ -58,7 +58,7 @@ def read_df(file):
     # df['id'] = df['id'].apply(str)
     return df
 
-def to_df(df, filename):
+def df_to(df, filename):
     file_type = filename.split('.')[-1]
     if file_type == 'json':
         df.to_json(filename, orient='records')
