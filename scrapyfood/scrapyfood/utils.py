@@ -58,6 +58,16 @@ def read_df(file):
     # df['id'] = df['id'].apply(str)
     return df
 
+def to_df(df, filename):
+    file_type = filename.split('.')[-1]
+    if file_type == 'json':
+        df.to_json(filename, orient='records')
+    elif file_type == 'jsonlines':
+         df.to_json(filename, orient='records', lines=True)
+    elif file_type == 'csv':
+        df.to_csv(filename, index=False)
+    else:
+        raise Exception('Unknown file type')
 
 def read_terjual_tokped(labels):
     text = [label['title']
