@@ -4,8 +4,9 @@ import pandas as pd
 import numpy as np
 import scrapy
 from ..gql import TokpedGQL, BaseSpiderGQL
-from ..utils import read_df
+from ..utils import read_df, df_to
 from ..items import TokpedCategoryItem, TokpedCategoryGrowthItem
+from pydispatch import dispatcher
 
 class TokpedCategoryScraper(BaseSpiderGQL, scrapy.Spider):
     name = 'tokped_category'
@@ -84,10 +85,9 @@ class TokpedCategoryGrowthScraper(scrapy.Spider):
             self.categories = read_df(categories)
         else:
             self.categories = categories
-        
-        self.categories = self.categories.sort_values(by='parent')
+
         self.categories['product_count'] = np.nan
-        self.categories.set_index('id')
+        self.categories = self.categories.set_index('id')
 
     def start_requests(self):
         # scrape all categories that are not main category
@@ -108,7 +108,6 @@ class TokpedCategoryGrowthScraper(scrapy.Spider):
     
     def calculate_main_category(self, id):
         child = self.categories[self.categories['parent']==id]
-        # if np.all(child.product_count.notnull()):
         if not np.any(child.product_count.isnull()):
             product_count = child.product_count.sum()
             yield TokpedCategoryGrowthItem({
