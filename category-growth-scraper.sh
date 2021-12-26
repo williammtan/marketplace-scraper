@@ -28,5 +28,5 @@ bq load \
   $blob \
   ../product_schema.json
 
-gcloud logging write scraper-log "Completed category-growth-scraper update with $(wc -l < $preprocessing_output) categories"
+gcloud logging write scraper-log "Completed category-growth-scraper update with $(wc -l < $scraper_output) categories"
 
