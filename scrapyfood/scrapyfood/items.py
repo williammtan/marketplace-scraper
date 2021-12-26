@@ -132,6 +132,19 @@ class TokpedShopItem(scrapy.Item):
 
     response_speed = scrapy.Field()
 
+class TokpedCategoryItem(scrapy.Item):
+    id = scrapy.Field()
+    name = scrapy.Field()
+    identifier = scrapy.Field()
+    parent = scrapy.Field() # id for parent, 0 if it doesnt exist
+    level = scrapy.Field() # 1, 2, 3
+    url = scrapy.Field()
+    is_food = scrapy.Field() # if the category's level parent is not /makanan-minuman/
+
+class TokpedCategoryGrowthItem(scrapy.Item):
+    id = scrapy.Field()
+    product_count = scrapy.Field()
+
 class ShopeeShortProductItem(scrapy.Item):
     id = scrapy.Field()
     shop_id = scrapy.Field()
