@@ -21,12 +21,11 @@ scrapy crawl tokped_category_growth -a categories=$scraper_input -O $scraper_out
 
 blob="gs://data_external_backup/upload/category-updates/$datetime/categories.jsonlines"
 gsutil cp $scraper_output $blob
-bq load \
+bq load --autodetect \
   --replace \
   --source_format="NEWLINE_DELIMITED_JSON" \
   "external_data_temp.EXTERNAL_CATEGORIES_GROWTH_$datetime" \
   $blob \
-  ../product_schema.json
 
 gcloud logging write scraper-log "Completed category-growth-scraper update with $(wc -l < $scraper_output) categories"
 
