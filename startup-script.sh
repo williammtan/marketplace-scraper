@@ -1,5 +1,6 @@
 
 cd /home/externalscraper/food_scraping/
+git stash
 git pull
 
 chmod +x product-scraper.sh
