@@ -17,7 +17,7 @@ bq query --format=csv --max_rows=30000 --use_legacy_sql=false '
 
 pip3 install -r requirements.txt
 
-scrapy crawl tokped_category_growth -a categories=$scraper_input -O $scraper_output
+scrapy crawl tokped_category_growth_v2 -a categories=$scraper_input -O $scraper_output
 
 blob="gs://data_external_backup/upload/category-updates/$datetime/categories.jsonlines"
 gsutil cp $scraper_output $blob

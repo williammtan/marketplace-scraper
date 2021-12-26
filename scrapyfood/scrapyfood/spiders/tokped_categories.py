@@ -115,3 +115,115 @@ class TokpedCategoryGrowthScraper(scrapy.Spider):
                 'product_count': int(product_count)
             })
 
+class TokpedCategoryScraper(BaseSpiderGQL, scrapy.Spider):
+    name = 'tokped_category_growth_v2'
+
+    def __init__(self, categories):
+        if type(categories) == str:
+            self.categories = read_df(categories)
+        else:
+            self.categories = categories
+
+    def start_requests(self):
+        # scrape all categories that are not main category
+        for id in self.categories.id:
+            query = f'&sc={id}&rows=60&source=directory&device=desktop&page=1&related=true&st=product&safe_search=false'
+            yield self.gql.request_old(callback=self.parse_split, params=query, cb_kwargs={'id': id})
+
+    def parse(self, response, id):
+        data = response['ace_search_product_v4']
+        yield TokpedCategoryGrowthItem({
+            'id': id,
+            'product_count': data['header']['totalData']
+        })
+
+    gql = TokpedGQL(operation_name='SearchProductQueryV4', query="""
+    query SearchProductQueryV4($params: String!) {
+  ace_search_product_v4(params: $params) {
+    header {
+      totalData
+      totalDataText
+      processTime
+      responseCode
+      errorMessage
+      additionalParams
+      keywordProcess
+      __typename
+    }
+    data {
+      isQuerySafe
+      ticker {
+        text
+        query
+        typeId
+        __typename
+      }
+      redirection {
+        redirectUrl
+        departmentId
+        __typename
+      }
+      related {
+        relatedKeyword
+        otherRelated {
+          keyword
+          __typename
+        }
+        __typename
+      }
+      products {
+        id
+        name
+        ads {
+          adsId: id
+          productClickUrl
+          productWishlistUrl
+          productViewUrl
+          __typename
+        }
+        badges {
+          title
+          imageUrl
+          show
+          __typename
+        }
+        category: departmentId
+        categoryBreadcrumb
+        categoryId
+        categoryName
+        countReview
+        discountPercentage
+        gaKey
+        imageUrl
+        labelGroups {
+          position
+          title
+          type
+          __typename
+        }
+        originalPrice
+        price
+        priceRange
+        rating
+        ratingAverage
+        shop {
+          id
+          name
+          url
+          city
+          isOfficial
+          isPowerBadge
+          __typename
+        }
+        url
+        wishlist
+        sourceEngine: source_engine
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}
+
+""")
