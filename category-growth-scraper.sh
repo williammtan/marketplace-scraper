@@ -10,7 +10,7 @@ scraper_input="$run_dir/scraper_input.csv"
 scraper_output="$run_dir/products.jsonlines"
 
 bq query --format=csv --max_rows=30000 --use_legacy_sql=false '
-    SELECT id, url, parent
+    SELECT *
     FROM `food-id-app.external_data_temp.EXTERNAL_CATEGORIES`
     ' > $scraper_input
 
