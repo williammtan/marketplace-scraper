@@ -5,7 +5,7 @@ jsonlines==2.0.0
 beautifulsoup4==4.9.0
 python-dotenv==0.19.2
 selenium==4.1.0
-selenium-wire==4.5.5
+selenium-wire
 spacy==2.3.0
 tqdm==4.60.0
 matplotlib==3.5.0
